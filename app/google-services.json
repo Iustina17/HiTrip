@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "423336018351",
+    "project_id": "proiectlicenta-1d9be",
+    "storage_bucket": "proiectlicenta-1d9be.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:423336018351:android:8eda306186a6479889af5a",
+        "android_client_info": {
+          "package_name": "com.tripshare.hitrip"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "423336018351-s2eap5qo4i8kla8fjm3egqsv8a672iu8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tripshare.hitrip",
+            "certificate_hash": "c1c2982f120615f292b184759845a5086e0e2153"
+          }
+        },
+        {
+          "client_id": "423336018351-4aiel6n92un39s99n7eh46j3aqev3itt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxhE0Lf0lPL6LiNEOm-wsYkUfkZfPlj3o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "423336018351-4aiel6n92un39s99n7eh46j3aqev3itt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
