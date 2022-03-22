@@ -120,6 +120,7 @@ public class LoginActivity extends AppCompatActivity {
                                 }
                             }
                         });
+
                         // if (!mFirebaseAuth.getCurrentUser().isEmailVerified()) {
                         //emailID.setError("Adresa de e-mail nu a fost validata. Accesați link-ul primit pe e-mail pentru a confirma adresa de e-mail");
                         //emailID.requestFocus();
