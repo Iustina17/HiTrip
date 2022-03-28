@@ -2,4 +2,5 @@
     <string name="app_name">HiTrip</string>
     <string name="email">Email</string>
     <string name="parola">Parolă</string>
+    <string name="pick_date">Selectează data</string>
 </resources>

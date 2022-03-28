@@ -27,10 +27,10 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
 public class LoginActivity extends AppCompatActivity {
 
     private Button login_button;
+    private Button signup_button;
     private EditText password;
     private EditText username;
     FirebaseAuth mFirebaseAuth;
@@ -42,48 +42,49 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         login_button = findViewById((R.id.login_button));
+        signup_button = findViewById((R.id.signup_button));
         username = findViewById(R.id.login_email);
         password = findViewById(R.id.login_password);
 
 // Write a message to the database
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("message");
+        //FirebaseDatabase database = FirebaseDatabase.getInstance();
+        //DatabaseReference myRef = database.getReference("message");
         //myRef.setValue("Hello, World!");
         // Read from the database
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class);
-                Log.d("TAG", "Value is: " + value);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w("TAG", "Failed to read value.", error.toException());
-            }
-        });
-
-//        mFirebaseAuth = FirebaseAuth.getInstance();
-//
-//        mAuthStateListener = new FirebaseAuth.AuthStateListener() {
+//        myRef.addValueEventListener(new ValueEventListener() {
 //            @Override
-//            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-//                //intra direct în cont dacă s-a autentificat anterior
-//                FirebaseUser mFirebaseUser = mFirebaseAuth.getCurrentUser();
-//                if (mFirebaseUser != null) {// && mFirebaseUser.isEmailVerified()) {
-//                    //  Toast.makeText(LoginActivity.this, "V-ați autentificat", Toast.LENGTH_LONG).show();
-//                    Intent i = new Intent(LoginActivity.this, MainActivity.class);
-//                    startActivity(i);
-//                    //  } else if (!mFirebaseUser.isEmailVerified()) {
-//                    //     Toast.makeText(LoginActivity.this, "Un e-mail pentru validare a fost trimis.", Toast.LENGTH_LONG).show();
-//                } else {
-//                    Toast.makeText(LoginActivity.this, "Autentificați-vă", Toast.LENGTH_LONG).show();
-//                }
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                // This method is called once with the initial value and again
+//                // whenever data at this location is updated.
+//                String value = dataSnapshot.getValue(String.class);
+//                Log.d("TAG", "Value is: " + value);
 //            }
-//        };
+//
+//            @Override
+//            public void onCancelled(DatabaseError error) {
+//                // Failed to read value
+//                Log.w("TAG", "Failed to read value.", error.toException());
+//            }
+//        });
+
+        mFirebaseAuth = FirebaseAuth.getInstance();
+
+        mAuthStateListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                //intra direct în cont dacă s-a autentificat anterior
+                FirebaseUser mFirebaseUser = mFirebaseAuth.getCurrentUser();
+                if (mFirebaseUser != null) {// && mFirebaseUser.isEmailVerified()) {
+                    //  Toast.makeText(LoginActivity.this, "V-ați autentificat", Toast.LENGTH_LONG).show();
+                    Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(i);
+                    //  } else if (!mFirebaseUser.isEmailVerified()) {
+                    //     Toast.makeText(LoginActivity.this, "Un e-mail pentru validare a fost trimis.", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(LoginActivity.this, "Autentificați-vă", Toast.LENGTH_LONG).show();
+                }
+            }
+        };
 
         login_button.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("ShowToast")
@@ -148,7 +149,18 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+
+        signup_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Toast.makeText(LoginActivity.this, "Nu ai cont?", Toast.LENGTH_LONG).show();
+                Intent intToSignUp = new Intent(LoginActivity.this, SignUpActivity.class);
+                startActivity(intToSignUp);
+            }
+        });
     }
+
+
 
     protected void onStart() {
         super.onStart();
