@@ -3,10 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/drawable/ic_account.xml" value="0.2703125" />
+        <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/drawable/ic_notifications.xml" value="0.2703125" />
+        <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/drawable/ic_profile.xml" value="0.2703125" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_login_2.xml" value="0.1125" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_signup.xml" value="0.264" />
+        <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/main_nav_drawer.xml" value="0.264" />
+        <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/main_toolbar.xml" value="0.4" />
       </map>
     </option>
   </component>

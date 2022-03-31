@@ -2,5 +2,7 @@
     <string name="app_name">HiTrip</string>
     <string name="email">Email</string>
     <string name="parola">Parolă</string>
+    <string name="error_email_not_found">Adresa de email nu este înregistrată</string>
     <string name="pick_date">Selectează data</string>
+
 </resources>

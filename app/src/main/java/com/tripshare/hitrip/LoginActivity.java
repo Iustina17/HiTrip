@@ -93,7 +93,7 @@ public class LoginActivity extends AppCompatActivity {
                 String email = username.getText().toString();
                 String pwd = password.getText().toString();
                 if (email.isEmpty()) {
-                    username.setError("Introduceți e-mail-ul");
+                    username.setError("Introduceți email-ul");
                     username.requestFocus();
                 } else if (pwd.isEmpty()) {
                     password.setError("Introduceți parola");
@@ -116,7 +116,7 @@ public class LoginActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
                                 boolean isNewUser = task.getResult().getSignInMethods().isEmpty();
                                 if (isNewUser) {
-                                    //username.setError(getString(R.string.error_email_not_found));
+                                    username.setError(getString(R.string.error_email_not_found));
                                     username.requestFocus();
                                 }
                             }
