@@ -4,5 +4,6 @@
     <string name="parola">Parolă</string>
     <string name="error_email_not_found">Adresa de email nu este înregistrată</string>
     <string name="pick_date">Selectează data</string>
+    <string name="utlizator_neinregistart">Utilizatorul nu a putut fi înregistrat</string>
 
 </resources>

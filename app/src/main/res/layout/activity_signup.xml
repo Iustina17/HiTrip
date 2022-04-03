@@ -30,13 +30,13 @@
                 android:text="Creează cont"
                 android:textColor="#000000"
                 android:textSize="34sp"
-                app:layout_constraintBottom_toTopOf="@+id/editTextTextEmailAddress"
+                app:layout_constraintBottom_toTopOf="@+id/editTextEmail"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/editTextTextEmailAddress"
+                android:id="@+id/editTextEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
@@ -45,11 +45,11 @@
                 android:hint="Email"
                 android:inputType="textEmailAddress"
                 android:minHeight="48dp"
-                app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName3"
+                app:layout_constraintBottom_toTopOf="@+id/editTextLastName"
                 app:layout_constraintStart_toStartOf="@+id/date_picker" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName3"
+                android:id="@+id/editTextLastName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
@@ -58,11 +58,11 @@
                 android:hint="Nume"
                 android:inputType="textPersonName"
                 android:minHeight="48dp"
-                app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName2"
+                app:layout_constraintBottom_toTopOf="@+id/editTextFirstName"
                 app:layout_constraintStart_toStartOf="@+id/date_picker" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName2"
+                android:id="@+id/editTextFirstName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
@@ -71,11 +71,11 @@
                 android:hint="Prenume"
                 android:inputType="textPersonName"
                 android:minHeight="48dp"
-                app:layout_constraintBottom_toTopOf="@+id/editTextTextPassword"
+                app:layout_constraintBottom_toTopOf="@+id/editTextPassword"
                 app:layout_constraintStart_toStartOf="@+id/date_picker" />
 
             <EditText
-                android:id="@+id/editTextTextPassword"
+                android:id="@+id/editTextPassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
@@ -84,34 +84,25 @@
                 android:hint="Parolă"
                 android:inputType="textPassword"
                 android:minHeight="48dp"
-                app:layout_constraintBottom_toTopOf="@+id/editTextTextPassword2"
+                app:layout_constraintBottom_toTopOf="@+id/editTextConfirmPassowrd"
                 app:layout_constraintStart_toStartOf="@+id/date_picker" />
 
 
             <EditText
-                android:id="@+id/editTextTextPassword2"
+                android:id="@+id/editTextConfirmPassowrd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:ems="10"
                 android:fontFamily="sans-serif"
                 android:hint="Confirmă parola"
                 android:inputType="textPassword"
                 android:minHeight="48dp"
-                app:layout_constraintBottom_toTopOf="@+id/max_Parola"
+                app:layout_constraintBottom_toTopOf="@+id/textBirthDate"
                 app:layout_constraintStart_toStartOf="@+id/date_picker" />
 
             <TextView
-                android:id="@+id/max_Parola"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:fontFamily="sans-serif"
-                android:text="Minimum 6 caractere"
-                app:layout_constraintBottom_toTopOf="@+id/textView2"
-                app:layout_constraintStart_toStartOf="@+id/editTextTextPassword" />
-
-            <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/textBirthDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif"
@@ -119,7 +110,7 @@
                 android:textColor="#000000"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toTopOf="@+id/date_picker"
-                app:layout_constraintStart_toStartOf="@+id/editTextTextPassword" />
+                app:layout_constraintStart_toStartOf="@+id/editTextPassword" />
 
 
             <DatePicker
@@ -131,17 +122,17 @@
                 android:calendarViewShown="false"
                 android:datePickerMode="spinner"
                 android:onClick="showDatePickerDialog"
-                app:layout_constraintBottom_toTopOf="@+id/textView3"
+                app:layout_constraintBottom_toTopOf="@+id/textCondition"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/textCondition"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:fontFamily="sans-serif"
-                android:text="Trebuie să ai cel puţin 18 ani putea utiliza HiTrip"
+                android:text="Trebuie să ai cel puţin 18 ani pentru a utiliza HiTrip"
                 app:layout_constraintBottom_toTopOf="@+id/registrer_button"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />

@@ -57,12 +57,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void ClickMyTrips(View view){
         //Redirect activity to feed
-        redirectActivity(this,);
+        redirectActivity(this,MyTripsActivity.class);
     }
 
     public void ClickMessages(View view){
         //Redirect actvity to about us
-        redirectActivity(this,);
+        redirectActivity(this,MessagesActivity.class);
     }
 
     public void ClickLogout(View view){
@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         logout(this);
     }
 
-    private static void logout(Activity activity) {
+    private void logout(Activity activity) {
         //Initialize alert dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         //Set Title
@@ -82,10 +82,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 //Finish activity
-                activity.finishActivity();
-                //Exit app
-                System.exit(0);
-            }
+                Intent login_intent = new Intent(activity, LoginActivity.class);
+                finish();
+                startActivity(login_intent);
+                }
         });
 
         //Negative no button

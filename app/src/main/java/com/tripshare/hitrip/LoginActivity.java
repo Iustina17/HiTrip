@@ -78,6 +78,7 @@ public class LoginActivity extends AppCompatActivity {
                     //  Toast.makeText(LoginActivity.this, "V-ați autentificat", Toast.LENGTH_LONG).show();
                     Intent i = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(i);
+                    finish();
                     //  } else if (!mFirebaseUser.isEmailVerified()) {
                     //     Toast.makeText(LoginActivity.this, "Un e-mail pentru validare a fost trimis.", Toast.LENGTH_LONG).show();
                 } else {
