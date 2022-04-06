@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".Trips.MainActivity">
 
     <ImageView
         android:id="@+id/imageView6"
@@ -69,6 +69,7 @@
         android:layout_marginTop="48dp"
         android:fontFamily="sans-serif"
         android:text="Nu ai cont? Înregistrează-te"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_button" />

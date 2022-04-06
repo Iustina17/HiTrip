@@ -1,8 +1,9 @@
-package com.tripshare.hitrip;
+package com.tripshare.hitrip.Trips;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -11,10 +12,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.tripshare.hitrip.LoginActivity;
+import com.tripshare.hitrip.MessagesActivity;
+import com.tripshare.hitrip.MyTripsActivity;
+import com.tripshare.hitrip.R;
+import com.tripshare.hitrip.RegulationsActivity;
+import com.tripshare.hitrip.SuggestionActivity;
+
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     //Initialize variable
     DrawerLayout drawerLayout;
+    private RecyclerView mRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +34,14 @@ public class MainActivity extends AppCompatActivity {
 
         //Assign variable
         drawerLayout = findViewById((R.id.drawer_layout));
+        mRecyclerView = findViewById(R.id.recyclerView_trips);
+        new FirebaseDatabaseHelperTrips().showTrips(new FirebaseDatabaseHelperTrips.DataStatus() {
+
+            @Override
+            public void DataIsLoaded(List<Trip> trips, List<String> keys) {
+                new RecyclerViewConfigTrip().setconfig(mRecyclerView, MainActivity.this, trips, keys);
+            }
+        });
     }
 
     public void ClickMenu(View view){
@@ -57,12 +76,20 @@ public class MainActivity extends AppCompatActivity {
 
     public void ClickMyTrips(View view){
         //Redirect activity to feed
-        redirectActivity(this,MyTripsActivity.class);
+        redirectActivity(this, MyTripsActivity.class);
     }
 
     public void ClickMessages(View view){
         //Redirect actvity to about us
-        redirectActivity(this,MessagesActivity.class);
+        redirectActivity(this, MessagesActivity.class);
+    }
+
+    public void ClickRegulations(View view){
+        redirectActivity(this, RegulationsActivity.class);
+    }
+
+    public void ClickSuggestions(View view){
+        redirectActivity(this, SuggestionActivity.class);
     }
 
     public void ClickLogout(View view){
@@ -117,6 +144,8 @@ public class MainActivity extends AppCompatActivity {
         //Close drawer
         closeDrawer(drawerLayout);
     }
+
+
 
     //20:04 - create new activities for every option in the menu
 }

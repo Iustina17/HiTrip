@@ -1,42 +1,33 @@
 package com.tripshare.hitrip;
 
-import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.tripshare.hitrip.User;
+import com.tripshare.hitrip.Trips.MainActivity;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -131,11 +122,11 @@ public class SignUpActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             //addUserToDatabase(email, lastName, firstName, age);
-                            reference = FirebaseDatabase.getInstance().getReference().child("Utilizatori");
+                            reference = FirebaseDatabase.getInstance().getReference().child("Calatorii");
                             User utilizator = new User(email, lastName, firstName, age);
                             reference.push().setValue(utilizator);
                             Toast.makeText(SignUpActivity.this,"Utilizator creat",Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
                             finish();
                         } else if (task.getException() instanceof FirebaseAuthUserCollisionException) {
                             mEmail.setError("Această adresă este deja înregistrată");
@@ -169,28 +160,5 @@ public class SignUpActivity extends AppCompatActivity {
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
     }
-
-//    void addUserToDatabase(String email, String nume, String prenume, int varsta){
-//        reference = FirebaseDatabase.getInstance().getReference().child("Utilizatori");
-//
-//        fAuth.createUserWithEmailAndPassword(email, "hitrip").addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-//            @Override
-//            public void onComplete(@NonNull Task<AuthResult> task) {
-//                if(task.isSuccessful()){
-//                    User utilizator = new User(email, nume, prenume, varsta);
-//                    reference.push().setValue(utilizator);
-//                } else if (task.getException().getMessage().contains("The email address is already in use by another account.")) {
-//                    mEmail.setError("Aceasta adresa este deja înregistrată");
-//                    mEmail.requestFocus();
-//                } else if (!task.getException().getMessage().contains("The email address is already in use by another account.")) {
-//                    String error = task.getException().toString();
-//                    String afisare = getString(R.string.utlizator_neinregistart)+error;
-//                    Toast.makeText(SignUpActivity.this, afisare, Toast.LENGTH_LONG).show();
-//                    finish();
-//                }
-//            }
-//        });
-
- //   }
 
 }

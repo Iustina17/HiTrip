@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
+            android:name=".SuggestionActivity"
+            android:exported="false" />
+        <activity
             android:name=".RegulationsActivity"
             android:exported="false" />
         <activity
@@ -25,7 +28,7 @@
             android:name=".ProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Trips.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
