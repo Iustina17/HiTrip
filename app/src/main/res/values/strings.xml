@@ -5,5 +5,16 @@
     <string name="error_email_not_found">Adresa de email nu este înregistrată</string>
     <string name="pick_date">Selectează data</string>
     <string name="utlizator_neinregistart">Utilizatorul nu a putut fi înregistrat</string>
-
+    <string-array name="tip_excursie">
+        <item>Drumetie</item>
+        <item>Circuit turistic</item>
+        <item>Sporturi de iarna</item>
+        <item>Ciclism</item>
+        <item>Croaziera</item>
+        <item>Calarie</item>
+        <item>Safari</item>
+        <item>Caiac</item>
+        <item>Litoral</item>
+        <item>Multisport</item>
+    </string-array>
 </resources>
