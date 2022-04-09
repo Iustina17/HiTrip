@@ -7,8 +7,11 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,11 +22,13 @@ import com.tripshare.hitrip.Trips.MainActivity;
 
 import java.util.Calendar;
 
-public class CreateTrip1 extends AppCompatActivity {
+public class CreateTrip1 extends AppCompatActivity implements View.OnClickListener {
     EditText date_start;
     DatePickerDialog.OnDateSetListener setListener;
     Spinner spinner;
     ArrayAdapter<CharSequence> adapter;
+    LinearLayout layoutList;
+    Button buttonAdd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +36,11 @@ public class CreateTrip1 extends AppCompatActivity {
         setContentView(R.layout.activity_create_trip1);
 
         date_start = findViewById(R.id.date_start);
+
+        layoutList = findViewById(R.id.layout_list);
+        buttonAdd = findViewById(R.id.button_add_stops);
+
+        buttonAdd.setOnClickListener(this);
 
         Calendar calendar = Calendar.getInstance();
         final int year = calendar.get(Calendar.YEAR);
@@ -76,5 +86,30 @@ public class CreateTrip1 extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
+    }
+
+    @Override
+    public void onClick(View v) {
+        addView();
+    }
+
+    private void addView() {
+        View stopView = getLayoutInflater().inflate(R.layout.row_add_stop,null,false);
+        EditText editText1 = (EditText)stopView.findViewById(R.id.locatie_item);
+        EditText editText2 = (EditText)stopView.findViewById(R.id.descriere_item);
+        ImageButton stopDelete = (ImageButton)stopView.findViewById(R.id.close_stop_button);
+
+        stopDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                removeView(stopView);
+            }
+        });
+
+        layoutList.addView(stopView);
+    }
+
+    private void removeView(View view){
+        layoutList.removeView(view);
     }
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -198,9 +199,9 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="120dp"
                     android:fontFamily="sans-serif"
                     android:hint="Altă tematică"
-                    android:layout_marginRight="120dp"
                     android:textSize="16dp"></EditText>
             </LinearLayout>
 
@@ -208,7 +209,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -230,6 +230,13 @@
                     tools:ignore="RtlHardcoded"></Spinner>
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="#636363" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -247,8 +254,7 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    >
+                    android:layout_height="match_parent">
 
                     <EditText
                         android:id="@+id/date_start"
@@ -261,8 +267,8 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:src="@drawable/ic_calendar"
-                        android:layout_alignRight="@id/date_start">
+                        android:layout_alignRight="@id/date_start"
+                        android:src="@drawable/ic_calendar">
 
                     </ImageView>
                 </RelativeLayout>
@@ -270,32 +276,97 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
                     android:fontFamily="sans-serif"
-                    android:text="Locul de plecare:"
+                    android:text="Itinerariu"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="bold"></TextView>
 
-                <EditText
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif"
-                    android:hint="Ţara, Oraş"
-                    android:textSize="16dp"></EditText>
+                    android:background="@drawable/layout_corners">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="16dp"
+                        android:background="@color/white"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="sans-serif"
+                            android:text="Locul de plecare:"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            android:textStyle="bold"></TextView>
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginRight="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:fontFamily="sans-serif"
+                            android:hint="Ţara, Oraş"
+                            android:textSize="16dp"></EditText>
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginRight="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:background="@drawable/edit_text_rectangle"
+                            android:hint=" Descriere..."
+                            android:paddingLeft="10dp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:rotation="90"
+                    android:src="@drawable/ic_line_circle">
+
+                </ImageView>
+
+                <LinearLayout
+                    android:id="@+id/layout_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"></LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <Button
+                        android:id="@+id/button_add_stops"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/layout_corners"
+                        android:drawableLeft="@drawable/ic_add"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="Adaugă o oprire       "
+                        android:textAlignment="center"></Button>
+                </LinearLayout>
+
+
             </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
-                android:background="#636363" />
 
             <View
                 android:layout_width="match_parent"
@@ -337,11 +408,9 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginRight="176dp"
                 android:layout_marginBottom="8dp"
-                android:text="  Înapoi    "
-                android:drawableStart="@drawable/ic_arrow_back"
                 android:background="@drawable/rounded_corners"
-                >
-            </Button>
+                android:drawableStart="@drawable/ic_arrow_back"
+                android:text="  Înapoi    "></Button>
 
             <Button
 
@@ -350,9 +419,9 @@
                 android:layout_marginTop="7dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginBottom="7dp"
-                android:text="    Înainte  "
+                android:background="@drawable/rounded_corners"
                 android:drawableEnd="@drawable/ic_arrow_forward"
-                android:background="@drawable/rounded_corners"></Button>
+                android:text="    Înainte  "></Button>
 
         </LinearLayout>
 
