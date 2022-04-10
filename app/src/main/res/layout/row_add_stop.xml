@@ -12,6 +12,65 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/layout_corners"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/white"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="sans-serif"
+                    android:text="Transport"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"></TextView>
+                <EditText
+                    android:id="@+id/descriere_transport"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/edit_text_rectangle"
+                    android:hint=" Ex: nu e necesar, discutabil, pe jos, maşină, autobuz, tren, avion, navă etc."
+                    android:paddingLeft="10dp"
+                    android:maxLines="2"
+                    android:inputType="textMultiLine"
+                    android:scrollbars="vertical"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:rotation="90"
+            android:src="@drawable/ic_line_circle">
+
+        </ImageView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
 
@@ -24,9 +83,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:layout_marginLeft="16dp"
-                >
+                android:layout_marginTop="8dp">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -101,7 +160,10 @@
                     android:layout_marginBottom="8dp"
                     android:background="@drawable/edit_text_rectangle"
                     android:hint=" Descriere..."
-                    android:paddingLeft="10dp" />
+                    android:paddingLeft="10dp"
+                    android:maxLines="10"
+                    android:inputType="textMultiLine"
+                    android:scrollbars="vertical"/>
             </LinearLayout>
         </LinearLayout>
 

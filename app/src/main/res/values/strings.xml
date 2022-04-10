@@ -6,15 +6,27 @@
     <string name="pick_date">Selectează data</string>
     <string name="utlizator_neinregistart">Utilizatorul nu a putut fi înregistrat</string>
     <string-array name="tip_excursie">
-        <item>Drumetie</item>
+        <item>Drumeţie</item>
         <item>Circuit turistic</item>
-        <item>Sporturi de iarna</item>
+        <item>Sporturi de iarnă</item>
         <item>Ciclism</item>
-        <item>Croaziera</item>
-        <item>Calarie</item>
+        <item>Croazieră</item>
+        <item>Calărie</item>
         <item>Safari</item>
         <item>Caiac</item>
         <item>Litoral</item>
         <item>Multisport</item>
+    </string-array>
+    <string-array name="grad_dificultate">
+        <item>Uşor</item>
+        <item>Mediu</item>
+        <item>Greu</item>
+    </string-array>
+    <string-array name="moneda">
+        <item>RON</item>
+        <item>EUR</item>
+        <item>USD</item>
+        <item>AUD</item>
+        <item>GBP</item>
     </string-array>
 </resources>

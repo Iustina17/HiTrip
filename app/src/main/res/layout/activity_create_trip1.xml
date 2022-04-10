@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -48,7 +47,7 @@
                     android:fontFamily="sans-serif"
                     android:text="Cum se numeşte excursia?"
                     android:textColor="@color/black"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     android:textStyle="bold"></TextView>
 
                 <EditText
@@ -69,7 +68,7 @@
                     android:layout_height="wrap_content"
                     android:text="Tematica excursiei"
                     android:textColor="@color/black"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     android:textStyle="bold"></TextView>
             </LinearLayout>
 
@@ -209,6 +208,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="8dp"
+                android:layout_marginRight="30dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -217,15 +217,39 @@
                     android:layout_marginRight="8dp"
                     android:text="Tipul de excursie"
                     android:textColor="@color/black"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     android:textStyle="bold"></TextView>
 
                 <Spinner
                     android:id="@+id/spinner_tip_excursie"
                     android:layout_width="wrap_content"
-                    android:layout_height="36dp"
-                    android:layout_marginEnd="10sp"
-                    android:textAlignment="center"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="8dp"
+                    android:tooltipText="Selecteza"
+                    tools:ignore="RtlHardcoded"></Spinner>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_grad_dificultate"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:text="Gradul de dificultate al traseului"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold"></TextView>
+
+                <Spinner
+                    android:id="@+id/grad_dificultate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:tooltipText="Selecteza"
                     tools:ignore="RtlHardcoded"></Spinner>
             </LinearLayout>
@@ -233,46 +257,9 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="32dp"
                 android:background="#636363" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif"
-                    android:text="Data de început:  "
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:textStyle="bold"></TextView>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <EditText
-                        android:id="@+id/date_start"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif"
-                        android:hint="Selectează data de început a excursiei"
-                        android:textSize="16dp"></EditText>
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_alignRight="@id/date_start"
-                        android:src="@drawable/ic_calendar">
-
-                    </ImageView>
-                </RelativeLayout>
-            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -286,7 +273,7 @@
                     android:fontFamily="sans-serif"
                     android:text="Itinerariu"
                     android:textColor="@color/black"
-                    android:textSize="16sp"
+                    android:textSize="20sp"
                     android:textStyle="bold"></TextView>
 
                 <LinearLayout
@@ -301,6 +288,83 @@
                         android:background="@color/white"
                         android:orientation="vertical">
 
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif"
+                                android:text="Data de început:  "
+                                android:textColor="@color/black"
+                                android:textSize="18sp"
+                                android:textStyle="bold"></TextView>
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <EditText
+                                    android:id="@+id/date_start"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="sans-serif"
+                                    android:hint="Selectează data de început a excursiei"
+                                    android:inputType="none"
+                                    android:textSize="16dp"></EditText>
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_alignRight="@id/date_start"
+                                    android:src="@drawable/ic_calendar">
+
+                                </ImageView>
+                            </RelativeLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif"
+                                android:text="Data de final:  "
+                                android:textColor="@color/black"
+                                android:textSize="18sp"
+                                android:textStyle="bold"></TextView>
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <EditText
+                                    android:id="@+id/date_end"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="sans-serif"
+                                    android:hint="Selectează data de final a excursiei"
+                                    android:inputType="none"
+                                    android:textSize="16dp"></EditText>
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_alignRight="@id/date_end"
+                                    android:src="@drawable/ic_calendar">
+
+                                </ImageView>
+                            </RelativeLayout>
+                        </LinearLayout>
+
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -309,7 +373,7 @@
                             android:fontFamily="sans-serif"
                             android:text="Locul de plecare:"
                             android:textColor="@color/black"
-                            android:textSize="16sp"
+                            android:textSize="18sp"
                             android:textStyle="bold"></TextView>
 
                         <EditText
@@ -330,7 +394,10 @@
                             android:layout_marginBottom="8dp"
                             android:background="@drawable/edit_text_rectangle"
                             android:hint=" Descriere..."
-                            android:paddingLeft="10dp" />
+                            android:inputType="textMultiLine"
+                            android:maxLines="10"
+                            android:paddingLeft="10dp"
+                            android:scrollbars="vertical" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -367,8 +434,321 @@
 
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="32dp"
+                android:background="#636363" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="sans-serif"
+                    android:text="Descrierea excursiei"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold"></TextView>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/edit_text_rectangle"
+                    android:hint=" Descriere..."
+                    android:inputType="textMultiLine"
+                    android:maxLines="10"
+                    android:paddingLeft="10dp"
+                    android:scrollbars="vertical"
+                    android:textAlignment="textStart" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="sans-serif"
+                    android:text="Regulament"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold"></TextView>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/edit_text_rectangle"
+                    android:hint=" Descriere..."
+                    android:inputType="textMultiLine"
+                    android:maxLines="10"
+                    android:paddingLeft="10dp"
+                    android:scrollbars="vertical"
+                    android:textAlignment="textStart" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="sans-serif"
+                    android:text="Echipament necesar"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold"></TextView>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/edit_text_rectangle"
+                    android:hint=" Descriere..."
+                    android:inputType="textMultiLine"
+                    android:maxLines="10"
+                    android:paddingLeft="10dp"
+                    android:scrollbars="vertical"
+                    android:textAlignment="textStart" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="sans-serif"
+                    android:text="Documente necesare"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold"></TextView>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/edit_text_rectangle"
+                    android:hint=" Descriere..."
+                    android:inputType="textMultiLine"
+                    android:maxLines="10"
+                    android:paddingLeft="10dp"
+                    android:scrollbars="vertical"
+                    android:textAlignment="textStart" />
+
+            </LinearLayout>
 
             <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="32dp"
+                android:background="#636363" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/layout_corners"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="sans-serif"
+                    android:text="Numărul participanţilor"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"></TextView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="80dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginRight="40dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp"
+                            android:fontFamily="sans-serif"
+                            android:text="Minim"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                            android:textStyle="bold"></TextView>
+
+                        <LinearLayout
+                            android:layout_width="60dp"
+                            android:layout_height="match_parent">
+
+                            <EditText
+                                android:id="@+id/min_participanti"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/edit_text_rectangle"
+                                android:text="0"
+                                android:textAlignment="center"
+                                android:textSize="18dp"></EditText>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginRight="80dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp"
+                            android:fontFamily="sans-serif"
+                            android:text="Maxim"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                            android:textStyle="bold"></TextView>
+
+                        <LinearLayout
+                            android:layout_width="60dp"
+                            android:layout_height="match_parent">
+
+                            <EditText
+                                android:id="@+id/max_participanti"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/edit_text_rectangle"
+                                android:text="0"
+                                android:textAlignment="center"
+                                android:textSize="18dp"></EditText>
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/layout_corners">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="sans-serif"
+                    android:text="Cost per participant  "
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"></TextView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="100dp"
+                    android:layout_marginRight="90dp"
+                    android:layout_marginBottom="16dp">
+
+
+                    <LinearLayout
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <EditText
+                                android:id="@+id/cost"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginRight="8dp"
+                                android:background="@drawable/edit_text_rectangle"
+                                android:text="0"
+                                android:textAlignment="center"
+                                android:textSize="20dp"></EditText>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <Spinner
+                        android:id="@+id/spinner_moneda"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:tooltipText="Selecteza"
+                        tools:ignore="RtlHardcoded"></Spinner>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="56dp">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="112dp"
+                    android:layout_marginTop="7dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="7dp"
+                    android:background="@drawable/rounded_corners"
+                    android:drawableEnd="@drawable/ic_arrow_forward"
+                    android:text="    Finalizează  "></Button>
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view"
                 android:layout_width="match_parent"
                 android:layout_height="75dp"
                 android:layout_marginTop="16dp"
@@ -394,37 +774,37 @@
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
             android:layout_height="8dp"></ProgressBar>
+        <!-- butoanele de jos
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+                    <Button
 
-            <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginRight="176dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/rounded_corners"
+                        android:drawableStart="@drawable/ic_arrow_back"
+                        android:text="  Înapoi    "></Button>
 
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginRight="176dp"
-                android:layout_marginBottom="8dp"
-                android:background="@drawable/rounded_corners"
-                android:drawableStart="@drawable/ic_arrow_back"
-                android:text="  Înapoi    "></Button>
+                    <Button
 
-            <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="7dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginBottom="7dp"
+                        android:background="@drawable/rounded_corners"
+                        android:drawableEnd="@drawable/ic_arrow_forward"
+                        android:text="    Înainte  "></Button>
 
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginTop="7dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginBottom="7dp"
-                android:background="@drawable/rounded_corners"
-                android:drawableEnd="@drawable/ic_arrow_forward"
-                android:text="    Înainte  "></Button>
-
-        </LinearLayout>
-
+                </LinearLayout>
+        -->
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
