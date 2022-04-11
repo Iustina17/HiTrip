@@ -26,7 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="20dp"
-                android:layout_marginBottom="32dp"
+                android:layout_marginBottom="56dp"
                 android:fontFamily="@font/roboto_medium"
                 android:gravity="center"
                 android:text="Completează datele pentru excursia ta"
@@ -38,7 +38,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="16dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -185,7 +185,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
 
                 <CheckBox
                     android:layout_width="wrap_content"
@@ -208,6 +209,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
                 android:layout_marginRight="30dp"
                 android:orientation="horizontal">
 
@@ -753,7 +755,7 @@
                 android:layout_height="75dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
-                android:background="@color/white" />
+                android:background="#FFF8F8F8" />
         </LinearLayout>
 
 
