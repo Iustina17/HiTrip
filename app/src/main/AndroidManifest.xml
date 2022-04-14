@@ -13,10 +13,7 @@
         android:theme="@style/Theme.HiTrip"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".VerifyOTPActivity"
-            android:exported="false" />
-        <activity
-            android:name=".SendOTPActivity"
+            android:name=".EditPersonalInfoActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,11 +21,30 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".CreateTrip1">
+        <activity
+            android:name=".EditProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MyProfileActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".VerifyOTPActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SendOTPActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".CreateTrip1">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
         <activity
@@ -48,7 +64,11 @@
             android:exported="false" />
         <activity
             android:name=".ProfileActivity"
-            android:exported="false" />
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".Trips.MainActivity"
             android:exported="true">

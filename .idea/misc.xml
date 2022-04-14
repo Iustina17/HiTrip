@@ -5,13 +5,21 @@
       <map>
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.26979166666666665" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/drawable/borders_button.xml" value="0.2203125" />
+        <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/drawable/button_black_corners.xml" value="0.2703125" />
+        <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/drawable/button_standard.xml" value="0.2703125" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/drawable/circle_button.xml" value="0.1125" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/drawable/edit_text_rectangle.xml" value="0.2703125" />
+        <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/drawable/gradient_background.xml" value="0.1574074074074074" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/drawable/ic_about_us.xml" value="0.26979166666666665" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/drawable/ic_account.xml" value="0.2703125" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/drawable/ic_add_image.xml" value="0.2546875" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/drawable/ic_arrow_back.xml" value="0.1125" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/drawable/ic_arrow_forward.xml" value="0.1125" />
+        <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/drawable/ic_baseline_check_24.xml" value="0.2703125" />
+        <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/drawable/ic_dashboard.xml" value="0.2703125" />
+        <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/drawable/ic_decrease.xml" value="0.2703125" />
+        <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/drawable/ic_exclamation.xml" value="0.23645833333333333" />
+        <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/drawable/ic_home.xml" value="0.2703125" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/drawable/ic_launcher_background.xml" value="0.26979166666666665" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/drawable/ic_line_circle.xml" value="0.2703125" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/drawable/ic_logout.xml" value="0.2703125" />
@@ -22,25 +30,31 @@
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/drawable/ic_regulations.xml" value="0.26979166666666665" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/drawable/ic_suggestions.xml" value="0.26979166666666665" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/drawable/layout_corners.xml" value="0.2703125" />
+        <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/drawable/profile_layout_context_corners.xml" value="0.2546875" />
+        <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/drawable/profile_layout_corners.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/drawable/rounded_corners.xml" value="0.264" />
-        <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_create_trip1.xml" value="0.264" />
+        <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_create_trip1.xml" value="0.4" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_create_trip2.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_create_trip_2.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_edit_personal_info.xml" value="0.2" />
+        <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_edit_profile.xml" value="0.264" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_login_2.xml" value="0.1125" />
-        <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_messages.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_my_profile.xml" value="0.264" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_my_trips.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_profile.xml" value="0.23854166666666668" />
+        <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_profile.xml" value="0.264" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_regulations.xml" value="0.1" />
-        <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_send_otpactivity.xml" value="0.264" />
+        <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_send_otpactivity.xml" value="0.4" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_signup.xml" value="0.264" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_suggestion.xml" value="0.23854166666666668" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_trip_list.xml" value="0.2" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_trips.xml" value="0.23854166666666668" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_verify_otpactivity.xml" value="0.264" />
+        <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/fragment_my_profile.xml" value="0.23854166666666668" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/item_trip.xml" value="0.4" />
-        <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/main_nav_drawer.xml" value="0.264" />
+        <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/main_nav_drawer.xml" value="0.4" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/main_toolbar.xml" value="0.264" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/row_add_stop.xml" value="0.264" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/menu/activity_main.xml" value="0.264" />

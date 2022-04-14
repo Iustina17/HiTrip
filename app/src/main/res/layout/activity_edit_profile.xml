@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileActivity">
+    tools:context=".EditProfileActivity">
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -44,13 +44,28 @@
                     android:elevation="@dimen/cardview_default_radius"
                     android:orientation="vertical">
 
-                    <ImageView
-                        android:layout_width="96dp"
-                        android:layout_height="96dp"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="16dp"
-                        android:background="@drawable/profile_layout_corners"
-                        android:src="@drawable/user" />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="96dp"
+                            android:layout_height="96dp"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="16dp"
+                            android:background="@drawable/profile_layout_corners"
+                            android:src="@drawable/user" />
+
+                        <ImageButton
+                            android:background="@drawable/profile_layout_context_corners"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:layout_marginTop="80dp"
+                            android:layout_marginLeft="70dp"
+                            android:src="@drawable/ic_edit"></ImageButton>
+                    </RelativeLayout>
+
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -80,6 +95,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
                         android:gravity="center"
                         android:orientation="horizontal">
 
@@ -101,18 +117,6 @@
                             android:textStyle="bold"></TextView>
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <RatingBar
-                            style="@style/Widget.AppCompat.RatingBar.Small"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_margin="8dp"></RatingBar>
-                    </LinearLayout>
                 </LinearLayout>
             </RelativeLayout>
 
@@ -135,18 +139,19 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Descriere"
+                        android:text="Despre tine"
                         android:textColor="@color/black"
                         android:textSize="16dp"
                         android:textStyle="bold"></TextView>
 
-                    <TextView
+                    <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:hint="Spune ceva despre tine..."
                         android:padding="8dp"
-                        android:text="Descriere..."
                         android:textColor="@color/black"
-                        android:textSize="16dp"></TextView>
+                        android:textSize="16dp"></EditText>
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -155,13 +160,13 @@
                         android:textSize="16dp"
                         android:textStyle="bold"></TextView>
 
-                    <TextView
+                    <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:hint="Ex: popasuri rare pe traseu, nu tolerez fumul de ţigară"
                         android:padding="8dp"
-                        android:text="Preferinţe..."
                         android:textColor="@color/black"
-                        android:textSize="16dp"></TextView>
+                        android:textSize="16dp"></EditText>
 
                     <TextView
                         android:layout_width="match_parent"
@@ -171,13 +176,13 @@
                         android:textSize="16dp"
                         android:textStyle="bold"></TextView>
 
-                    <TextView
+                    <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:hint="Ţări, oraşe, trasee, obiective"
                         android:padding="8dp"
-                        android:text="Locuri vizitate..."
                         android:textColor="@color/black"
-                        android:textSize="16dp"></TextView>
+                        android:textSize="16dp"></EditText>
 
                     <TextView
                         android:layout_width="match_parent"
@@ -187,94 +192,33 @@
                         android:textSize="16dp"
                         android:textStyle="bold"></TextView>
 
-                    <TextView
+                    <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:hint="Ex: engleză"
                         android:padding="8dp"
-                        android:text="Limbi vorbire..."
                         android:textColor="@color/black"
-                        android:textSize="16dp"></TextView>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginBottom="16dp"
-                        android:background="@color/divider_color"></View>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Informaţii verificate"
-                        android:textColor="@color/black"
-                        android:textSize="16dp"
-                        android:textStyle="bold"></TextView>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="28dp"
-                            android:layout_height="28dp"
-                            android:layout_marginRight="8dp"
-                            android:src="@drawable/ic_otp"></ImageView>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:text="Numărul de telefon"
-                            android:textColor="@color/black"
-                            android:textSize="14dp"></TextView>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="28dp"
-                            android:layout_height="28dp"
-                            android:layout_marginRight="8dp"
-                            android:src="@drawable/ic_exclamation"></ImageView>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:text="Nu există informaţii verificate"
-                            android:textColor="@color/black"
-                            android:textSize="14dp"></TextView>
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginBottom="16dp"
-                        android:background="@color/divider_color"></View>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
-                        android:text="Excursii  care urmează"
-                        android:textColor="@color/black"
-                        android:textSize="16dp"
-                        android:textStyle="bold"></TextView>
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyclerView_profileTrips"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-                    </androidx.recyclerview.widget.RecyclerView>
+                        android:textSize="16dp"></EditText>
 
                 </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="318dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="32dp"
+                android:orientation="vertical">
+
+                <Button
+                    android:layout_width="270dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/button_standard"
+                    android:text="Salvează modificările"
+                    android:textSize="14dp"></Button>
+
             </LinearLayout>
         </LinearLayout>
 
