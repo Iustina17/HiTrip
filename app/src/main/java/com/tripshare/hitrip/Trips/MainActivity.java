@@ -14,9 +14,11 @@ import android.view.View;
 
 import com.tripshare.hitrip.LoginActivity;
 import com.tripshare.hitrip.MessagesActivity;
+import com.tripshare.hitrip.MyProfileActivity;
 import com.tripshare.hitrip.MyTripsActivity;
 import com.tripshare.hitrip.R;
 import com.tripshare.hitrip.RegulationsActivity;
+import com.tripshare.hitrip.SignUpActivity;
 import com.tripshare.hitrip.SuggestionActivity;
 
 import java.util.List;
@@ -26,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     //Initialize variable
     DrawerLayout drawerLayout;
     private RecyclerView mRecyclerView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +70,10 @@ public class MainActivity extends AppCompatActivity {
             //Close drawer
             drawerLayout.closeDrawer(GravityCompat.START);
         }
+    }
+
+    public void ClickProfile(View view){
+        redirectActivity(this, MyProfileActivity.class);
     }
 
     public void ClickTrips(View view){

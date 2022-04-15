@@ -23,6 +23,7 @@
         android:background="@color/divider_color"/>
 
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -30,25 +31,27 @@
         android:onClick="ClickProfile">
 
         <ImageView
+            android:id="@+id/menu_profile"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_marginStart="16dp"
             android:src="@drawable/ic_account"
             />
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="sans-serif"
-            android:padding="24dp"
-            android:text="Nume"
-            android:textSize="20sp" />
-
-        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="48dp"
-            android:src="@drawable/ic_notifications" />
+            android:fontFamily="sans-serif"
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="16dp"
+            android:text="Prenume"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:text="Nume"
+            android:textSize="20sp" />
 
     </LinearLayout>
 

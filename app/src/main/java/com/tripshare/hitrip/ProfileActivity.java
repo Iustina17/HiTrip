@@ -3,6 +3,7 @@ package com.tripshare.hitrip;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -11,4 +12,5 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
     }
+
 }

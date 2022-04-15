@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileActivity">
+    tools:context=".MyProfileActivity">
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -124,11 +124,13 @@
                 android:orientation="vertical">
 
                 <Button
+                    android:id="@+id/edit_profile_button"
                     android:layout_width="270dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:text="Editează profilul"
                     android:textSize="14dp"
+                    android:onClick="ClickEditProfile"
                     android:background="@drawable/button_standard">
                 </Button>
 
@@ -139,17 +141,16 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="8dp"
                 android:orientation="vertical">
-
                 <Button
+                    android:id="@+id/edit_personal_info_button"
                     android:layout_width="270dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:text="Editează informaţiile personale"
                     android:textSize="14dp"
-                    android:background="@drawable/button_standard">
-
+                    android:background="@drawable/button_standard"
+                    android:onClick="ClickEditPersonalInfo">
                 </Button>
-
             </LinearLayout>
 
             <LinearLayout
