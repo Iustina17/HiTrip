@@ -107,21 +107,30 @@
                         android:textColor="@color/black"
                         android:textSize="16dp"></EditText>
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Sex"
-                        android:textColor="@color/black"
-                        android:textSize="16dp"
-                        android:textStyle="bold"></TextView>
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="16dp"
+                        android:orientation="horizontal">
 
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="bărbat/femeie/altele"
-                        android:padding="8dp"
-                        android:textColor="@color/black"
-                        android:textSize="16dp"></EditText>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Sex"
+                            android:textColor="@color/black"
+                            android:textSize="16dp"
+                            android:textStyle="bold"></TextView>
+
+                        <Spinner
+                            android:id="@+id/spinner_sex"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="16dp"
+                            android:tooltipText="Selecteza"
+                            tools:ignore="RtlHardcoded"></Spinner>
+                    </LinearLayout>
+
 
                     <TextView
                         android:layout_width="match_parent"
@@ -131,13 +140,49 @@
                         android:textSize="16dp"
                         android:textStyle="bold"></TextView>
 
-                    <EditText
+                    <RelativeLayout
+                        android:id="@+id/birth_date"
                         android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <EditText
+                            android:id="@+id/birthday_pers_info"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif"
+                            android:hint="Selectează data naşterii"
+                            android:inputType="none"
+                            android:padding="8dp"
+                            android:textSize="16dp"></EditText>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_alignRight="@id/birthday_pers_info"
+                            android:src="@drawable/ic_calendar">
+
+                        </ImageView>
+                    </RelativeLayout>
+
+                    <!--
+                                        <TextView
+                                            android:id="@+id/age_show"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="sans-serif"
+                                            android:paddingStart="8dp"
+                                            android:paddingBottom="8dp"
+                                            android:textSize="14dp" />
+                    -->
+                    <TextView
+                        android:id="@+id/textCondition"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:hint="Ex: data nasterii"
-                        android:padding="8dp"
-                        android:textColor="@color/black"
-                        android:textSize="16dp"></EditText>
+                        android:fontFamily="sans-serif"
+                        android:paddingStart="8dp"
+                        android:paddingBottom="8dp"
+                        android:text="Trebuie să ai cel puţin 18 ani pentru a utiliza HiTrip"
+                        android:textSize="14dp" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -158,8 +203,8 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Verificare"
                         android:layout_marginTop="8dp"
+                        android:text="Verificare"
                         android:textColor="@color/black"
                         android:textSize="16dp"
                         android:textStyle="bold"></TextView>
@@ -173,14 +218,28 @@
                         android:orientation="vertical">
 
                         <Button
+                            android:id="@+id/confirmaNrTelefon"
                             android:layout_width="270dp"
                             android:layout_height="40dp"
+                            android:layout_marginBottom="8dp"
                             android:background="@drawable/button_black_corners"
                             android:drawableStart="@drawable/ic_otp"
                             android:padding="10dp"
                             android:text="Confirmă numărul de telefon"
                             android:textAlignment="textStart"
-                            android:textSize="13dp"></Button>
+                            android:textSize="13dp"
+                            android:onClick="ClickConfirmMobile"></Button>
+                        <Button
+                            android:id="@+id/confirmaAcreditare"
+                            android:layout_width="270dp"
+                            android:layout_height="40dp"
+                            android:background="@drawable/button_black_corners"
+                            android:drawableStart="@drawable/ic_about_us"
+                            android:padding="10dp"
+                            android:text="Confirmă acreditare"
+                            android:textAlignment="center"
+                            android:textSize="13dp"
+                            android:onClick="ClickConfirmMobile"></Button>
 
                     </LinearLayout>
 
@@ -210,11 +269,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="Informaţiile conului"
+                        android:text="Informaţiile contului"
                         android:textAlignment="center"
                         android:textColor="@color/black"
                         android:textSize="18dp"
                         android:textStyle="bold"></TextView>
+
                     <LinearLayout
                         android:layout_width="318dp"
                         android:layout_height="wrap_content"
@@ -282,12 +342,12 @@
                         android:background="@color/divider_color"></View>
 
                     <Button
-                        android:background="@drawable/button_black_corners"
                         android:layout_width="200dp"
                         android:layout_height="30dp"
-                        android:layout_marginBottom="32dp"
-                        android:text="Stergţi contul"
                         android:layout_gravity="center"
+                        android:layout_marginBottom="32dp"
+                        android:background="@drawable/button_black_corners"
+                        android:text="Stergţi contul"
                         android:textAlignment="center"
                         android:textColor="#F44336"
                         android:textSize="14dp"

@@ -29,6 +29,11 @@
         <item>AUD</item>
         <item>GBP</item>
     </string-array>
+    <string-array name="sex">
+        <item>Bărbat</item>
+        <item>Femeie</item>
+        <item>Altele</item>
+    </string-array>
     <string name="title_activity_my_profile">MyProfileActivity</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>

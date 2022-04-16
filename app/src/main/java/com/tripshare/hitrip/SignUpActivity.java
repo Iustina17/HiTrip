@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,8 +37,11 @@ public class SignUpActivity extends AppCompatActivity {
     Button register_button;
     TextView age_show, textCondition;
     EditText mEmail,mLastName, mFirstName,mPassword, mConfirm_password;
-    static int age;
+    static Integer age;
     private DatabaseReference reference;
+    Spinner spinner_sex_login;
+    EditText nationalitate_login;
+    String date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +58,9 @@ public class SignUpActivity extends AppCompatActivity {
         mPassword = findViewById(R.id.editTextPassword);
         mConfirm_password = findViewById(R.id.editTextConfirmPassowrd);
 
+        spinner_sex_login = findViewById(R.id.spinner_sex_login);
+        nationalitate_login = findViewById(R.id.nationalitate_login);
+
         fAuth = FirebaseAuth.getInstance();
 
 
@@ -68,6 +75,7 @@ public class SignUpActivity extends AppCompatActivity {
                     birthdate.set(bYear, bMonth, bDay);
                     age_show.setText(Integer.toString(calculateAge(birthdate)));
                     age = calculateAge(birthdate);
+                    date = bDay+"/"+bMonth+"/"+bYear+"/";
                 }
             });
         }
@@ -113,7 +121,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                 if(age<18){
                     textCondition.setError("Trebuie să ai cel puţin 18 ani pentru a utiliza HiTrip");
-                    mEmail.requestFocus();
+                    date_picker.requestFocus();
                     return;
                 }
 
@@ -123,7 +131,8 @@ public class SignUpActivity extends AppCompatActivity {
                         if(task.isSuccessful()){
                             //addUserToDatabase(email, lastName, firstName, age);
                             reference = FirebaseDatabase.getInstance().getReference().child("Calatorii");
-                            User utilizator = new User(email, lastName, firstName, age);
+
+                            User utilizator = new User(email, lastName, firstName, age, "",0.0f, 0.0f, 0,0,0, spinner_sex_login.getSelectedItem().toString(),date, nationalitate_login.toString(),0,0,"","","","");
                             reference.push().setValue(utilizator);
                             Toast.makeText(SignUpActivity.this,"Utilizator creat",Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getApplicationContext(), MainActivity.class));
