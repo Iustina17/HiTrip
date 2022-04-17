@@ -1,5 +1,6 @@
 package com.tripshare.hitrip.Trips;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -57,12 +58,13 @@ class RecyclerViewConfigTrip {
 
         }
 
+        @SuppressLint("SetTextI18n")
         void bind(Trip trip, String key) {
             prenume_organiztor.setText(trip.prenume);
             nume_organiztor.setText(trip.nume);
             tara.setText(trip.tara);
             oras.setText(trip.oras);
-            nr_zile.setText(trip.nr_zile);
+            nr_zile.setText(trip.nr_zile.toString());
             nume_excursie.setText(trip.titlu_excursie);
             data_inceput.setText(trip.data_inceput);
             data_final.setText(trip.data_final);

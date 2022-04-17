@@ -62,7 +62,7 @@ public class CreateTrip1 extends AppCompatActivity implements View.OnClickListen
     Button button_finalizeaza;
     ImageView imagine_excursie;
 
-    int nr_zile = 0, index_opriri = 0;
+    Integer nr_zile = 0, index_opriri = 0;
     String tematica;
     ArrayList<Oprire> vect_opriri;
 
@@ -168,24 +168,24 @@ public class CreateTrip1 extends AppCompatActivity implements View.OnClickListen
                 String mimagine_excursie = "TODO"; //TODO
                 String mprenume = prenume.toString();
                 String mnume = nume.toString();
-                String mtitlu = titlu.toString();
+                String mtitlu = titlu.getText().toString();
                 String mtematica = tematica; ////////////////////////////////////////trebuie sa-l fac string din checkbox-uri
                 /* TODO */
                 String mtip = spinner1.getSelectedItem().toString();
-                String mdata_inceput = data_inceput.toString();
-                String mdata_final = data_final.toString();
-                int mnr_zile = nr_zile;
-                String mtara = tara.toString();
-                String moras = oras.toString();
-                String mdescriere_plecare = descriere_plecare.toString();
-                int nr_opriri = vect_opriri.size();
-                String mdescriere_excursie = descriere_excursie.toString();
-                String mregulament = regulament.toString();
-                String mechipament_necesar = echipament_necesar.toString();
-                String mdocumente_necesare = documente_necesare.toString();
-                String mnr_min_particpip = nr_min_particpip.toString();
-                String mnr_max_particpip = nr_max_particpip.toString();
-                String mcost = cost.toString();
+                String mdata_inceput = data_inceput.getText().toString();
+                String mdata_final = data_final.getText().toString();
+                Integer mnr_zile = nr_zile;
+                String mtara = tara.getText().toString();
+                String moras = oras.getText().toString();
+                String mdescriere_plecare = descriere_plecare.getText().toString();
+                Integer nr_opriri = vect_opriri.size();
+                String mdescriere_excursie = descriere_excursie.getText().toString();
+                String mregulament = regulament.getText().toString();
+                String mechipament_necesar = echipament_necesar.getText().toString();
+                String mdocumente_necesare = documente_necesare.getText().toString();
+                String mnr_min_particpip = nr_min_particpip.getText().toString();
+                String mnr_max_particpip = nr_max_particpip.getText().toString();
+                String mcost = cost.getText().toString();
                 String mtip_moneda = spinner3.getSelectedItem().toString();
 
                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Calatorii");

@@ -12,11 +12,11 @@ public class Trip {
     public String tip;
     public String data_inceput;
     public String data_final;
-    public int nr_zile;
+    public Integer nr_zile;
     public String tara;
     public String oras;
     public String descriere_plecare;
-    public int nr_opriri;
+    public Integer nr_opriri;
 
     public ArrayList<Oprire> vect_opriri;
 
@@ -34,7 +34,7 @@ public class Trip {
     public Trip() {
     }
 
-    public Trip(String UID_organiztor, String imagine_excursie, String prenume, String nume, String titlu_excursie, String tematica, String tip, String data_inceput, String data_final, int nr_zile, String tara, String oras, String descriere_plecare, int nr_opriri, ArrayList<Oprire> vect_opriri, String descriere_excursie, String regulament, String echipament_necesar, String documente_necesare, String nr_min_particip, String nr_max_particip, String pret, String tip_moneda) {
+    public Trip(String UID_organiztor, String imagine_excursie, String prenume, String nume, String titlu_excursie, String tematica, String tip, String data_inceput, String data_final, Integer nr_zile, String tara, String oras, String descriere_plecare, Integer nr_opriri, ArrayList<Oprire> vect_opriri, String descriere_excursie, String regulament, String echipament_necesar, String documente_necesare, String nr_min_particip, String nr_max_particip, String pret, String tip_moneda) {
         this.UID_organiztor = UID_organiztor;
         this.imagine_excursie = imagine_excursie;
         this.prenume = prenume;

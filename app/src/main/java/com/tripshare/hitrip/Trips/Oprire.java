@@ -7,6 +7,9 @@ public class Oprire {
     public String descriere_oprire;
     public String descriere_transport;
 
+    public Oprire() {
+    }
+
     public Oprire(int nr_oprire, String nr_locatie_oprire, String descriere_oprire, String descriere_transport) {
         this.index_opriri = nr_oprire;
         this.locatie_oprire = nr_locatie_oprire;
