@@ -37,6 +37,12 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -62,6 +68,8 @@ public class EditProfileActivity extends AppCompatActivity {
     private Button save_modif;
     private ProgressBar progressBarProfile;
 
+    private DatabaseReference referenceUtiliztaori;
+
     private StorageReference mStorage;
     private String currentPhotoPath;
     private String imagineProfilS;
@@ -83,141 +91,189 @@ public class EditProfileActivity extends AppCompatActivity {
         save_modif = findViewById(R.id.save_modif);
         progressBarProfile = (ProgressBar)findViewById(R.id.progressBarProfile);
     }
-
-    public void EditProfilePhoto(View view) {
-        schimbareImagineProfil();
-    }
-
-    private void schimbareImagineProfil() {
-        final AlertDialog schimbaImagineProfil = new AlertDialog.Builder(getApplicationContext()).create();
-        Window window = schimbaImagineProfil.getWindow();
-        WindowManager.LayoutParams wlp = window.getAttributes();
-
-        wlp.gravity = Gravity.BOTTOM;
-        window.setAttributes(wlp);
-
-        LinearLayout layout = new LinearLayout(getApplicationContext());
-        layout.setOrientation(LinearLayout.HORIZONTAL);
-        layout.setPadding(20, 20, 50, 20);
-
-        GradientDrawable shape = new GradientDrawable();
-        shape.setColor(getResources().getColor(R.color.dell));
-        shape.setCornerRadius(100);
-
-        ImageButton stergePoza = new ImageButton(getApplicationContext());
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            stergePoza.setImageDrawable(getResources().getDrawable(R.drawable.ic_stergere, getApplicationContext().getTheme()));
-        } else {
-            stergePoza.setImageDrawable(getResources().getDrawable(R.drawable.ic_stergere));
-        }
-        stergePoza.setBackground(shape);
-        stergePoza.setPadding(10, 10, 10, 10);
-        stergePoza.setMinimumWidth(200);
-        stergePoza.setMinimumHeight(200);
-        stergePoza.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                stergePoza();
-                schimbaImagineProfil.dismiss();
-            }
-        });
-        layout.addView(stergePoza);
-
-        ImageButton galeriePoza = new ImageButton(getApplicationContext());
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            galeriePoza.setImageDrawable(getResources().getDrawable(R.drawable.ic_galerie, getApplicationContext().getTheme()));
-        } else {
-            galeriePoza.setImageDrawable(getResources().getDrawable(R.drawable.ic_galerie));
-        }
-        galeriePoza.setBackground(shape);
-        galeriePoza.setPadding(10, 10, 10, 10);
-        galeriePoza.setMinimumWidth(200);
-        galeriePoza.setMinimumHeight(200);
-        galeriePoza.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                pozaGalerie();
-                schimbaImagineProfil.dismiss();
-            }
-        });
-        layout.addView(galeriePoza);
-
-//        ImageButton cameraPoza = new ImageButton(getApplicationContext());
+//
+//    public void EditProfilePhoto(View view) {
+//        schimbareImagineProfil();
+//    }
+//
+//    private void schimbareImagineProfil() {
+//        final AlertDialog schimbaImagineProfil = new AlertDialog.Builder(getApplicationContext()).create();
+//        Window window = schimbaImagineProfil.getWindow();
+//        WindowManager.LayoutParams wlp = window.getAttributes();
+//
+//        wlp.gravity = Gravity.BOTTOM;
+//        window.setAttributes(wlp);
+//
+//        LinearLayout layout = new LinearLayout(getApplicationContext());
+//        layout.setOrientation(LinearLayout.HORIZONTAL);
+//        layout.setPadding(20, 20, 50, 20);
+//
+//        GradientDrawable shape = new GradientDrawable();
+//        shape.setColor(getResources().getColor(R.color.dell));
+//        shape.setCornerRadius(100);
+//
+//        ImageButton stergePoza = new ImageButton(getApplicationContext());
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//            cameraPoza.setImageDrawable(getResources().getDrawable(R.drawable.ic_camera, getApplicationContext().getTheme()));
+//            stergePoza.setImageDrawable(getResources().getDrawable(R.drawable.ic_stergere, getApplicationContext().getTheme()));
 //        } else {
-//            cameraPoza.setImageDrawable(getResources().getDrawable(R.drawable.ic_camera));
+//            stergePoza.setImageDrawable(getResources().getDrawable(R.drawable.ic_stergere));
 //        }
-//        cameraPoza.setBackground(shape);
-//        cameraPoza.setPadding(10, 10, 10, 10);
-//        cameraPoza.setMinimumWidth(200);
-//        cameraPoza.setMinimumHeight(200);
-//        cameraPoza.setOnClickListener(new View.OnClickListener() {
+//        stergePoza.setBackground(shape);
+//        stergePoza.setPadding(10, 10, 10, 10);
+//        stergePoza.setMinimumWidth(200);
+//        stergePoza.setMinimumHeight(200);
+//        stergePoza.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
-//                cameraPoza();
+//                stergePoza();
 //                schimbaImagineProfil.dismiss();
 //            }
 //        });
-//        layout.addView(cameraPoza);
-
-        schimbaImagineProfil.setTitle("Schimbă poza profil");
-        schimbaImagineProfil.setView(layout);
-        schimbaImagineProfil.show();
-    }
-
-    private void cameraPoza() {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            File photoFile = null;
-            try {
-                photoFile = createImageFile();
-            } catch (IOException ignored) {
-            }
-            // Continue only if the File was successfully created
-            if (photoFile != null) {
-                Uri photoURI = FileProvider.getUriForFile(getApplicationContext(),
-                        "com.tripshare.hitrip.fileprovider",
-                        photoFile);
-                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-                startActivityForResult(takePictureIntent, CAMERA_REQUEST);
-            }
-
-        }
-    }
-
-    private File createImageFile() throws IOException {
-        @SuppressLint("SimpleDateFormat") String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-        File image = File.createTempFile(
-                imageFileName,  /* prefix */
-                ".jpg",         /* suffix */
-                storageDir      /* directory */
-        );
-        currentPhotoPath = image.getAbsolutePath();
-        return image;
-    }
-
-
-    @SuppressLint("IntentReset")
-    private void pozaGalerie() {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        intent.setType("image/*");
-        Intent pickIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        pickIntent.setType("image/*");
-        Intent chooserIntent = Intent.createChooser(intent, "Select Image");
-        chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[]{pickIntent});
-        someActivityResultLauncher.launch(Intent.createChooser(intent, "Select Picture")); //PICK_IMAGE
-    }
-    ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            new ActivityResultCallback<ActivityResult>() {
-        @Override
-        public void onActivityResult(ActivityResult result) {
-//            if (result.getResultCode() == Activity.RESULT_OK){
+//        layout.addView(stergePoza);
+//
+//        ImageButton galeriePoza = new ImageButton(getApplicationContext());
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            galeriePoza.setImageDrawable(getResources().getDrawable(R.drawable.ic_galerie, getApplicationContext().getTheme()));
+//        } else {
+//            galeriePoza.setImageDrawable(getResources().getDrawable(R.drawable.ic_galerie));
+//        }
+//        galeriePoza.setBackground(shape);
+//        galeriePoza.setPadding(10, 10, 10, 10);
+//        galeriePoza.setMinimumWidth(200);
+//        galeriePoza.setMinimumHeight(200);
+//        galeriePoza.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                pozaGalerie();
+//                schimbaImagineProfil.dismiss();
+//            }
+//        });
+//        layout.addView(galeriePoza);
+//
+////        ImageButton cameraPoza = new ImageButton(getApplicationContext());
+////        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+////            cameraPoza.setImageDrawable(getResources().getDrawable(R.drawable.ic_camera, getApplicationContext().getTheme()));
+////        } else {
+////            cameraPoza.setImageDrawable(getResources().getDrawable(R.drawable.ic_camera));
+////        }
+////        cameraPoza.setBackground(shape);
+////        cameraPoza.setPadding(10, 10, 10, 10);
+////        cameraPoza.setMinimumWidth(200);
+////        cameraPoza.setMinimumHeight(200);
+////        cameraPoza.setOnClickListener(new View.OnClickListener() {
+////            @Override
+////            public void onClick(View view) {
+////                cameraPoza();
+////                schimbaImagineProfil.dismiss();
+////            }
+////        });
+////        layout.addView(cameraPoza);
+//
+//        schimbaImagineProfil.setTitle("Schimbă poza profil");
+//        schimbaImagineProfil.setView(layout);
+//        schimbaImagineProfil.show();
+//    }
+//
+//    private void cameraPoza() {
+//        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+//            File photoFile = null;
+//            try {
+//                photoFile = createImageFile();
+//            } catch (IOException ignored) {
+//            }
+//            // Continue only if the File was successfully created
+//            if (photoFile != null) {
+//                Uri photoURI = FileProvider.getUriForFile(getApplicationContext(),
+//                        "com.tripshare.hitrip.fileprovider",
+//                        photoFile);
+//                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+//                startActivityForResult(takePictureIntent, CAMERA_REQUEST);
+//            }
+//
+//        }
+//    }
+//
+//    private File createImageFile() throws IOException {
+//        @SuppressLint("SimpleDateFormat") String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+//        String imageFileName = "JPEG_" + timeStamp + "_";
+//        File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+//        File image = File.createTempFile(
+//                imageFileName,  /* prefix */
+//                ".jpg",         /* suffix */
+//                storageDir      /* directory */
+//        );
+//        currentPhotoPath = image.getAbsolutePath();
+//        return image;
+//    }
+//
+//
+//    @SuppressLint("IntentReset")
+//    private void pozaGalerie() {
+//        Intent intent = new Intent();
+//        intent.setType("image/*");
+//        intent.setAction(Intent.ACTION_GET_CONTENT);
+//        intent.setType("image/*");
+//        Intent pickIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//        pickIntent.setType("image/*");
+//        Intent chooserIntent = Intent.createChooser(intent, "Select Image");
+//        chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[]{pickIntent});
+//        someActivityResultLauncher.launch(Intent.createChooser(intent, "Select Picture")); //PICK_IMAGE
+//    }
+//    ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(
+//            new ActivityResultContracts.StartActivityForResult(),
+//            new ActivityResultCallback<ActivityResult>() {
+//        @Override
+//        public void onActivityResult(ActivityResult result) {
+////            if (result.getResultCode() == Activity.RESULT_OK){
+////                Intent data = result.getData();
+////                Uri imagineProfilUri = data.getData();
+////                final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+////                final StorageReference imageReference = FirebaseStorage.getInstance().getReference().child("/imaginiProfil").child(user.getUid() + ".jpeg");
+////                UploadTask uploadTask = imageReference.putFile(imagineProfilUri);
+////                uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+////                    @Override
+////                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+////                        Handler handler = new Handler();
+////                        handler.postDelayed(new Runnable() {
+////                            @Override
+////                            public void run() {
+////                                progressBarProfile.setVisibility(View.INVISIBLE);
+////                                Task<Uri> downloadUrl = imageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+////                                    @Override
+////                                    public void onSuccess(Uri uri) {
+////                                        imagineProfilS = uri.toString();
+////                                        Picasso.get()
+////                                                .load(imagineProfilS)
+////                                                .fit().centerCrop()
+////                                                .transform(new CropCircleTransformation())
+////                                                .into(imagineProfil);
+////                                    }
+////                                });
+////                            }
+////                        }, 2000);
+////                        Toast.makeText(getApplicationContext(), "Salvează modificările", Toast.LENGTH_LONG).show();
+////                    }
+////                }).addOnFailureListener(new OnFailureListener() {
+////                    @Override
+////                    public void onFailure(@NonNull Exception e) {
+////                        progressBarProfile.setVisibility(View.INVISIBLE);
+////                        progressBarProfile.setProgress(0);
+////                        Toast.makeText(getApplicationContext(), "Poza nu a putut fi încărcată", Toast.LENGTH_LONG).show();
+////                    }
+////                }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+////                    @Override
+////                    public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
+////                        progressBarProfile.setVisibility(View.VISIBLE);
+////                        double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
+////                        progressBarProfile.setProgress((int) progress);
+////                    }
+////                });
+//
+//
+//
+//
+//            if (result.getResultCode() == Activity.RESULT_OK) {
 //                Intent data = result.getData();
 //                Uri imagineProfilUri = data.getData();
 //                final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -231,7 +287,7 @@ public class EditProfileActivity extends AppCompatActivity {
 //                            @Override
 //                            public void run() {
 //                                progressBarProfile.setVisibility(View.INVISIBLE);
-//                                Task<Uri> downloadUrl = imageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//                                imageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
 //                                    @Override
 //                                    public void onSuccess(Uri uri) {
 //                                        imagineProfilS = uri.toString();
@@ -244,6 +300,7 @@ public class EditProfileActivity extends AppCompatActivity {
 //                                });
 //                            }
 //                        }, 2000);
+//
 //                        Toast.makeText(getApplicationContext(), "Salvează modificările", Toast.LENGTH_LONG).show();
 //                    }
 //                }).addOnFailureListener(new OnFailureListener() {
@@ -261,65 +318,51 @@ public class EditProfileActivity extends AppCompatActivity {
 //                        progressBarProfile.setProgress((int) progress);
 //                    }
 //                });
+//            }
+//            Toast.makeText(getApplicationContext(), "Salvează modificările", Toast.LENGTH_LONG).show();
+//
+//        }
+//    });
+//
+//
+//    private void stergePoza() {
+//        imagineProfilS = "https://firebasestorage.googleapis.com/v0/b/aventura-in-natura-c313d.appspot.com/o/imaginiProfil%2FH1DA51VNlNXm28JvWs3T2wvrRvB3.jpeg?alt=media&token=682dd750-df3e-4fb8-972f-80781b18a96a";
+//        imagineProfil.setImageResource(R.drawable.user);
+//        Toast.makeText(getApplicationContext(), "Salvează modificările", Toast.LENGTH_LONG).show();
+//    }
 
+    private void uploadInformatiiFirebase() {
+        final String despreS = despre.getText().toString().trim();
+        final String preferinteS = preferinte.getText().toString().trim();
+        final String locuri_vizitateS = locuri_vizitate.getText().toString().trim();
+        final String limbi_vorbiteS = limbi_vorbite.getText().toString().trim();
 
-
-
-            if (result.getResultCode() == Activity.RESULT_OK) {
-                Intent data = result.getData();
-                Uri imagineProfilUri = data.getData();
-                final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                final StorageReference imageReference = FirebaseStorage.getInstance().getReference().child("/imaginiProfil").child(user.getUid() + ".jpeg");
-                UploadTask uploadTask = imageReference.putFile(imagineProfilUri);
-                uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        Handler handler = new Handler();
-                        handler.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                progressBarProfile.setVisibility(View.INVISIBLE);
-                                imageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                    @Override
-                                    public void onSuccess(Uri uri) {
-                                        imagineProfilS = uri.toString();
-                                        Picasso.get()
-                                                .load(imagineProfilS)
-                                                .fit().centerCrop()
-                                                .transform(new CropCircleTransformation())
-                                                .into(imagineProfil);
-                                    }
-                                });
-                            }
-                        }, 2000);
-
-                        Toast.makeText(getApplicationContext(), "Salvează modificările", Toast.LENGTH_LONG).show();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        progressBarProfile.setVisibility(View.INVISIBLE);
-                        progressBarProfile.setProgress(0);
-                        Toast.makeText(getApplicationContext(), "Poza nu a putut fi încărcată", Toast.LENGTH_LONG).show();
-                    }
-                }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
-                        progressBarProfile.setVisibility(View.VISIBLE);
-                        double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
-                        progressBarProfile.setProgress((int) progress);
-                    }
-                });
-            }
-            Toast.makeText(getApplicationContext(), "Salvează modificările", Toast.LENGTH_LONG).show();
-
+        String uid = null;
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            uid = user.getUid();
         }
-    });
 
+        //cautam copilul dupa UID
+        referenceUtiliztaori = FirebaseDatabase.getInstance().getReference().child("Utilizatori");
+        Query query = referenceUtiliztaori.orderByChild("UID").equalTo(uid);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
+                    String key = child.getKey();
+                    referenceUtiliztaori = referenceUtiliztaori.child(key);
+                    referenceUtiliztaori.child("despre").setValue(despreS);
+                    referenceUtiliztaori.child("preferinte").setValue(preferinteS);
+                    referenceUtiliztaori.child("locuri_vizitate").setValue(locuri_vizitateS);
+                    referenceUtiliztaori.child("limbi_vorbite").setValue(limbi_vorbiteS);
+                    //referenceUtiliztaori.child("imagine").setValue(imagineProfilS);
+                }
+            }
 
-    private void stergePoza() {
-        imagineProfilS = "https://firebasestorage.googleapis.com/v0/b/aventura-in-natura-c313d.appspot.com/o/imaginiProfil%2FH1DA51VNlNXm28JvWs3T2wvrRvB3.jpeg?alt=media&token=682dd750-df3e-4fb8-972f-80781b18a96a";
-        imagineProfil.setImageResource(R.drawable.user);
-        Toast.makeText(getApplicationContext(), "Salvează modificările", Toast.LENGTH_LONG).show();
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
     }
 }

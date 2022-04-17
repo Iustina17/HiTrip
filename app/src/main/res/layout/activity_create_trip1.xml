@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateTrip1">
+    tools:context=".Trips.CreateTrip1">
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -51,6 +51,7 @@
                     android:textStyle="bold"></TextView>
 
                 <EditText
+                    android:id="@+id/titlu_excursie"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif"
@@ -84,6 +85,7 @@
                     android:orientation="vertical">
 
                     <CheckBox
+                        android:id="@+id/natura"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:minHeight="48dp"
@@ -91,6 +93,7 @@
                         android:textSize="14dp"></CheckBox>
 
                     <CheckBox
+                        android:id="@+id/sport"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:minHeight="48dp"
@@ -98,6 +101,7 @@
                         android:textSize="14dp"></CheckBox>
 
                     <CheckBox
+                        android:id="@+id/relaxare"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:minHeight="48dp"
@@ -105,6 +109,7 @@
                         android:textSize="14dp"></CheckBox>
 
                     <CheckBox
+                        android:id="@+id/divertisment"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:minHeight="48dp"
@@ -119,6 +124,7 @@
                     android:orientation="vertical">
 
                     <CheckBox
+                        android:id="@+id/gastronomie"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:minHeight="48dp"
@@ -126,6 +132,7 @@
                         android:textSize="14dp"></CheckBox>
 
                     <CheckBox
+                        android:id="@+id/muzica"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:minHeight="48dp"
@@ -133,6 +140,7 @@
                         android:textSize="14dp"></CheckBox>
 
                     <CheckBox
+                        android:id="@+id/arhitectura"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:minHeight="48dp"
@@ -140,6 +148,7 @@
                         android:textSize="14dp"></CheckBox>
 
                     <CheckBox
+                        android:id="@+id/industrie"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:minHeight="48dp"
@@ -153,6 +162,7 @@
                     android:orientation="vertical">
 
                     <CheckBox
+                        android:id="@+id/istorie"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:minHeight="48dp"
@@ -160,6 +170,7 @@
                         android:textSize="14dp"></CheckBox>
 
                     <CheckBox
+                        android:id="@+id/etnografie"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:minHeight="48dp"
@@ -167,6 +178,7 @@
                         android:textSize="14dp"></CheckBox>
 
                     <CheckBox
+                        android:id="@+id/arta"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:minHeight="48dp"
@@ -174,6 +186,7 @@
                         android:textSize="14dp"></CheckBox>
 
                     <CheckBox
+                        android:id="@+id/literatura"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:minHeight="48dp"
@@ -189,6 +202,7 @@
                 android:layout_marginBottom="8dp">
 
                 <CheckBox
+                    android:id="@+id/altele"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:minHeight="48dp"
@@ -197,6 +211,7 @@
                     tools:ignore="TouchTargetSizeCheck"></CheckBox>
 
                 <EditText
+                    android:id="@+id/altele_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="120dp"
@@ -379,16 +394,29 @@
                             android:textStyle="bold"></TextView>
 
                         <EditText
+                            android:id="@+id/tara"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="8dp"
                             android:layout_marginRight="8dp"
                             android:layout_marginBottom="8dp"
                             android:fontFamily="sans-serif"
-                            android:hint="Ţara, Oraş"
+                            android:hint="Ţară"
                             android:textSize="16dp"></EditText>
 
                         <EditText
+                            android:id="@+id/oras"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginRight="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:fontFamily="sans-serif"
+                            android:hint="Oraş"
+                            android:textSize="16dp"></EditText>
+
+                        <EditText
+                            android:id="@+id/descriere_plecare"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="8dp"
@@ -460,6 +488,7 @@
                     android:textStyle="bold"></TextView>
 
                 <EditText
+                    android:id="@+id/descriere_excursie"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
@@ -492,6 +521,7 @@
                     android:textStyle="bold"></TextView>
 
                 <EditText
+                    android:id="@+id/regulament"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
@@ -524,6 +554,7 @@
                     android:textStyle="bold"></TextView>
 
                 <EditText
+                    android:id="@+id/echipament_necesar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
@@ -556,6 +587,7 @@
                     android:textStyle="bold"></TextView>
 
                 <EditText
+                    android:id="@+id/documente_necesare"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
@@ -738,6 +770,7 @@
                 android:layout_marginTop="56dp">
 
                 <Button
+                    android:id="@+id/button_finalizare"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="112dp"

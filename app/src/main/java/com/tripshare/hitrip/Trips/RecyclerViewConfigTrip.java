@@ -34,7 +34,7 @@ class RecyclerViewConfigTrip {
     }
 
     class TripItemView extends RecyclerView.ViewHolder {
-        private TextView nume_organiztor, tara, oras, nr_zile, nume_excursie, data_inceput, data_final, tip_excursie, pret, moneda;
+        private TextView prenume_organiztor, nume_organiztor, tara, oras, nr_zile, nume_excursie, data_inceput, data_final, tip_excursie, pret, moneda;
 //        private TextView mtitlu, mdata, mautor, madresare, mcontinut;
 //        private ImageButton mediteaza, msterge;
 //        String key;
@@ -43,6 +43,7 @@ class RecyclerViewConfigTrip {
             super(LayoutInflater.from(mContext).
                     inflate(R.layout.item_trip, parent, false));
 
+            prenume_organiztor = itemView.findViewById(R.id.prenume_organizator);
             nume_organiztor = itemView.findViewById(R.id.nume_organizator);
             tara = itemView.findViewById(R.id.tara);
             oras = itemView.findViewById(R.id.oras);
@@ -57,7 +58,8 @@ class RecyclerViewConfigTrip {
         }
 
         void bind(Trip trip, String key) {
-            nume_organiztor.setText(trip.nume + " " + trip.prenume);
+            prenume_organiztor.setText(trip.prenume);
+            nume_organiztor.setText(trip.nume);
             tara.setText(trip.tara);
             oras.setText(trip.oras);
             nr_zile.setText(trip.nr_zile);

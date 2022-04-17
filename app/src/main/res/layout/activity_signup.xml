@@ -30,113 +30,79 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
+                android:layout_marginLeft="64dp"
+                android:layout_marginRight="64dp"
                 android:orientation="vertical">
 
                 <EditText
                     android:id="@+id/editTextEmail"
-                    android:layout_width="wrap_content"
+                    android:layout_width="208dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
-                    android:ems="10"
                     android:fontFamily="sans-serif"
                     android:hint="Email"
                     android:inputType="textEmailAddress"
-                    android:minHeight="48dp"
-                    app:layout_constraintBottom_toTopOf="@+id/editTextLastName"
-                    app:layout_constraintStart_toStartOf="@+id/date_picker" />
+                    android:minHeight="48dp" />
 
                 <EditText
                     android:id="@+id/editTextLastName"
-                    android:layout_width="wrap_content"
+                    android:layout_width="208dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
-                    android:ems="10"
                     android:fontFamily="sans-serif"
                     android:hint="Nume"
                     android:inputType="textPersonName"
-                    android:minHeight="48dp"
-                    app:layout_constraintBottom_toTopOf="@+id/date_start"
-                    app:layout_constraintStart_toStartOf="@+id/date_picker" />
+                    android:minHeight="48dp" />
 
                 <EditText
-                    android:id="@+id/date_start"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/editTextFirstName"
+                    android:layout_width="208dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
-                    android:ems="10"
                     android:fontFamily="sans-serif"
                     android:hint="Prenume"
                     android:inputType="textPersonName"
-                    android:minHeight="48dp"
-                    app:layout_constraintBottom_toTopOf="@+id/editTextPassword"
-                    app:layout_constraintStart_toStartOf="@+id/date_picker" />
+                    android:minHeight="48dp" />
 
                 <EditText
                     android:id="@+id/editTextPassword"
-                    android:layout_width="wrap_content"
+                    android:layout_width="208dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
-                    android:ems="10"
                     android:fontFamily="sans-serif"
                     android:hint="Parolă"
                     android:inputType="textPassword"
-                    android:minHeight="48dp"
-                    app:layout_constraintBottom_toTopOf="@+id/editTextConfirmPassowrd"
-                    app:layout_constraintStart_toStartOf="@+id/date_picker" />
+                    android:minHeight="48dp" />
 
 
                 <EditText
                     android:id="@+id/editTextConfirmPassowrd"
-                    android:layout_width="wrap_content"
+                    android:layout_width="208dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:ems="10"
                     android:fontFamily="sans-serif"
                     android:hint="Confirmă parola"
                     android:inputType="textPassword"
-                    android:minHeight="48dp"
-                    app:layout_constraintBottom_toTopOf="@+id/textBirthDate"
-                    app:layout_constraintStart_toStartOf="@+id/sex" />
+                    android:minHeight="48dp" />
 
                 <EditText
-                    android:id="@+id/sex"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/nationalitate_login"
+                    android:layout_width="208dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
-                    android:ems="10"
                     android:fontFamily="sans-serif"
-                    android:hint="Confirmă parola"
-                    android:inputType="textPassword"
+                    android:hint="Naţionalitate"
                     android:minHeight="48dp"
-                    app:layout_constraintBottom_toTopOf="@+id/varsta"
-                    app:layout_constraintStart_toStartOf="@+id/date_picker" />
+                    android:padding="8dp"
+                    android:textColor="@color/black"></EditText>
 
-                <EditText
-                    android:id="@+id/varsta"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:ems="10"
-                    android:fontFamily="sans-serif"
-                    android:hint="Confirmă parola"
-                    android:inputType="textPassword"
-                    android:minHeight="48dp"
-                    app:layout_constraintBottom_toTopOf="@+id/textBirthDate"
-                    app:layout_constraintStart_toStartOf="@+id/date_picker" />
-            </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginBottom="16dp">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="16dp"
-                    android:layout_marginLeft="104dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:padding="8dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -155,41 +121,15 @@
                         tools:ignore="RtlHardcoded"></Spinner>
                 </LinearLayout>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Naţionalitate"
-                    android:textColor="@color/black"
-                    android:layout_marginLeft="104dp"
-                    android:textSize="16dp"
-                    android:textStyle="bold"></TextView>
-
-                <EditText
-                    android:id="@+id/nationalitate_login"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:hint="Naţioalitate"
-                    android:padding="8dp"
-                    android:textColor="@color/black"
-                    android:layout_marginLeft="104dp"
-                    android:textSize="16dp"></EditText>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/textBirthDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="80dp"
                     android:fontFamily="sans-serif"
                     android:text="Data naşterii"
                     android:textColor="#000000"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
 
 
                 <DatePicker
@@ -228,9 +168,9 @@
                     android:id="@+id/age_show"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Varsta_provizoriu"
                     android:layout_gravity="center"
-                    android:layout_marginBottom="32dp"/>
+                    android:text="varsta"
+                    android:layout_marginBottom="32dp" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

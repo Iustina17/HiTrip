@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -28,20 +31,24 @@ import java.util.Calendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
 import com.tripshare.hitrip.Trips.MainActivity;
+import com.tripshare.hitrip.User;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    FirebaseAuth fAuth;
     DatePicker date_picker;
     Button register_button;
     TextView age_show, textCondition;
     EditText mEmail,mLastName, mFirstName,mPassword, mConfirm_password;
-    static Integer age;
-    private DatabaseReference reference;
-    Spinner spinner_sex_login;
-    EditText nationalitate_login;
-    String date;
+    static int age;
+    Spinner mspinner_sex_login;
+    EditText mnationalitate_login;
+    static String date;
+    String UID;
+
+    FirebaseAuth fAuth;
+    DatabaseReference reference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,12 +61,14 @@ public class SignUpActivity extends AppCompatActivity {
         textCondition = findViewById(R.id.textCondition);
         mEmail = findViewById(R.id.editTextEmail);
         mLastName = findViewById(R.id.editTextLastName);
-        mFirstName = findViewById(R.id.date_start);
+        mFirstName = findViewById(R.id.editTextLastName);
         mPassword = findViewById(R.id.editTextPassword);
         mConfirm_password = findViewById(R.id.editTextConfirmPassowrd);
 
-        spinner_sex_login = findViewById(R.id.spinner_sex_login);
-        nationalitate_login = findViewById(R.id.nationalitate_login);
+        mspinner_sex_login = findViewById(R.id.spinner_sex_login);
+        mnationalitate_login = findViewById(R.id.nationalitate_login);
+
+        ArrayAdapter<CharSequence> adapter1;
 
         fAuth = FirebaseAuth.getInstance();
 
@@ -85,9 +94,10 @@ public class SignUpActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String email = mEmail.getText().toString().trim();
                 String password = mPassword.getText().toString().trim();
-                String confirm_password = mConfirm_password.getText().toString().trim();
                 String firstName = mFirstName.getText().toString().trim();
                 String lastName = mLastName.getText().toString().trim();
+                String spinner_sex_login = mspinner_sex_login.getSelectedItem().toString().trim();
+                String nationalitate_login = mnationalitate_login.toString().trim();
 
 
                 if(TextUtils.isEmpty(email)){
@@ -125,14 +135,22 @@ public class SignUpActivity extends AppCompatActivity {
                     return;
                 }
 
+                if(mnationalitate_login.getText().toString().trim().equals("")){
+                    mnationalitate_login.setError("Câmpul trebuie completat");
+                    mnationalitate_login.requestFocus();
+                    return;
+                }
+
                 fAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             //addUserToDatabase(email, lastName, firstName, age);
-                            reference = FirebaseDatabase.getInstance().getReference().child("Calatorii");
+                            reference = FirebaseDatabase.getInstance().getReference().child("Utilizatori");
 
-                            User utilizator = new User(email, lastName, firstName, age, "",0.0f, 0.0f, 0,0,0, spinner_sex_login.getSelectedItem().toString(),date, nationalitate_login.toString(),0,0,"","","","");
+                            UID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+                            User utilizator = new User(UID, email, lastName, firstName, age, "",0.0f, 0.0f, 0,0,0, spinner_sex_login,date, nationalitate_login,0,0,"","","","");
                             reference.push().setValue(utilizator);
                             Toast.makeText(SignUpActivity.this,"Utilizator creat",Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getApplicationContext(), MainActivity.class));
@@ -152,7 +170,22 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
+        adapter1 = ArrayAdapter.createFromResource(this, R.array.sex, android.R.layout.simple_spinner_item);
+        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mspinner_sex_login.setAdapter(adapter1);
+
+        mspinner_sex_login.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
     }
+
 
     int calculateAge(Calendar date) {
         Calendar today = Calendar.getInstance();

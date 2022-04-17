@@ -18,7 +18,6 @@ import com.tripshare.hitrip.MyProfileActivity;
 import com.tripshare.hitrip.MyTripsActivity;
 import com.tripshare.hitrip.R;
 import com.tripshare.hitrip.RegulationsActivity;
-import com.tripshare.hitrip.SignUpActivity;
 import com.tripshare.hitrip.SuggestionActivity;
 
 import java.util.List;
@@ -79,6 +78,10 @@ public class MainActivity extends AppCompatActivity {
     public void ClickTrips(View view){
         //Recreate activity
         recreate();
+    }
+
+    public void ClickCreateTrip(View view){
+        redirectActivity(this, CreateTrip1.class);
     }
 
     public void ClickMyTrips(View view){
