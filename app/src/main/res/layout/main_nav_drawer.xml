@@ -44,14 +44,16 @@
             android:layout_marginRight="8dp"
             android:layout_marginLeft="16dp"
             android:text="Prenume"
-            android:textSize="20sp" />
+            android:textSize="18sp"
+            android:textColor="@color/black"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"
             android:text="Nume"
-            android:textSize="20sp" />
+            android:textSize="18sp"
+            android:textColor="@color/black"/>
 
     </LinearLayout>
 
@@ -79,7 +81,7 @@
             android:fontFamily="sans-serif"
             android:padding="12dp"
             android:text="Excursii active"
-            android:textSize="14sp" />
+            android:textSize="16sp" />
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -103,7 +105,7 @@
             android:fontFamily="sans-serif"
             android:padding="12dp"
             android:text="Excursiile mele"
-            android:textSize="14sp" />
+            android:textSize="16sp" />
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -126,12 +128,12 @@
             android:fontFamily="sans-serif"
             android:padding="12dp"
             android:text="Creează o excursie"
-            android:textSize="14sp" />
+            android:textSize="16sp" />
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="48dp"
-            android:src="@drawable/ic_add"
+            android:src="@drawable/ic_add_nav"
             />
     </LinearLayout>
     <LinearLayout
@@ -149,7 +151,7 @@
             android:fontFamily="sans-serif"
             android:padding="12dp"
             android:text="Mesaje"
-            android:textSize="14sp" />
+            android:textSize="16sp" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -175,7 +177,7 @@
             android:fontFamily="sans-serif"
             android:padding="12dp"
             android:text="Regulament"
-            android:textSize="14sp" />
+            android:textSize="16sp" />
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -199,7 +201,7 @@
             android:fontFamily="sans-serif"
             android:padding="12dp"
             android:text="Sugestii şi probleme"
-            android:textSize="14sp" />
+            android:textSize="16sp" />
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -232,7 +234,7 @@
             android:fontFamily="sans-serif"
             android:padding="12dp"
             android:text="Deconectează-te"
-            android:textSize="14sp" />
+            android:textSize="16sp" />
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -1,5 +1,6 @@
 package com.tripshare.hitrip;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
@@ -7,24 +8,45 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+import com.tripshare.hitrip.Trips.FirebaseDatabaseHelperTrips;
+import com.tripshare.hitrip.Trips.Trip;
+
 import java.util.Calendar;
+import java.util.List;
 
 public class EditPersonalInfoActivity extends AppCompatActivity {
 
     static EditText birthday_pers_info;
+    EditText nume_edit_pers_info, prenume_edit_persinfo, nationalitate_edit_pers_info;
     DatePickerDialog.OnDateSetListener setListener;
     Spinner spinner1;
     ArrayAdapter<CharSequence> adapter1;
     //TextView age_show;////////////////////////////////////
     TextView textCondition;
+    Button confirmaNrTelefon, confirmaAcreditare, schimba_email, schimba_parola, save_modif_personal_info, sterge_cont;
+    TextView nr_tel_verificat;
+    Integer nr_mobil_verificatS; ///daca e sau nu verificat
+
+
+    private DatabaseReference referenceUtiliztaori;
 
     static int age;
 
@@ -33,8 +55,19 @@ public class EditPersonalInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_personal_info);
 
+        nume_edit_pers_info = findViewById(R.id.nume_edit_pers_info);
+        prenume_edit_persinfo = findViewById(R.id.prenume_edit_persinfo);
+        nationalitate_edit_pers_info = findViewById(R.id.nationalitate_edit_pers_info);
+        confirmaNrTelefon = findViewById(R.id.confirmaNrTelefon);
+        confirmaAcreditare = findViewById(R.id.confirmaAcreditare);
+        schimba_email = findViewById(R.id.schimba_email);
+        schimba_parola = findViewById(R.id.schimba_parola);
+        save_modif_personal_info = findViewById(R.id.save_modif_personal_info);
+        sterge_cont = findViewById(R.id.sterge_cont);
         birthday_pers_info = findViewById(R.id.birthday_pers_info);
-       // age_show = findViewById(R.id.age_show);
+        nr_tel_verificat = findViewById(R.id.nr_tel_verificat);
+
+        // age_show = findViewById(R.id.age_show);
         textCondition = findViewById(R.id.textCondition);
 
 
@@ -50,18 +83,18 @@ public class EditPersonalInfoActivity extends AppCompatActivity {
                         EditPersonalInfoActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int day) {
-                        month = month+1;
-                        String date = day+"/"+month+"/"+year;
+                        month = month + 1;
+                        String date = day + "/" + month + "/" + year;
                         birthday_pers_info.setText(date);
                         Calendar birthdate = Calendar.getInstance();
                         birthdate.set(year, month, day);
                         //age_show.setText(Integer.toString(calculateAge(birthdate)));
                         age = calculateAge(birthdate);
-                        if(age<18){
+                        if (age < 18) {
                             textCondition.setError("Trebuie să ai cel puţin 18 ani pentru a utiliza HiTrip");
                             birthday_pers_info.requestFocus();
                             return;
-                        }else{
+                        } else {
                             textCondition.setError(null);
                         }
                     }
@@ -75,8 +108,8 @@ public class EditPersonalInfoActivity extends AppCompatActivity {
         setListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                month = month+1;
-                String date = day+"/"+month+"/"+year+"/";
+                month = month + 1;
+                String date = day + "/" + month + "/" + year + "/";
                 birthday_pers_info.setText(date);
             }
         };
@@ -95,6 +128,8 @@ public class EditPersonalInfoActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
+
+        ShowVerificareNr();
     }
 
     int calculateAge(Calendar date) {
@@ -112,10 +147,92 @@ public class EditPersonalInfoActivity extends AppCompatActivity {
 
     private static void redirectActivity(Activity activity, Class aClass) {
         //Initialize intent
-        Intent intent = new Intent(activity,aClass);
+        Intent intent = new Intent(activity, aClass);
         //Set flag
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         //Start activity
         activity.startActivity((intent));
     }
+
+    void ShowVerificareNr() {
+
+        String uid = null;
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            uid = user.getUid();
+        }
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        //cautam copilul dupa UID
+
+        referenceUtiliztaori = database.getInstance().getReference().child("Utilizatori");
+        Query query = referenceUtiliztaori.orderByChild("UID").equalTo(uid);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    User utilizatorCurent = data.getValue(User.class);
+                    //Log.d(TAG, "Value is: " + utilizatorCurent);
+                    nr_mobil_verificatS = utilizatorCurent.nr_mobil_verificat;
+                    if (nr_mobil_verificatS == 1) {
+                        confirmaNrTelefon.setVisibility(View.GONE);
+                        nr_tel_verificat.setVisibility(View.VISIBLE);
+                    } else if (nr_mobil_verificatS == 0) {
+                        confirmaNrTelefon.setVisibility(View.VISIBLE);
+                        nr_tel_verificat.setVisibility(View.GONE);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                //Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
+    }
+
+
+    private void uploadInformatiiFirebase() {
+        final String numeS = nume_edit_pers_info.getText().toString().trim();
+        final String prenumeS = prenume_edit_persinfo.getText().toString().trim();
+        final String sexS = spinner1.getSelectedItem().toString().trim();
+        final String birthday_pers_infoS = birthday_pers_info.getText().toString().trim();
+        final String nationalitateS = nationalitate_edit_pers_info.getText().toString().trim();
+
+        String uid = null;
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            uid = user.getUid();
+        }
+
+        //cautam copilul dupa UID
+        referenceUtiliztaori = FirebaseDatabase.getInstance().getReference().child("Utilizatori");
+        Query query = referenceUtiliztaori.orderByChild("UID").equalTo(uid);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
+                    String key = child.getKey();
+                    referenceUtiliztaori = referenceUtiliztaori.child(key);
+                    referenceUtiliztaori.child("nume").setValue(numeS);
+                    referenceUtiliztaori.child("prenume").setValue(prenumeS);
+                    referenceUtiliztaori.child("sex").setValue(sexS);
+                    referenceUtiliztaori.child("data_nasterii").setValue(birthday_pers_infoS);
+                    referenceUtiliztaori.child("nationalitate").setValue(nationalitateS);
+                    //referenceUtiliztaori.child("nr_mobil_verificat").setValue(nrTelVerificatS);
+                    //referenceUtiliztaori.child("imagine").setValue(imagineProfilS);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+    }
+
+    public void Save_Personal_Info(View view) {
+        uploadInformatiiFirebase();
+        redirectActivity(this, MyProfileActivity.class);
+    }
+
 }

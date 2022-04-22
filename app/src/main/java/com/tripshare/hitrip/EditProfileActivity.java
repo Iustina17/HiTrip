@@ -90,6 +90,7 @@ public class EditProfileActivity extends AppCompatActivity {
         limbi_vorbite = findViewById(R.id.limbi_vorbite);
         save_modif = findViewById(R.id.save_modif);
         progressBarProfile = (ProgressBar)findViewById(R.id.progressBarProfile);
+
     }
 //
 //    public void EditProfilePhoto(View view) {
@@ -331,6 +332,15 @@ public class EditProfileActivity extends AppCompatActivity {
 //        Toast.makeText(getApplicationContext(), "Salvează modificările", Toast.LENGTH_LONG).show();
 //    }
 
+    private static void redirectActivity(Activity activity, Class aClass) {
+        //Initialize intent
+        Intent intent = new Intent(activity,aClass);
+        //Set flag
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        //Start activity
+        activity.startActivity((intent));
+    }
+
     private void uploadInformatiiFirebase() {
         final String despreS = despre.getText().toString().trim();
         final String preferinteS = preferinte.getText().toString().trim();
@@ -364,5 +374,10 @@ public class EditProfileActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
+    }
+
+    public void SaveModifProfil(View view){
+        uploadInformatiiFirebase();
+        redirectActivity(this, MyProfileActivity.class);
     }
 }

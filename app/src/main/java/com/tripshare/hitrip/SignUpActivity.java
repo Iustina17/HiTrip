@@ -61,7 +61,7 @@ public class SignUpActivity extends AppCompatActivity {
         textCondition = findViewById(R.id.textCondition);
         mEmail = findViewById(R.id.editTextEmail);
         mLastName = findViewById(R.id.editTextLastName);
-        mFirstName = findViewById(R.id.editTextLastName);
+        mFirstName = findViewById(R.id.editTextFirstName);
         mPassword = findViewById(R.id.editTextPassword);
         mConfirm_password = findViewById(R.id.editTextConfirmPassowrd);
 

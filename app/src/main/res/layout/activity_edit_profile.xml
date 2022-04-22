@@ -48,8 +48,8 @@
                         android:id="@+id/edit_profile_photo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
                         android:layout_gravity="center"
+                        android:layout_marginTop="16dp"
                         android:onClick="EditProfilePhoto">
 
                         <ProgressBar
@@ -159,7 +159,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Spune ceva despre tine..."
-                        android:padding="8dp"
+                        android:paddingStart="8dp"
                         android:textColor="@color/black"
                         android:textSize="16dp"></EditText>
 
@@ -176,7 +176,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Ex: popasuri rare pe traseu, nu tolerez fumul de ţigară"
-                        android:padding="8dp"
+                        android:paddingStart="8dp"
                         android:textColor="@color/black"
                         android:textSize="16dp"></EditText>
 
@@ -193,7 +193,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Ţări, oraşe, trasee, obiective"
-                        android:padding="8dp"
+                        android:paddingStart="8dp"
                         android:textColor="@color/black"
                         android:textSize="16dp"></EditText>
 
@@ -210,7 +210,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Ex: engleză"
-                        android:padding="8dp"
+                        android:paddingStart="8dp"
                         android:textColor="@color/black"
                         android:textSize="16dp"></EditText>
 
@@ -232,7 +232,8 @@
                     android:layout_gravity="center"
                     android:background="@drawable/button_standard"
                     android:text="Salvează modificările"
-                    android:textSize="14dp"></Button>
+                    android:textSize="14dp"
+                    android:onClick="SaveModifProfil"></Button>
 
             </LinearLayout>
         </LinearLayout>

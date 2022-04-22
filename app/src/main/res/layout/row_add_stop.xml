@@ -12,37 +12,43 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="32dp">
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:orientation="vertical">
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/layout_corners"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginBottom="2dp"
+            android:background="@drawable/profile_layout_context_corners"
+            android:elevation="5dp"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
-                android:background="@color/white"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
                 android:orientation="vertical">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
                     android:fontFamily="sans-serif"
                     android:text="Transport"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold"></TextView>
+
                 <EditText
                     android:id="@+id/descriere_transport"
                     android:layout_width="match_parent"
@@ -51,11 +57,13 @@
                     android:layout_marginRight="8dp"
                     android:layout_marginBottom="8dp"
                     android:background="@drawable/edit_text_rectangle"
-                    android:hint=" Ex: nu e necesar, discutabil, pe jos, maşină, autobuz, tren, avion, navă etc."
-                    android:paddingLeft="10dp"
-                    android:maxLines="2"
+                    android:gravity="top"
+                    android:hint="Ex: discutabil, pe jos, maşină, autobuz, tren, avion, navă etc."
                     android:inputType="textMultiLine"
-                    android:scrollbars="vertical"/>
+                    android:maxLines="3"
+                    android:padding="8dp"
+                    android:scrollbars="vertical"
+                    android:textSize="16dp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -77,44 +85,54 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/layout_corners"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="2dp"
+            android:background="@drawable/profile_layout_context_corners"
+            android:elevation="5dp"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
+                android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="sans-serif"
-                    android:text="Oprire"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold"></TextView>
+                    android:layout_weight="1">
 
-                <TextView
-                    android:id="@+id/nr_oprire"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="sans-serif"
-                    android:text="nr. oprire"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold"></TextView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="sans-serif"
+                        android:text="Oprire"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold"></TextView>
+
+                    <TextView
+                        android:id="@+id/nr_oprire"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="sans-serif"
+                        android:text="nr. oprire"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold"></TextView>
+                </LinearLayout>
 
                 <ImageButton
                     android:id="@+id/close_stop_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="155dp"
-                    android:background="@color/white"
+                    android:layout_marginRight="8dp"
+                    android:background="@color/babyPowder"
                     android:src="@drawable/ic_close"></ImageButton>
 
             </LinearLayout>
@@ -122,10 +140,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginBottom="16dp"
-                android:background="@color/white"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
                 android:orientation="vertical">
 
 
@@ -148,22 +165,30 @@
                     android:layout_marginRight="8dp"
                     android:layout_marginBottom="8dp"
                     android:fontFamily="sans-serif"
-                    android:hint="Ţara, Oraş"
+                    android:hint="Ţară, Oraş"
+                    android:paddingStart="8dp"
                     android:textSize="16dp"></EditText>
 
-                <EditText
-                    android:id="@+id/descriere_item"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="100dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:background="@drawable/edit_text_rectangle"
-                    android:hint=" Descriere..."
-                    android:paddingLeft="10dp"
-                    android:maxLines="10"
-                    android:inputType="textMultiLine"
-                    android:scrollbars="vertical"/>
+                    android:layout_marginBottom="8dp">
+
+                    <EditText
+                        android:id="@+id/descriere_item"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/edit_text_rectangle"
+                        android:gravity="top"
+                        android:hint="Descriere..."
+                        android:inputType="textMultiLine"
+                        android:maxLines="6"
+                        android:padding="8dp"
+                        android:scrollbars="vertical"
+                        android:textSize="16dp" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 

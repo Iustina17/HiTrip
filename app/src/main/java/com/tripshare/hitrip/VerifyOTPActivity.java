@@ -19,18 +19,29 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.tripshare.hitrip.Trips.MainActivity;
 
 import java.util.concurrent.TimeUnit;
+
 
 public class VerifyOTPActivity extends AppCompatActivity {
 
     private EditText inputCode1, inputCode2, inputCode3, inputCode4, inputCode5, inputCode6;
     private String verificationId;
     FirebaseAuth mFirebaseAuth;
+
+    private DatabaseReference referenceUtiliztaori;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +103,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
                                     progressBarOTP.setVisibility(View.GONE);
                                     buttonVerify.setVisibility(View.VISIBLE);
                                     if (task.isSuccessful()) {
+                                        uploadInformatiiFirebase();
                                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                         startActivity(intent);
@@ -227,4 +239,35 @@ public class VerifyOTPActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void uploadInformatiiFirebase() {
+
+        final Integer nrTelVerificatS = 1;
+
+        String uid = null;
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            uid = user.getUid();
+        }
+
+        //cautam copilul dupa UID
+        referenceUtiliztaori = FirebaseDatabase.getInstance().getReference().child("Utilizatori");
+        Query query = referenceUtiliztaori.orderByChild("UID").equalTo(uid);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
+                    String key = child.getKey();
+                    referenceUtiliztaori = referenceUtiliztaori.child(key);
+                    referenceUtiliztaori.child("nr_mobil_verificat").setValue(nrTelVerificatS);
+                    //referenceUtiliztaori.child("imagine").setValue(imagineProfilS);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+    }
+
 }
