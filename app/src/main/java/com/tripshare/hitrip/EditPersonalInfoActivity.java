@@ -204,7 +204,7 @@ public class EditPersonalInfoActivity extends AppCompatActivity {
         if (user != null) {
             uid = user.getUid();
         }
-
+        Log.d("EDIT PERSONAL INFO", uid );
         //cautam copilul dupa UID
         referenceUtiliztaori = FirebaseDatabase.getInstance().getReference().child("Utilizatori");
         Query query = referenceUtiliztaori.orderByChild("UID").equalTo(uid);

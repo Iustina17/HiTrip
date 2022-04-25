@@ -30,8 +30,12 @@ import com.google.firebase.database.ValueEventListener;
 import com.tripshare.hitrip.R;
 import com.tripshare.hitrip.User;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 public class CreateTrip1 extends AppCompatActivity implements View.OnClickListener {
 
@@ -62,7 +66,7 @@ public class CreateTrip1 extends AppCompatActivity implements View.OnClickListen
     Button button_finalizeaza;
     ImageView imagine_excursie;
 
-    Integer nr_zile = 0, index_opriri = 0;
+    Integer index_opriri = 0;
     String tematica;
     ArrayList<Oprire> vect_opriri;
 
@@ -174,7 +178,32 @@ public class CreateTrip1 extends AppCompatActivity implements View.OnClickListen
                 String mtip = spinner1.getSelectedItem().toString();
                 String mdata_inceput = data_inceput.getText().toString();
                 String mdata_final = data_final.getText().toString();
-                Integer mnr_zile = nr_zile;
+
+                String dataFinal = data_final.getText().toString();
+                SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+                Date datef = null;
+                try {
+                    datef = df.parse(dataFinal);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+
+                String dataIncep = data_inceput.getText().toString();
+                SimpleDateFormat di = new SimpleDateFormat("dd/MM/yyyy");
+                Date datei = null;
+                try {
+                    datei = di.parse(dataIncep);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+
+                long diff = datef.getTime() - datei.getTime();
+                //System.out.println ("Days: " + Integer.parseInt(String.valueOf(TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS))));
+
+                //int nr_zile  = 0;
+                Integer mnr_zile = Integer.parseInt(String.valueOf(TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS)));
                 String mtara = tara.getText().toString();
                 String moras = oras.getText().toString();
                 String mdescriere_plecare = descriere_plecare.getText().toString();

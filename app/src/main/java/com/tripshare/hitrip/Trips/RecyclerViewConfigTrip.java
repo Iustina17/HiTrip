@@ -99,6 +99,4 @@ class RecyclerViewConfigTrip {
             return tripsLista.size();
         }
     }
-
-
 }

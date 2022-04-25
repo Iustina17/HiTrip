@@ -5,7 +5,9 @@
     android:layout_height="wrap_content"
     android:layout_margin="24dp"
     app:cardCornerRadius="8dp"
-    app:cardElevation="8dp">
+    app:cardElevation="8dp"
+    android:background="@drawable/profile_layout_context_corners"
+    android:elevation="5dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -51,13 +53,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
+                    android:layout_marginRight="4dp"
                     android:layout_marginBottom="8dp"
                     android:fontFamily="sans-serif"
                     android:text="Preume_org"
-                    android:layout_marginRight="8dp"
                     android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:textSize="16dp"></TextView>
+                    android:textSize="16dp"
+                    android:textStyle="bold"></TextView>
 
                 <TextView
                     android:id="@+id/nume_organizator"
@@ -68,9 +70,9 @@
                     android:layout_marginBottom="8dp"
                     android:fontFamily="sans-serif"
                     android:text="Nume_org"
-                    android:textStyle="bold"
                     android:textColor="@color/black"
-                    android:textSize="16dp"></TextView>
+                    android:textSize="16dp"
+                    android:textStyle="bold"></TextView>
 
             </LinearLayout>
         </RelativeLayout>
@@ -80,13 +82,16 @@
             android:layout_height="1dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:background="#636363" />
+            android:background="@color/divider_color" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_margin="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="8dp"
             android:orientation="vertical">
 
             <TextView
@@ -184,7 +189,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Data inceput"
-                    android:textColor="@color/black"
+                    android:textColor="@color/green0"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -201,7 +206,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Data final"
-                    android:textColor="@color/black"
+                    android:textColor="@color/green0"
                     android:textSize="16sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -222,7 +227,7 @@
             android:layout_height="1dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:background="#636363" />
+            android:background="@color/divider_color" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -248,7 +253,7 @@
                 android:layout_marginRight="6dp"
                 android:layout_marginBottom="8dp"
                 android:text="pret"
-                android:textColor="@color/black"
+                android:textColor="@color/green0"
                 android:textSize="16dp"
                 android:textStyle="bold" />
 
@@ -259,7 +264,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:text="moneda"
-                android:textColor="@color/black"
+                android:textColor="@color/green0"
                 android:textSize="16sp"
                 android:textStyle="bold" />
         </LinearLayout>
