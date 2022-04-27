@@ -13,11 +13,13 @@
         android:theme="@style/Theme.HiTrip"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".InsideTripActivity1"
+            android:exported="false" />
+        <activity
             android:name=".EditPersonalInfoActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
             </intent-filter>
         </activity>
         <activity
@@ -28,7 +30,6 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
             </intent-filter>
         </activity>
         <activity
@@ -80,6 +81,7 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

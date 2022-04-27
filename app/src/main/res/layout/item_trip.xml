@@ -240,7 +240,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                android:text="Pret per participant: "
+                android:text="Preţ per participant: "
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold" />

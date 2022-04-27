@@ -156,6 +156,4 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-    //20:04 - create new activities for every option in the menu
 }
