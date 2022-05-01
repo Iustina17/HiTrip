@@ -2,14 +2,18 @@ package com.tripshare.hitrip.Trips;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.tripshare.hitrip.InsideTripActivity1;
 import com.tripshare.hitrip.R;
 
 import java.util.Collections;
@@ -36,6 +40,7 @@ class RecyclerViewConfigTrip {
 
     class TripItemView extends RecyclerView.ViewHolder {
         private TextView prenume_organiztor, nume_organiztor, tara, oras, nr_zile, nume_excursie, data_inceput, data_final, tip_excursie, pret, moneda;
+        CardView card_view_trip;
 //        private TextView mtitlu, mdata, mautor, madresare, mcontinut;
 //        private ImageButton mediteaza, msterge;
 //        String key;
@@ -55,6 +60,7 @@ class RecyclerViewConfigTrip {
             tip_excursie = itemView.findViewById(R.id.tip_excursie);
             pret = itemView.findViewById(R.id.pret);
             moneda = itemView.findViewById(R.id.moneda);
+            card_view_trip = itemView.findViewById(R.id.card_view_trip);
 
         }
 
@@ -90,8 +96,19 @@ class RecyclerViewConfigTrip {
         }
 
         @Override
-        public void onBindViewHolder(@NonNull TripItemView holder, int position) {
+        public void onBindViewHolder(@NonNull TripItemView holder, @SuppressLint("RecyclerView") int position) {
             holder.bind(tripsLista.get(position), keys.get(position));
+
+            holder.card_view_trip.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(mContext, InsideTripActivity1.class);
+                    intent.putExtra("uid_organizator", tripsLista.get(position).UID_organiztor);
+                    intent.putExtra("data_start", tripsLista.get(position).data_inceput);
+                    intent.putExtra("data_final", tripsLista.get(position).data_final);
+                    mContext.startActivity(intent);
+                }
+            });
         }
 
         @Override
@@ -99,6 +116,4 @@ class RecyclerViewConfigTrip {
             return tripsLista.size();
         }
     }
-
-
 }

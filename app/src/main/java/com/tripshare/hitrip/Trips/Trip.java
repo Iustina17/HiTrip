@@ -29,12 +29,14 @@ public class Trip {
 
     public String pret;
     public String tip_moneda;
+
+    public String dificultate;
 //TODO grad_dificultate
 
     public Trip() {
     }
 
-    public Trip(String UID_organiztor, String imagine_excursie, String prenume, String nume, String titlu_excursie, String tematica, String tip, String data_inceput, String data_final, Integer nr_zile, String tara, String oras, String descriere_plecare, Integer nr_opriri, ArrayList<Oprire> vect_opriri, String descriere_excursie, String regulament, String echipament_necesar, String documente_necesare, String nr_min_particip, String nr_max_particip, String pret, String tip_moneda) {
+    public Trip(String UID_organiztor, String imagine_excursie, String prenume, String nume, String titlu_excursie, String tematica, String tip, String data_inceput, String data_final, Integer nr_zile, String tara, String oras, String descriere_plecare, Integer nr_opriri, ArrayList<Oprire> vect_opriri, String descriere_excursie, String regulament, String echipament_necesar, String documente_necesare, String nr_min_particip, String nr_max_particip, String pret, String tip_moneda, String dificultate) {
         this.UID_organiztor = UID_organiztor;
         this.imagine_excursie = imagine_excursie;
         this.prenume = prenume;
@@ -58,5 +60,6 @@ public class Trip {
         this.nr_max_particip = nr_max_particip;
         this.pret = pret;
         this.tip_moneda = tip_moneda;
+        this.dificultate = dificultate;
     }
 }

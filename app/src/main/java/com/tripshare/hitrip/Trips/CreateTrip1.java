@@ -216,13 +216,14 @@ public class CreateTrip1 extends AppCompatActivity implements View.OnClickListen
                 String mnr_max_particpip = nr_max_particpip.getText().toString();
                 String mcost = cost.getText().toString();
                 String mtip_moneda = spinner3.getSelectedItem().toString();
+                String dificultate = spinner2.getSelectedItem().toString();
 
                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Calatorii");
                 Trip trip = new Trip(mUID_organiztor, mimagine_excursie, mprenume, mnume, mtitlu, mtematica,
                         mtip, mdata_inceput, mdata_final, mnr_zile, mtara,
                         moras, mdescriere_plecare, nr_opriri, vect_opriri,
                         mdescriere_excursie, mregulament, mechipament_necesar,
-                        mdocumente_necesare, mnr_min_particpip, mnr_max_particpip, mcost, mtip_moneda);
+                        mdocumente_necesare, mnr_min_particpip, mnr_max_particpip, mcost, mtip_moneda,dificultate);
                 reference.push().setValue(trip);
             }
         });
