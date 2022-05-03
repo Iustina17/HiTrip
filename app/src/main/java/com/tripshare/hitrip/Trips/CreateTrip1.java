@@ -4,8 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -56,10 +59,12 @@ public class CreateTrip1 extends AppCompatActivity implements View.OnClickListen
     CheckBox natura, sport, relaxare, divertisment, gastronomie, muzica, arhitectura, industrie, istorie, etnografie, arta, literatura, altele;
     EditText altele_text;
     //spinner 1 e tip_excursie
+    TextView tip_excursie_text, grad_dificultate_text;
     static EditText data_inceput, data_final;
     EditText tara, oras, descriere_plecare;
     EditText descriere_excursie, regulament, echipament_necesar, documente_necesare;
     EditText nr_min_particpip, nr_max_particpip;
+    LinearLayout layout_nr_particip;
     EditText cost;
     //spinner 2 e grad_dificultate
 //spinner3 e tip_moneda
@@ -69,6 +74,8 @@ public class CreateTrip1 extends AppCompatActivity implements View.OnClickListen
     Integer index_opriri = 0;
     String tematica;
     ArrayList<Oprire> vect_opriri;
+
+    String natura1 = "", sport1 = "", relaxare1 = "", divertisment1 = "", gastronomie1 = "", muzica1 = "", arhitectura1 = "", industrie1 = "", istorie1 = "", etnografie1 = "", arta1 = "", literatura1 = "", altele1 = "";
 
 
     @Override
@@ -102,8 +109,51 @@ public class CreateTrip1 extends AppCompatActivity implements View.OnClickListen
         documente_necesare = findViewById(R.id.documente_necesare);
         nr_min_particpip = findViewById(R.id.min_participanti);
         nr_max_particpip = findViewById(R.id.max_participanti);
+        layout_nr_particip = findViewById(R.id.layout_nr_particip);
         cost = findViewById(R.id.cost);
         button_finalizeaza = findViewById(R.id.button_finalizare);
+        tip_excursie_text = findViewById(R.id.tip_excursie_text);
+        grad_dificultate_text = findViewById(R.id.tip_excursie_text);
+
+        if (natura.isChecked()) {
+            natura1 = natura.getText().toString() + ", ";
+        }
+        if (sport.isChecked()) {
+            sport1 = sport.getText().toString() + ", ";
+        }
+        if (relaxare.isChecked()) {
+            relaxare1 = relaxare.getText().toString() + ", ";
+        }
+        if (divertisment.isChecked()) {
+            divertisment1 = divertisment.getText().toString() + ", ";
+        }
+        if (gastronomie.isChecked()) {
+            gastronomie1 = gastronomie.getText().toString() + ", ";
+        }
+        if (muzica.isChecked()) {
+            muzica1 = muzica.getText().toString() + ", ";
+        }
+        if (arhitectura.isChecked()) {
+            arhitectura1 = arhitectura.getText().toString() + ", ";
+        }
+        if (industrie.isChecked()) {
+            industrie1 = industrie.getText().toString() + ", ";
+        }
+        if (istorie.isChecked()) {
+            istorie1 = istorie.getText().toString() + ", ";
+        }
+        if (etnografie.isChecked()) {
+            etnografie1 = etnografie.getText().toString() + ", ";
+        }
+        if (arta.isChecked()) {
+            arta1 = arta.getText().toString() + ", ";
+        }
+        if (literatura.isChecked()) {
+            literatura1 = literatura.getText().toString() + ", ";
+        }
+        if (altele.isChecked()) {
+            altele1 = altele_text.getText().toString() + ", ";
+        }
 
 
         layoutList = findViewById(R.id.layout_list);
@@ -173,8 +223,12 @@ public class CreateTrip1 extends AppCompatActivity implements View.OnClickListen
                 String mprenume = prenume.toString();
                 String mnume = nume.toString();
                 String mtitlu = titlu.getText().toString();
-                String mtematica = tematica; ////////////////////////////////////////trebuie sa-l fac string din checkbox-uri
+                String mtematica = natura1 + sport1 + relaxare1 + divertisment1 +
+                        gastronomie1 + muzica1 + arhitectura1 + industrie1 + istorie1 +
+                        etnografie1 + arta1 + literatura1 + altele1;////////////////////////////////////////trebuie sa-l fac string din checkbox-uri
                 /* TODO */
+                //mtematica = mtematica.substring(0, mtematica.length() - 2); //sterg ultimele doua caractere ca sa nu am ", " la final
+
                 String mtip = spinner1.getSelectedItem().toString();
                 String mdata_inceput = data_inceput.getText().toString();
                 String mdata_final = data_final.getText().toString();
@@ -198,12 +252,11 @@ public class CreateTrip1 extends AppCompatActivity implements View.OnClickListen
                     e.printStackTrace();
                 }
 
-
                 long diff = datef.getTime() - datei.getTime();
                 //System.out.println ("Days: " + Integer.parseInt(String.valueOf(TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS))));
 
                 //int nr_zile  = 0;
-                Integer mnr_zile = Integer.parseInt(String.valueOf(TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS)));
+                Integer mnr_zile = Integer.parseInt(String.valueOf(TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS))) + 1;
                 String mtara = tara.getText().toString();
                 String moras = oras.getText().toString();
                 String mdescriere_plecare = descriere_plecare.getText().toString();
@@ -218,13 +271,50 @@ public class CreateTrip1 extends AppCompatActivity implements View.OnClickListen
                 String mtip_moneda = spinner3.getSelectedItem().toString();
                 String dificultate = spinner2.getSelectedItem().toString();
 
-                DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Calatorii");
-                Trip trip = new Trip(mUID_organiztor, mimagine_excursie, mprenume, mnume, mtitlu, mtematica,
-                        mtip, mdata_inceput, mdata_final, mnr_zile, mtara,
-                        moras, mdescriere_plecare, nr_opriri, vect_opriri,
-                        mdescriere_excursie, mregulament, mechipament_necesar,
-                        mdocumente_necesare, mnr_min_particpip, mnr_max_particpip, mcost, mtip_moneda,dificultate);
-                reference.push().setValue(trip);
+
+                if (mtitlu.isEmpty()) {
+                    titlu.setError("Stabiliţi titlul");
+                    titlu.requestFocus();
+                } else if (mtip.isEmpty()) {
+                    tip_excursie_text.setError("Stabiliţi tipul excursiei");
+                    spinner1.requestFocus();
+                } else if (mtip.equals("Drumeţie") && dificultate.isEmpty()) {
+                    grad_dificultate_text.setError("Selectaţi gradul de dificultate");
+                    spinner2.requestFocus();
+                } else if (dataIncep.isEmpty()) {
+                    data_inceput.setError("Selectaţi data de început a excursiei");
+                    data_inceput.requestFocus();
+                } else if (mtara.isEmpty() || moras.isEmpty()) {
+                    tara.setError("Selectaţi locul de plecare");
+                    tara.requestFocus();
+                } else if (mnr_min_particpip.isEmpty() || mnr_max_particpip.isEmpty()) {
+                    nr_max_particpip.setError("Selectaţi numărul participanţilor");
+                    layout_nr_particip.requestFocus();
+                } else if (mdescriere_excursie.isEmpty()) {
+                        descriere_excursie.setError("Completaţi descrierea excursiei");
+                        descriere_excursie.requestFocus();
+                } else if (mregulament.isEmpty()) {
+                    regulament.setError("Completaţi regulamentul excursiei");
+                    regulament.requestFocus();
+                }else if (mtip.equals("Drumeţie") && mechipament_necesar.isEmpty()) {
+                    echipament_necesar.setError("Stabiliţi echipamenul necesar");
+                    echipament_necesar.requestFocus();
+                }else if (mcost.isEmpty()) {
+                    cost.setError("Selectaţi costul per participant");
+                    cost.requestFocus();
+                } else {
+                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Calatorii");
+                    Trip trip = new Trip(mUID_organiztor, mimagine_excursie, mprenume, mnume, mtitlu, mtematica,
+                            mtip, mdata_inceput, mdata_final, mnr_zile, mtara,
+                            moras, mdescriere_plecare, nr_opriri, vect_opriri,
+                            mdescriere_excursie, mregulament, mechipament_necesar,
+                            mdocumente_necesare, mnr_min_particpip, mnr_max_particpip, mcost, mtip_moneda, dificultate);
+                    reference.push().setValue(trip);
+
+                    redirectActivity(CreateTrip1.this, MainActivity.class);
+                }
+
+
             }
         });
 
@@ -416,6 +506,15 @@ public class CreateTrip1 extends AppCompatActivity implements View.OnClickListen
 
     private void removeView(View view) {
         layoutList.removeView(view);
+    }
+
+    private static void redirectActivity(Activity activity, Class aClass) {
+        //Initialize intent
+        Intent intent = new Intent(activity,aClass);
+        //Set flag
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        //Start activity
+        activity.startActivity((intent));
     }
 
 }

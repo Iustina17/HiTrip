@@ -283,6 +283,7 @@
                         android:padding="16dp">
 
                         <TextView
+                            android:id="@+id/tip_excursie_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -318,6 +319,7 @@
                         android:visibility="visible">
 
                         <TextView
+                            android:id="@+id/grad_dificultate_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -808,6 +810,7 @@
                             android:textStyle="bold"></TextView>
 
                         <LinearLayout
+                            android:id="@+id/layout_nr_particip"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="16dp"

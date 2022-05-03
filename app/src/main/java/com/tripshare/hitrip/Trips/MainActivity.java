@@ -1,5 +1,6 @@
 package com.tripshare.hitrip.Trips;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -11,7 +12,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.tripshare.hitrip.LoginActivity;
 import com.tripshare.hitrip.MessagesActivity;
 import com.tripshare.hitrip.MyProfileActivity;
@@ -19,6 +27,7 @@ import com.tripshare.hitrip.MyTripsActivity;
 import com.tripshare.hitrip.R;
 import com.tripshare.hitrip.RegulationsActivity;
 import com.tripshare.hitrip.SuggestionActivity;
+import com.tripshare.hitrip.User;
 
 import java.util.List;
 
@@ -27,6 +36,11 @@ public class MainActivity extends AppCompatActivity {
     //Initialize variable
     DrawerLayout drawerLayout;
     private RecyclerView mRecyclerView;
+
+    TextView nume, prenume;
+    String uid_user_nav;
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private DatabaseReference referenceUsers = database.getReference("Utilizatori");
 
 
     @Override
@@ -37,6 +51,33 @@ public class MainActivity extends AppCompatActivity {
         //Assign variable
         drawerLayout = findViewById((R.id.drawer_layout));
         mRecyclerView = findViewById(R.id.recyclerView_trips);
+
+        nume = findViewById(R.id.nume_nav);
+        prenume = findViewById(R.id.prenume_nav);
+
+        referenceUsers.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot keyNode : snapshot.getChildren()) {
+                    User user = keyNode.getValue(User.class);
+
+                    uid_user_nav = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+                    if (user.UID.equals(uid_user_nav)) {
+                        //imagine_excursie.setAdjustViewBounds(trip.imagine_excursie);
+                        nume.setText(user.nume);
+                        prenume.setText(user.prenume);
+                    }
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         new FirebaseDatabaseHelperTrips().showTrips(new FirebaseDatabaseHelperTrips.DataStatus() {
 
             @Override

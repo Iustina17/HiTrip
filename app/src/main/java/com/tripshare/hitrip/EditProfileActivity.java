@@ -62,9 +62,10 @@ public class EditProfileActivity extends AppCompatActivity {
 
     private static final int CAMERA_REQUEST = 1;
     private static final int PICK_IMAGE = 2;
+    String uid_profil_my;
     private ImageView imagineProfil;
     TextView nume, prenume, varsta;
-    private EditText despre, preferinte,locuri_vizitate, limbi_vorbite;
+    private EditText descriere, preferinte,locuri_vizitate, limbi_vorbite;
     private Button save_modif;
     private ProgressBar progressBarProfile;
 
@@ -74,6 +75,9 @@ public class EditProfileActivity extends AppCompatActivity {
     private String currentPhotoPath;
     private String imagineProfilS;
 
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private DatabaseReference referenceUsers = database.getReference("Utilizatori");
+
 
 
     @Override
@@ -81,16 +85,46 @@ public class EditProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
         imagineProfil = (ImageView)findViewById(R.id.editare_imagineProfil);
-        nume = findViewById(R.id.nume);
-        prenume = findViewById(R.id.prenume);
-        varsta = findViewById(R.id.varsta);
-        despre = findViewById(R.id.despre);
-        preferinte = findViewById(R.id.preferinte);
-        locuri_vizitate = findViewById(R.id.locuri_vizitate);
-        limbi_vorbite = findViewById(R.id.limbi_vorbite);
+        nume = findViewById(R.id.nume_ed);
+        prenume = findViewById(R.id.prenume_ed);
+        varsta = findViewById(R.id.varsta_ed);
+        descriere = findViewById(R.id.despre_ed);
+        preferinte = findViewById(R.id.preferinte_ed);
+        locuri_vizitate = findViewById(R.id.locuri_vizitate_ed);
+        limbi_vorbite = findViewById(R.id.limbi_vorbite_ed);
         save_modif = findViewById(R.id.save_modif);
         progressBarProfile = (ProgressBar)findViewById(R.id.progressBarProfile);
 
+        referenceUsers.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot keyNode : snapshot.getChildren()) {
+                    User user = keyNode.getValue(User.class);
+
+                    uid_profil_my = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+                    if (user.UID.equals(uid_profil_my)) {
+                        //imagine_excursie.setAdjustViewBounds(trip.imagine_excursie);
+                        nume.setText(user.nume);
+                        prenume.setText(user.prenume);
+                        varsta.setText(user.varsta.toString());
+                        descriere.setText(user.descriere.toString());
+                        preferinte.setText(user.preferinte.toString());
+                        locuri_vizitate.setText(user.locuri_vizitate);
+                        limbi_vorbite.setText(user.limbi_vorbite);
+//                        nr_tel_verificat_my.setText(user.nume);
+//                        nu_exista_info_verificate_my.setText(user.nume);
+
+                    }
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 //
 //    public void EditProfilePhoto(View view) {
@@ -342,7 +376,7 @@ public class EditProfileActivity extends AppCompatActivity {
     }
 
     private void uploadInformatiiFirebase() {
-        final String despreS = despre.getText().toString().trim();
+        final String despreS = descriere.getText().toString().trim();
         final String preferinteS = preferinte.getText().toString().trim();
         final String locuri_vizitateS = locuri_vizitate.getText().toString().trim();
         final String limbi_vorbiteS = limbi_vorbite.getText().toString().trim();
@@ -362,7 +396,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
                     String key = child.getKey();
                     referenceUtiliztaori = referenceUtiliztaori.child(key);
-                    referenceUtiliztaori.child("despre").setValue(despreS);
+                    referenceUtiliztaori.child("descriere").setValue(despreS);
                     referenceUtiliztaori.child("preferinte").setValue(preferinteS);
                     referenceUtiliztaori.child("locuri_vizitate").setValue(locuri_vizitateS);
                     referenceUtiliztaori.child("limbi_vorbite").setValue(limbi_vorbiteS);

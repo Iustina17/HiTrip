@@ -60,6 +60,7 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/prenume1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Prenume "
@@ -68,6 +69,7 @@
                             android:textStyle="bold"></TextView>
 
                         <TextView
+                            android:id="@+id/nume1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Nume"
@@ -85,6 +87,7 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/varsta1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Vârsta "
@@ -147,7 +150,7 @@
                                     android:textSize="12dp"></TextView>
 
                                 <TextView
-                                    android:id="@+id/nr_pers_rating_organiz"
+                                    android:id="@+id/nr_pers_rating_organiz1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
@@ -178,6 +181,7 @@
                                     android:textStyle="bold"></TextView>
 
                                 <TextView
+                                    android:id="@+id/nr_exc_organizate1"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginBottom="8dp"
@@ -246,7 +250,7 @@
                                     android:textSize="12dp"></TextView>
 
                                 <TextView
-                                    android:id="@+id/nr_pers_rating_particip"
+                                    android:id="@+id/nr_pers_rating_particip1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
@@ -277,6 +281,7 @@
                                     android:textStyle="bold"></TextView>
 
                                 <TextView
+                                    android:id="@+id/nr_exc_particip1"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginBottom="8dp"
@@ -328,6 +333,7 @@
                         android:textStyle="bold"></TextView>
 
                     <TextView
+                        android:id="@+id/descriere1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="8dp"
@@ -344,6 +350,7 @@
                         android:textStyle="bold"></TextView>
 
                     <TextView
+                        android:id="@+id/preferinte1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="8dp"
@@ -360,6 +367,7 @@
                         android:textStyle="bold"></TextView>
 
                     <TextView
+                        android:id="@+id/locuri_vizitate1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="8dp"
@@ -376,6 +384,7 @@
                         android:textStyle="bold"></TextView>
 
                     <TextView
+                        android:id="@+id/limbi_vorbite1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="8dp"
@@ -399,6 +408,7 @@
                         android:textStyle="bold"></TextView>
 
                     <LinearLayout
+                        android:id="@+id/layout_nr_tel_verificat1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
@@ -420,6 +430,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/layout_nu_exista_info_verificate1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"

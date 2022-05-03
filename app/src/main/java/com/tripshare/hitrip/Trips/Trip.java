@@ -1,5 +1,7 @@
 package com.tripshare.hitrip.Trips;
 
+import com.tripshare.hitrip.User;
+
 import java.util.ArrayList;
 
 public class Trip {
@@ -19,6 +21,7 @@ public class Trip {
     public Integer nr_opriri;
 
     public ArrayList<Oprire> vect_opriri;
+    public ArrayList<User> participanti; //TODO
 
     public String descriere_excursie;
     public String regulament;

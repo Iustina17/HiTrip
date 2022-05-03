@@ -1,18 +1,89 @@
 package com.tripshare.hitrip;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MyProfileActivity extends AppCompatActivity {
+
+    String uid_organizator_my;
+    TextView nume_my, prenume_my, varsta_my;
+    TextView nr_exc_organiz_my, nr_exc_perticip_my;
+    TextView nr_pers_rating_organiz_my, nr_pers_rating_particip_my;
+    TextView descriere_my, preferinte_my, locuri_vizitate_my, limbi_vorbite_my;
+    LinearLayout nr_tel_verificat_my;
+    LinearLayout nu_exista_info_verificate_my;
+    Integer nr_mobil_verificatS_my; ///daca e sau nu verificat
+
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private DatabaseReference referenceUsers = database.getReference("Utilizatori");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_profile);
+
+        nume_my = findViewById(R.id.nume_my);
+        prenume_my = findViewById(R.id.prenume_my);
+        varsta_my = findViewById(R.id.varsta_my);
+        nr_exc_organiz_my = findViewById(R.id.nr_excursii_organiz_my);
+        nr_exc_perticip_my = findViewById(R.id.nr_excursii_particip_my);
+        nr_pers_rating_organiz_my = findViewById(R.id.nr_pers_rating_organiz_my);
+        nr_pers_rating_particip_my = findViewById(R.id.nr_pers_rating_particip_my);
+        descriere_my = findViewById(R.id.descriere_my);
+        preferinte_my = findViewById(R.id.preferinte_my);
+        locuri_vizitate_my = findViewById(R.id.locuri_vizitate_my);
+        limbi_vorbite_my = findViewById(R.id.limbi_vorbite_my);
+        nr_tel_verificat_my = findViewById(R.id.nr_tel_verificat_my);
+        nu_exista_info_verificate_my = findViewById(R.id.nu_exista_info_verificate_my);
+
+        referenceUsers.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot keyNode : snapshot.getChildren()) {
+                    User user = keyNode.getValue(User.class);
+
+                    uid_organizator_my = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+                    if (user.UID.equals(uid_organizator_my)) {
+                        //imagine_excursie.setAdjustViewBounds(trip.imagine_excursie);
+                        nume_my.setText(user.nume);
+                        prenume_my.setText(user.prenume);
+                        varsta_my.setText(user.varsta.toString());
+                        nr_exc_organiz_my.setText(user.nr_exc_organiz.toString());
+                        nr_exc_perticip_my.setText(user.nr_exc_partic.toString());
+                        nr_pers_rating_organiz_my.setText(user.rating_organizator.toString());
+                        nr_pers_rating_particip_my.setText(user.rating_participant.toString());
+                        descriere_my.setText(user.descriere);
+                        preferinte_my.setText(user.preferinte);
+                        locuri_vizitate_my.setText(user.locuri_vizitate);
+                        limbi_vorbite_my.setText(user.limbi_vorbite);
+//                        nr_tel_verificat_my.setText(user.nume);
+//                        nu_exista_info_verificate_my.setText(user.nume);
+
+                    }
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     public void ClickEditProfile(View view){

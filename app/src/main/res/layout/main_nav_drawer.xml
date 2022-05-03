@@ -38,6 +38,7 @@
             android:src="@drawable/ic_account"
             />
         <TextView
+            android:id="@+id/prenume_nav"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"
@@ -48,6 +49,7 @@
             android:textColor="@color/black"/>
 
         <TextView
+            android:id="@+id/nume_nav"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"

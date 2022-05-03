@@ -1,7 +1,8 @@
-package com.tripshare.hitrip;
+package com.tripshare.hitrip.Trips;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.media.Image;
 import android.os.Bundle;
@@ -15,10 +16,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.tripshare.hitrip.R;
 import com.tripshare.hitrip.Trips.Oprire;
 import com.tripshare.hitrip.Trips.Trip;
+import com.tripshare.hitrip.User;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class InsideTripActivity1 extends AppCompatActivity {
     private String uid_organizator, data_start, data_fin;
@@ -34,10 +38,12 @@ public class InsideTripActivity1 extends AppCompatActivity {
     TextView locuri_ramase;
     TextView dificultate;
     LinearLayout grad_dif_layout;
+    LinearLayout layout_echipament_necesar, layout_documente_necesare, layout_descreiere_plecare;
+    RecyclerView inside_trip_profil_recycler;
     Integer loc_ramase = 0;
 
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
-    private DatabaseReference referenceTrips = database.getReference("Calatorii");;
+    private DatabaseReference referenceTrips = database.getReference("Calatorii");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +82,10 @@ public class InsideTripActivity1 extends AppCompatActivity {
         locuri_ramase = findViewById(R.id.locuri_ramase);
         dificultate = findViewById(R.id.dificultate);
         grad_dif_layout = findViewById(R.id.grad_dif_layout);
+        layout_echipament_necesar = findViewById(R.id.layout_echipament_necesar);
+        layout_documente_necesare = findViewById(R.id.layout_documente_necesare);
+        layout_descreiere_plecare = findViewById(R.id.layout_descreiere_plecare);
+        inside_trip_profil_recycler = findViewById(R.id.inside_trip_profil_recycler);
 
 
         referenceTrips.addValueEventListener(new ValueEventListener() {
@@ -116,11 +126,23 @@ public class InsideTripActivity1 extends AppCompatActivity {
 
                         if (trip.tip.equals("Drumeţie")) {
                             grad_dif_layout.setVisibility(View.VISIBLE);
+                            layout_echipament_necesar.setVisibility(View.VISIBLE);
                         } else {
                             grad_dif_layout.setVisibility(View.GONE);
                         }
-                    }
 
+                        if (!trip.tip.equals("Drumeţie") && trip.echipament_necesar.isEmpty()) {
+                            layout_echipament_necesar.setVisibility(View.GONE);
+                        }
+
+                        if (trip.documente_necesare.isEmpty()) {
+                            layout_documente_necesare.setVisibility(View.GONE);
+                        }
+
+                        if (trip.descriere_plecare.isEmpty()) {
+                            layout_descreiere_plecare.setVisibility(View.GONE);
+                        }
+                    }
                 }
             }
 
@@ -129,7 +151,13 @@ public class InsideTripActivity1 extends AppCompatActivity {
 
             }
         });
-
-        //TextView tripTitle = findViewById(R.id.trip_title);
+//        new FirebaseDatabaseHelperParticipanti().showTrips(new FirebaseDatabaseHelperParticipanti().DataStatus() { //TODO
+//
+//            @Override
+//            public void DataIsLoaded(List<User> paticipanti, List<String> keys, uid_organizator, data_start, data_fin) {
+//                new RecyclerViewConfigTrip().setconfig(inside_trip_profil_recycler, InsideTripActivity1.this, paticipanti, keys);
+//            }
+//        });
+//
     }
 }

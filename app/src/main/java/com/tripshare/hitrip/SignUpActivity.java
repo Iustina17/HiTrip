@@ -41,7 +41,7 @@ public class SignUpActivity extends AppCompatActivity {
     Button register_button;
     TextView age_show, textCondition;
     EditText mEmail,mLastName, mFirstName,mPassword, mConfirm_password;
-    static int age;
+    static Integer age;
     Spinner mspinner_sex_login;
     EditText mnationalitate_login;
     static String date;
@@ -187,9 +187,9 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
 
-    int calculateAge(Calendar date) {
+    Integer calculateAge(Calendar date) {
         Calendar today = Calendar.getInstance();
-        int age = today.get(Calendar.YEAR) - date.get(Calendar.YEAR);
+        Integer age = today.get(Calendar.YEAR) - date.get(Calendar.YEAR);
         if (today.get(Calendar.DAY_OF_MONTH) < date.get(Calendar.DAY_OF_MONTH)) {
             age--;
         }

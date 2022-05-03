@@ -3,7 +3,7 @@ package com.tripshare.hitrip;
 public class User {
     public String UID;
     public String email, nume, prenume;
-    public int varsta;
+    public Integer varsta;
     public String poza_profil;
     public Float rating_organizator, rating_participant;
     public Integer nr_exc_organiz, nr_exc_partic;
@@ -17,7 +17,7 @@ public class User {
 
     }
 
-    public User(String UID, String email, String nume, String prenume, int varsta, String poza_profil,Float rating_organizator,
+    public User(String UID, String email, String nume, String prenume, Integer varsta, String poza_profil,Float rating_organizator,
                 Float rating_participant, Integer nr_exc_organiz, Integer getNr_exc_partic, Integer nr_impresii,
                 String sex, String data_nasterii, String nationalitate, Integer nr_mobil_verificat,
                 Integer acreditare1_vierificat, String descriere, String preferinte,

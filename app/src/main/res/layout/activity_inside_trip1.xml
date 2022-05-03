@@ -20,7 +20,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:context=".InsideTripActivity1">
+        tools:context=".Trips.InsideTripActivity1">
 
         <ScrollView
 
@@ -359,7 +359,7 @@
                                         android:id="@+id/nr_opriri"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="Nr. opriri"
+                                        android:text=" - "
                                         android:textColor="@color/black"
                                         android:textSize="14sp"></TextView>
 
@@ -686,6 +686,7 @@
                             android:orientation="vertical">
 
                             <LinearLayout
+                                android:id="@+id/layout_descriere_excursie"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical">
@@ -712,7 +713,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:gravity="top"
-                                        android:hint="Descriere..."
+                                        android:hint=" - "
                                         android:textColor="@color/black"
                                         android:inputType="textMultiLine"
                                         android:maxLines="7"
@@ -724,6 +725,7 @@
                             </LinearLayout>
 
                             <LinearLayout
+                                android:id="@+id/layout_regulament"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical">
@@ -750,7 +752,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:gravity="top"
-                                        android:hint="Descriere..."
+                                        android:hint=" - "
                                         android:textColor="@color/black"
                                         android:inputType="textMultiLine"
                                         android:maxLines="7"
@@ -762,6 +764,7 @@
                             </LinearLayout>
 
                             <LinearLayout
+                                android:id="@+id/layout_echipament_necesar"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical">
@@ -788,7 +791,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:gravity="top"
-                                        android:hint="Descriere..."
+                                        android:hint=" - "
                                         android:inputType="textMultiLine"
                                         android:textColor="@color/black"
                                         android:maxLines="7"
@@ -800,6 +803,7 @@
                             </LinearLayout>
 
                             <LinearLayout
+                                android:id="@+id/layout_documente_necesare"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical">
@@ -826,7 +830,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:gravity="top"
-                                        android:hint="Descriere..."
+                                        android:hint=" - "
                                         android:inputType="textMultiLine"
                                         android:textColor="@color/black"
                                         android:maxLines="7"
@@ -1018,6 +1022,7 @@
                             </LinearLayout>
 
                             <LinearLayout
+                                android:id="@+id/layout_descreiere_plecare"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="16dp"
@@ -1028,7 +1033,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:gravity="top"
-                                    android:hint="Descriere..."
+                                    android:hint=" - "
                                     android:inputType="textMultiLine"
                                     android:maxLines="7"
                                     android:scrollbars="vertical"

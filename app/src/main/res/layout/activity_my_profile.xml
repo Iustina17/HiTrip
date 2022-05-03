@@ -60,16 +60,17 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/prenume"
+                            android:id="@+id/prenume_my"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginRight="3dp"
                             android:text="Prenume "
                             android:textColor="@color/black"
                             android:textSize="20dp"
                             android:textStyle="bold"></TextView>
 
                         <TextView
-                            android:id="@+id/nume"
+                            android:id="@+id/nume_my"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Nume"
@@ -87,10 +88,11 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/varsta"
+                            android:id="@+id/varsta_my"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Vârsta "
+                            android:layout_marginRight="3dp"
                             android:textColor="@color/black"
                             android:textSize="16dp"
                             android:textStyle="bold"></TextView>
@@ -150,7 +152,7 @@
                                     android:textSize="12dp"></TextView>
 
                                 <TextView
-                                    android:id="@+id/nr_pers_rating_organiz"
+                                    android:id="@+id/nr_pers_rating_organiz_my"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
@@ -181,6 +183,7 @@
                                     android:textStyle="bold"></TextView>
 
                                 <TextView
+                                    android:id="@+id/nr_excursii_organiz_my"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginBottom="8dp"
@@ -249,7 +252,7 @@
                                     android:textSize="12dp"></TextView>
 
                                 <TextView
-                                    android:id="@+id/nr_pers_rating_particip"
+                                    android:id="@+id/nr_pers_rating_particip_my"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
@@ -280,6 +283,7 @@
                                     android:textStyle="bold"></TextView>
 
                                 <TextView
+                                    android:id="@+id/nr_excursii_particip_my"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginBottom="8dp"
@@ -368,6 +372,7 @@
                         android:textStyle="bold"></TextView>
 
                     <TextView
+                        android:id="@+id/descriere_my"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="8dp"
@@ -383,6 +388,7 @@
                         android:textStyle="bold"></TextView>
 
                     <TextView
+                        android:id="@+id/preferinte_my"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="8dp"
@@ -398,6 +404,7 @@
                         android:textStyle="bold"></TextView>
 
                     <TextView
+                        android:id="@+id/locuri_vizitate_my"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="8dp"
@@ -414,6 +421,7 @@
                         android:textStyle="bold"></TextView>
 
                     <TextView
+                        android:id="@+id/limbi_vorbite_my"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="8dp"
@@ -437,6 +445,7 @@
                         android:textStyle="bold"></TextView>
 
                     <LinearLayout
+                        android:id="@+id/nr_tel_verificat_my"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
@@ -458,6 +467,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/nu_exista_info_verificate_my"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"

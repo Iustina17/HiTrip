@@ -13,7 +13,7 @@
         android:theme="@style/Theme.HiTrip"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".InsideTripActivity1"
+            android:name=".Trips.InsideTripActivity1"
             android:exported="false" />
         <activity
             android:name=".EditPersonalInfoActivity"
