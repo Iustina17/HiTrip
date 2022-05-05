@@ -4,18 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="24dp">
+    android:layout_marginTop="20dp"
+>
 
     <LinearLayout
         android:id="@+id/scoll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/profile_layout_context_corners"
         android:elevation="5dp"
         android:orientation="vertical"
         app:cardCornerRadius="8dp"
         app:cardElevation="8dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,7 +29,8 @@
         <ScrollView
 
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:elevation="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -36,6 +41,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:elevation="5dp"
                     android:orientation="horizontal">
 
                     <ImageView

@@ -30,6 +30,7 @@ public class Trip {
     public String nr_min_particip;
     public String nr_max_particip;
 
+
     public String pret;
     public String tip_moneda;
 
@@ -39,7 +40,7 @@ public class Trip {
     public Trip() {
     }
 
-    public Trip(String UID_organiztor, String imagine_excursie, String prenume, String nume, String titlu_excursie, String tematica, String tip, String data_inceput, String data_final, Integer nr_zile, String tara, String oras, String descriere_plecare, Integer nr_opriri, ArrayList<Oprire> vect_opriri, String descriere_excursie, String regulament, String echipament_necesar, String documente_necesare, String nr_min_particip, String nr_max_particip, String pret, String tip_moneda, String dificultate) {
+    public Trip(String UID_organiztor, String imagine_excursie, String prenume, String nume, String titlu_excursie, String tematica, String tip, String data_inceput, String data_final, Integer nr_zile, String tara, String oras, String descriere_plecare, Integer nr_opriri, ArrayList<Oprire> vect_opriri, String descriere_excursie, String regulament, String echipament_necesar, String documente_necesare, String nr_min_particip, String nr_max_particip, String pret, String tip_moneda, String dificultate, ArrayList<User> participanti) {
         this.UID_organiztor = UID_organiztor;
         this.imagine_excursie = imagine_excursie;
         this.prenume = prenume;
@@ -64,5 +65,6 @@ public class Trip {
         this.pret = pret;
         this.tip_moneda = tip_moneda;
         this.dificultate = dificultate;
+        this.participanti = participanti;
     }
 }

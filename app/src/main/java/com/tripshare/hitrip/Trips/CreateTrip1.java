@@ -9,9 +9,11 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -23,6 +25,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.slider.Slider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -74,6 +77,7 @@ public class CreateTrip1 extends AppCompatActivity implements View.OnClickListen
     Integer index_opriri = 0;
     String tematica;
     ArrayList<Oprire> vect_opriri;
+    ArrayList<User> participanti;
 
     String natura1 = "", sport1 = "", relaxare1 = "", divertisment1 = "", gastronomie1 = "", muzica1 = "", arhitectura1 = "", industrie1 = "", istorie1 = "", etnografie1 = "", arta1 = "", literatura1 = "", altele1 = "";
 
@@ -115,46 +119,18 @@ public class CreateTrip1 extends AppCompatActivity implements View.OnClickListen
         tip_excursie_text = findViewById(R.id.tip_excursie_text);
         grad_dificultate_text = findViewById(R.id.tip_excursie_text);
 
-        if (natura.isChecked()) {
-            natura1 = natura.getText().toString() + ", ";
-        }
-        if (sport.isChecked()) {
-            sport1 = sport.getText().toString() + ", ";
-        }
-        if (relaxare.isChecked()) {
-            relaxare1 = relaxare.getText().toString() + ", ";
-        }
-        if (divertisment.isChecked()) {
-            divertisment1 = divertisment.getText().toString() + ", ";
-        }
-        if (gastronomie.isChecked()) {
-            gastronomie1 = gastronomie.getText().toString() + ", ";
-        }
-        if (muzica.isChecked()) {
-            muzica1 = muzica.getText().toString() + ", ";
-        }
-        if (arhitectura.isChecked()) {
-            arhitectura1 = arhitectura.getText().toString() + ", ";
-        }
-        if (industrie.isChecked()) {
-            industrie1 = industrie.getText().toString() + ", ";
-        }
-        if (istorie.isChecked()) {
-            istorie1 = istorie.getText().toString() + ", ";
-        }
-        if (etnografie.isChecked()) {
-            etnografie1 = etnografie.getText().toString() + ", ";
-        }
-        if (arta.isChecked()) {
-            arta1 = arta.getText().toString() + ", ";
-        }
-        if (literatura.isChecked()) {
-            literatura1 = literatura.getText().toString() + ", ";
-        }
-        if (altele.isChecked()) {
-            altele1 = altele_text.getText().toString() + ", ";
-        }
-
+        altele_text.setVisibility(View.GONE);
+        
+        altele.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (altele.isChecked()) {
+                    altele_text.setVisibility(View.VISIBLE);
+                }else{
+                    altele_text.setVisibility(View.GONE);
+                }
+            }
+        });
 
         layoutList = findViewById(R.id.layout_list);
         buttonAdd = findViewById(R.id.button_add_stops);
@@ -218,6 +194,48 @@ public class CreateTrip1 extends AppCompatActivity implements View.OnClickListen
             @Override
             public void onClick(View view) {
 
+                if (natura.isChecked()) {
+                    natura1 = natura.getText().toString() + ", ";
+                }
+                if (sport.isChecked()) {
+                    sport1 = sport.getText().toString() + ", ";
+                }
+                if (relaxare.isChecked()) {
+                    relaxare1 = relaxare.getText().toString() + ", ";
+                }
+                if (divertisment.isChecked()) {
+                    divertisment1 = divertisment.getText().toString() + ", ";
+                }
+                if (gastronomie.isChecked()) {
+                    gastronomie1 = gastronomie.getText().toString() + ", ";
+                }
+                if (muzica.isChecked()) {
+                    muzica1 = muzica.getText().toString() + ", ";
+                }
+                if (arhitectura.isChecked()) {
+                    arhitectura1 = arhitectura.getText().toString() + ", ";
+                }
+                if (industrie.isChecked()) {
+                    industrie1 = industrie.getText().toString() + ", ";
+                }
+                if (istorie.isChecked()) {
+                    istorie1 = istorie.getText().toString() + ", ";
+                }
+                if (etnografie.isChecked()) {
+                    etnografie1 = etnografie.getText().toString() + ", ";
+                }
+                if (arta.isChecked()) {
+                    arta1 = arta.getText().toString() + ", ";
+                }
+                if (literatura.isChecked()) {
+                    literatura1 = literatura.getText().toString() + ", ";
+                }
+                if (altele.isChecked()) {
+                    altele1 = altele_text.getText().toString() + ", ";
+                }else{
+                    altele1="";
+                }
+
                 String mUID_organiztor = UID_organiztor.toString();
                 String mimagine_excursie = "TODO"; //TODO
                 String mprenume = prenume.toString();
@@ -226,8 +244,9 @@ public class CreateTrip1 extends AppCompatActivity implements View.OnClickListen
                 String mtematica = natura1 + sport1 + relaxare1 + divertisment1 +
                         gastronomie1 + muzica1 + arhitectura1 + industrie1 + istorie1 +
                         etnografie1 + arta1 + literatura1 + altele1;////////////////////////////////////////trebuie sa-l fac string din checkbox-uri
+                Log.d("tematici",mtematica);
                 /* TODO */
-                //mtematica = mtematica.substring(0, mtematica.length() - 2); //sterg ultimele doua caractere ca sa nu am ", " la final
+                mtematica = mtematica.substring(0, mtematica.length() - 2); //sterg ultimele doua caractere ca sa nu am ", " la final
 
                 String mtip = spinner1.getSelectedItem().toString();
                 String mdata_inceput = data_inceput.getText().toString();
@@ -308,7 +327,7 @@ public class CreateTrip1 extends AppCompatActivity implements View.OnClickListen
                             mtip, mdata_inceput, mdata_final, mnr_zile, mtara,
                             moras, mdescriere_plecare, nr_opriri, vect_opriri,
                             mdescriere_excursie, mregulament, mechipament_necesar,
-                            mdocumente_necesare, mnr_min_particpip, mnr_max_particpip, mcost, mtip_moneda, dificultate);
+                            mdocumente_necesare, mnr_min_particpip, mnr_max_particpip, mcost, mtip_moneda, dificultate, participanti);
                     reference.push().setValue(trip);
 
                     redirectActivity(CreateTrip1.this, MainActivity.class);

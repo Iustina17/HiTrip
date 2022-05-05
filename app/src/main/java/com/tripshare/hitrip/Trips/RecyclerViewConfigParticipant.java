@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,9 +24,9 @@ import java.util.List;
 
 class RecyclerViewConfigParticipant {
     private Context mContext;
-    private ParticipantAdaptor adaptorTrip;
+    private ParticipantAdaptor adaptorParticipant;
 
-    void setconfig(RecyclerView recyclerView, Context context, List<User> participantList, List<String> keys) {
+    void setconfig(RecyclerView recyclerView, Context context, List<User> participantList, List<Integer> keys) {
         mContext = context;
 //        Collections.sort(tripsList, new Comparator<Trip>() {
 //            @Override
@@ -34,13 +35,14 @@ class RecyclerViewConfigParticipant {
 //            }
 //        });
 
-        adaptorTrip = new ParticipantAdaptor(participantList, keys);
+        adaptorParticipant = new ParticipantAdaptor(participantList, keys);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        recyclerView.setAdapter(adaptorTrip);
+        recyclerView.setAdapter(adaptorParticipant);
     }
 
     class ParticipantItemView extends RecyclerView.ViewHolder {
-        private TextView prenume_particip, poza;
+        private TextView prenume_particip;
+        ImageView poza;
         String poza_string;
         CardView card_view_participant;
 //        private TextView mtitlu, mdata, mautor, madresare, mcontinut;
@@ -56,17 +58,17 @@ class RecyclerViewConfigParticipant {
         }
 
         @SuppressLint("SetTextI18n")
-        void bind(User user, String key) {
+        void bind(User user, Integer key) {
             prenume_particip.setText(user.prenume);
-            poza.setText(user.poza_profil);
+           // poza.setText(user.poza_profil); TODO
         }
     }
 
     class ParticipantAdaptor extends RecyclerView.Adapter<ParticipantItemView> {
         private List<User> participantLista;
-        private List<String> keys;
+        private List<Integer> keys;
 
-        ParticipantAdaptor(List<User> participantLista, List<String> keys) {
+        ParticipantAdaptor(List<User> participantLista, List<Integer> keys) {
             this.participantLista = participantLista;
             this.keys = keys;
         }

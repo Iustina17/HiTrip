@@ -151,13 +151,14 @@ public class InsideTripActivity1 extends AppCompatActivity {
 
             }
         });
-//        new FirebaseDatabaseHelperParticipanti().showTrips(new FirebaseDatabaseHelperParticipanti().DataStatus() { //TODO
-//
-//            @Override
-//            public void DataIsLoaded(List<User> paticipanti, List<String> keys, uid_organizator, data_start, data_fin) {
-//                new RecyclerViewConfigTrip().setconfig(inside_trip_profil_recycler, InsideTripActivity1.this, paticipanti, keys);
-//            }
-//        });
-//
+
+        new FirebaseDatabaseHelperParticipanti().showParticipanti(new FirebaseDatabaseHelperParticipanti.DataStatus() {
+            @Override
+            public void DataIsLoaded(List<User> participanti, List<Integer> keys) {
+                new RecyclerViewConfigParticipant().setconfig(inside_trip_profil_recycler, InsideTripActivity1.this, participanti, keys);
+            }
+        }, uid_organizator, data_start, data_fin);
+
+
     }
 }

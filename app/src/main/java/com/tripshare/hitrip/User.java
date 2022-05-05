@@ -43,4 +43,10 @@ public class User {
         this.locuri_vizitate = locuri_vizitate;
         this.limbi_vorbite = limbi_vorbite;
     }
+
+    public User(String UID, String prenume, String poza_profil) {
+        this.UID = UID;
+        this.prenume = prenume;
+        this.poza_profil = poza_profil;
+    }
 }
