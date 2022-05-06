@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +18,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.tripshare.hitrip.ProfileActivity;
 import com.tripshare.hitrip.R;
 import com.tripshare.hitrip.Trips.Oprire;
 import com.tripshare.hitrip.Trips.Trip;
@@ -41,6 +44,8 @@ public class InsideTripActivity1 extends AppCompatActivity {
     LinearLayout layout_echipament_necesar, layout_documente_necesare, layout_descreiere_plecare;
     RecyclerView inside_trip_profil_recycler;
     Integer loc_ramase = 0;
+
+    LinearLayout profil_organizator_layout;
 
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference referenceTrips = database.getReference("Calatorii");
@@ -86,6 +91,7 @@ public class InsideTripActivity1 extends AppCompatActivity {
         layout_documente_necesare = findViewById(R.id.layout_documente_necesare);
         layout_descreiere_plecare = findViewById(R.id.layout_descreiere_plecare);
         inside_trip_profil_recycler = findViewById(R.id.inside_trip_profil_recycler);
+        profil_organizator_layout = findViewById(R.id.profil_organizator_layout);
 
 
         referenceTrips.addValueEventListener(new ValueEventListener() {
@@ -159,6 +165,17 @@ public class InsideTripActivity1 extends AppCompatActivity {
             }
         }, uid_organizator, data_start, data_fin);
 
-
+        profil_organizator_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(InsideTripActivity1.this, ProfileActivity.class);
+                intent.putExtra("uid", uid_organizator);
+                //Start activity
+                startActivity(intent);
+            }
+        });
     }
+
+
+
 }

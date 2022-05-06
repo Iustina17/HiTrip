@@ -18,12 +18,14 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.tripshare.hitrip.Trips.Trip;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    String uid_organizator1;
+    //   private String uid_organizator;
+    String uid_user;
     TextView nume_1, prenume_1, varsta_1;
     TextView nr_exc_organiz, nr_exc_perticip;
     TextView nr_pers_rating_organiz1, nr_pers_rating_particip1;
@@ -39,6 +41,7 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        uid_user = getIntent().getStringExtra("uid");
 
         nume_1 = findViewById(R.id.nume1);
         prenume_1 = findViewById(R.id.prenume1);
@@ -54,19 +57,20 @@ public class ProfileActivity extends AppCompatActivity {
         nr_tel_verificat = findViewById(R.id.layout_nr_tel_verificat1);
         nu_exista_info_verificate = findViewById(R.id.layout_nu_exista_info_verificate1);
 
-        referenceUsers.addValueEventListener(new ValueEventListener() {
+        Query query = referenceUsers.orderByChild("UID").equalTo(uid_user);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot keyNode : snapshot.getChildren()) {
-                    User user = keyNode.getValue(User.class);
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
+                    User user = child.getValue(User.class);
 
-                    uid_organizator1 = FirebaseAuth.getInstance().getCurrentUser().getUid(); //TODO // trebuie sa iau utilizatorul pe a carui profil intru
+   //                 uid_user = FirebaseAuth.getInstance().getCurrentUser().getUid(); //TODO // trebuie sa iau utilizatorul pe a carui profil intru
 
-                    if (user.UID.equals(uid_organizator1)) {
+                    //if (user.UID.equals(uid_user)) {
                         //imagine_excursie.setAdjustViewBounds(trip.imagine_excursie);
                         nume_1.setText(user.nume);
                         prenume_1.setText(user.prenume);
-                        varsta_1.setText(user.varsta);
+                        varsta_1.setText(user.varsta.toString());
                         nr_exc_organiz.setText(user.nr_exc_organiz.toString());
                         nr_exc_perticip.setText(user.nr_exc_partic.toString());
                         nr_pers_rating_organiz1.setText(user.rating_organizator.toString());
@@ -77,17 +81,15 @@ public class ProfileActivity extends AppCompatActivity {
                         limbi_vorbite.setText(user.limbi_vorbite);
 //                        nr_tel_verificat.setText(user.nume);
 //                        nu_exista_info_verificate.setText(user.nume);
-
-                    }
-
+                   // }
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
+
     }
 
 }

@@ -41,7 +41,7 @@ public class SignUpActivity extends AppCompatActivity {
     Button register_button;
     TextView age_show, textCondition;
     EditText mEmail,mLastName, mFirstName,mPassword, mConfirm_password;
-    static Integer age;
+    Integer age;
     Spinner mspinner_sex_login;
     EditText mnationalitate_login;
     static String date;
