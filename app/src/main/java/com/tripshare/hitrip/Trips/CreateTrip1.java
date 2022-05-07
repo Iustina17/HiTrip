@@ -22,11 +22,13 @@ import android.widget.LinearLayout;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.slider.Slider;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -43,7 +45,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-public class CreateTrip1 extends AppCompatActivity implements View.OnClickListener {
+public class CreateTrip1 extends AppCompatActivity {
 
     FirebaseDatabase database;
     DatabaseReference reference_utilizatori;
@@ -74,12 +76,19 @@ public class CreateTrip1 extends AppCompatActivity implements View.OnClickListen
     Button button_finalizeaza;
     ImageView imagine_excursie;
 
+    String locatieV, descriere_oprireV, descriere_transportV;
+
     Integer index_opriri = 0;
     String tematica;
     ArrayList<Oprire> vect_opriri;
     ArrayList<User> participanti;
 
     String natura1 = "", sport1 = "", relaxare1 = "", divertisment1 = "", gastronomie1 = "", muzica1 = "", arhitectura1 = "", industrie1 = "", istorie1 = "", etnografie1 = "", arta1 = "", literatura1 = "", altele1 = "";
+
+    Switch switch_tip_pret;
+    LinearLayout layout_pret_variabil, layout_pret_fix;
+    EditText pret_min, pret_max;
+    EditText detalii_pret;
 
 
     @Override
@@ -119,14 +128,22 @@ public class CreateTrip1 extends AppCompatActivity implements View.OnClickListen
         tip_excursie_text = findViewById(R.id.tip_excursie_text);
         grad_dificultate_text = findViewById(R.id.tip_excursie_text);
 
+        switch_tip_pret = findViewById(R.id.switch_tip_pret);
+        String tip_pret = "fix";
+        layout_pret_variabil = findViewById(R.id.layout_pret_variabil);
+        layout_pret_fix = findViewById(R.id.layout_pret_fix);
+        pret_min = findViewById(R.id.pret_min);
+        pret_max = findViewById(R.id.pret_max);
+        detalii_pret = findViewById(R.id.detalii_pret);
+
         altele_text.setVisibility(View.GONE);
-        
+
         altele.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (altele.isChecked()) {
                     altele_text.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     altele_text.setVisibility(View.GONE);
                 }
             }
@@ -135,7 +152,12 @@ public class CreateTrip1 extends AppCompatActivity implements View.OnClickListen
         layoutList = findViewById(R.id.layout_list);
         buttonAdd = findViewById(R.id.button_add_stops);
 
-        buttonAdd.setOnClickListener(this);
+        buttonAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addView();
+            }
+        });
 
         layoutGradDif = findViewById(R.id.layout_grad_dificultate);
 
@@ -156,6 +178,18 @@ public class CreateTrip1 extends AppCompatActivity implements View.OnClickListen
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+
+        switch_tip_pret.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    layout_pret_variabil.setVisibility(View.VISIBLE);
+                    layout_pret_fix.setVisibility(View.GONE);
+                } else {
+                    layout_pret_variabil.setVisibility(View.GONE);
+                    layout_pret_fix.setVisibility(View.VISIBLE);
+                }
             }
         });
 
@@ -232,9 +266,22 @@ public class CreateTrip1 extends AppCompatActivity implements View.OnClickListen
                 }
                 if (altele.isChecked()) {
                     altele1 = altele_text.getText().toString() + ", ";
-                }else{
-                    altele1="";
+                } else {
+                    altele1 = "";
                 }
+
+                String mcost, mpretMin, mpretMax;
+                if (switch_tip_pret.isChecked()) {
+                    mpretMin = pret_min.getText().toString();
+                    mpretMax = pret_max.getText().toString();
+                    mcost = "";
+                } else {
+                    mcost = cost.getText().toString();
+                    mpretMin = "";
+                    mpretMax = "";
+                }
+
+                String mDetalii_pret = detalii_pret.getText().toString();
 
                 String mUID_organiztor = UID_organiztor.toString();
                 String mimagine_excursie = "TODO"; //TODO
@@ -244,8 +291,7 @@ public class CreateTrip1 extends AppCompatActivity implements View.OnClickListen
                 String mtematica = natura1 + sport1 + relaxare1 + divertisment1 +
                         gastronomie1 + muzica1 + arhitectura1 + industrie1 + istorie1 +
                         etnografie1 + arta1 + literatura1 + altele1;////////////////////////////////////////trebuie sa-l fac string din checkbox-uri
-                Log.d("tematici",mtematica);
-                /* TODO */
+
                 mtematica = mtematica.substring(0, mtematica.length() - 2); //sterg ultimele doua caractere ca sa nu am ", " la final
 
                 String mtip = spinner1.getSelectedItem().toString();
@@ -286,10 +332,8 @@ public class CreateTrip1 extends AppCompatActivity implements View.OnClickListen
                 String mdocumente_necesare = documente_necesare.getText().toString();
                 String mnr_min_particpip = nr_min_particpip.getText().toString();
                 String mnr_max_particpip = nr_max_particpip.getText().toString();
-                String mcost = cost.getText().toString();
                 String mtip_moneda = spinner3.getSelectedItem().toString();
                 String dificultate = spinner2.getSelectedItem().toString();
-
 
                 if (mtitlu.isEmpty()) {
                     titlu.setError("Stabiliţi titlul");
@@ -310,24 +354,30 @@ public class CreateTrip1 extends AppCompatActivity implements View.OnClickListen
                     nr_max_particpip.setError("Selectaţi numărul participanţilor");
                     layout_nr_particip.requestFocus();
                 } else if (mdescriere_excursie.isEmpty()) {
-                        descriere_excursie.setError("Completaţi descrierea excursiei");
-                        descriere_excursie.requestFocus();
+                    descriere_excursie.setError("Completaţi descrierea excursiei");
+                    descriere_excursie.requestFocus();
                 } else if (mregulament.isEmpty()) {
                     regulament.setError("Completaţi regulamentul excursiei");
                     regulament.requestFocus();
-                }else if (mtip.equals("Drumeţie") && mechipament_necesar.isEmpty()) {
+                } else if (mtip.equals("Drumeţie") && mechipament_necesar.isEmpty()) {
                     echipament_necesar.setError("Stabiliţi echipamenul necesar");
                     echipament_necesar.requestFocus();
-                }else if (mcost.isEmpty()) {
+                } else if ((!switch_tip_pret.isChecked()) && mcost.isEmpty()) {
                     cost.setError("Selectaţi costul per participant");
                     cost.requestFocus();
+                } else if ((switch_tip_pret.isChecked()) && mpretMin.isEmpty()) {
+                    pret_min.setError("Selectaţi costul minim");
+                    pret_min.requestFocus();
+                }if ((switch_tip_pret.isChecked()) && mpretMax.isEmpty()) {
+                    pret_max.setError("Selectaţi costul maxim");
+                    pret_max.requestFocus();
                 } else {
                     DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Calatorii");
                     Trip trip = new Trip(mUID_organiztor, mimagine_excursie, mprenume, mnume, mtitlu, mtematica,
                             mtip, mdata_inceput, mdata_final, mnr_zile, mtara,
                             moras, mdescriere_plecare, nr_opriri, vect_opriri,
                             mdescriere_excursie, mregulament, mechipament_necesar,
-                            mdocumente_necesare, mnr_min_particpip, mnr_max_particpip, mcost, mtip_moneda, dificultate, participanti);
+                            mdocumente_necesare, mnr_min_particpip, mnr_max_particpip, mcost, mtip_moneda, dificultate, participanti,mpretMin,mpretMax,mDetalii_pret);
                     reference.push().setValue(trip);
 
                     redirectActivity(CreateTrip1.this, MainActivity.class);
@@ -496,22 +546,31 @@ public class CreateTrip1 extends AppCompatActivity implements View.OnClickListen
         }
     }
 
-    @Override
-    public void onClick(View v) {
-        addView();
-    }
-
     private void addView() {
         View stopView = getLayoutInflater().inflate(R.layout.row_add_stop, null, false);
         index_opriri++;
+
+        layoutList.addView(stopView);
+
         EditText locatie = (EditText) stopView.findViewById(R.id.locatie_item);
         EditText descriere_oprire = (EditText) stopView.findViewById(R.id.descriere_item);
         EditText descriere_transport = (EditText) stopView.findViewById(R.id.descriere_transport);
         ImageButton stopDelete = (ImageButton) stopView.findViewById(R.id.close_stop_button);
 
-        Oprire oprire = new Oprire(index_opriri, locatie.getText().toString(), descriere_oprire.getText().toString(), descriere_transport.getText().toString());
+        locatieV = locatie.getText().toString();
+        descriere_oprireV = descriere_oprire.getText().toString();
+        descriere_transportV = descriere_transport.getText().toString();
+        Log.d("Locatie", locatieV);
+        Log.d("DOprire", descriere_oprireV);
+        Log.d("Dtransport", descriere_transportV);
+
+        Oprire oprire = new Oprire(index_opriri, locatieV, descriere_oprireV, descriere_transportV);
         vect_opriri = new ArrayList<Oprire>();
         vect_opriri.add(oprire);
+
+//        Log.d("Locatie1", oprire.index_opriri);
+//        Log.d("DOprire2", descriere_oprireV);
+//        Log.d("Dtransport3", descriere_transportV);
 
         stopDelete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -520,7 +579,6 @@ public class CreateTrip1 extends AppCompatActivity implements View.OnClickListen
             }
         });
 
-        layoutList.addView(stopView);
     }
 
     private void removeView(View view) {
@@ -529,7 +587,7 @@ public class CreateTrip1 extends AppCompatActivity implements View.OnClickListen
 
     private static void redirectActivity(Activity activity, Class aClass) {
         //Initialize intent
-        Intent intent = new Intent(activity,aClass);
+        Intent intent = new Intent(activity, aClass);
         //Set flag
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         //Start activity

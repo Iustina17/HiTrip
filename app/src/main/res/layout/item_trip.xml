@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="24dp"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="8dp"
     android:background="@drawable/profile_layout_context_corners"
-    android:elevation="5dp">
+    android:elevation="5dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="8dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,7 +21,31 @@
             android:layout_gravity="center_vertical"
             android:orientation="horizontal">
 
+            <LinearLayout
+                android:id="@+id/trip_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"></ImageView>
+
+                <ImageButton
+                    android:id="@+id/imageButton_sterge_trip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignEnd="@+id/trip_layout"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="8dp"
+                    android:background="@color/white"
+                    android:visibility="gone"
+                    app:srcCompat="@drawable/ic_baseline_delete_24" />
+
+            </LinearLayout>
+
             <ImageView
+                android:id="@+id/cover_trip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -89,8 +113,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginTop="8dp"
             android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
             android:layout_marginRight="16dp"
             android:layout_marginBottom="8dp"
             android:orientation="vertical">
@@ -269,6 +293,7 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
         </LinearLayout>
+
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

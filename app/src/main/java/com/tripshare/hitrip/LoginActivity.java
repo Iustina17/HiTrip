@@ -41,26 +41,6 @@ public class LoginActivity extends AppCompatActivity {
         username = findViewById(R.id.login_email);
         password = findViewById(R.id.login_password);
 
-// Write a message to the database
-        //FirebaseDatabase database = FirebaseDatabase.getInstance();
-        //DatabaseReference myRef = database.getReference("message");
-        //myRef.setValue("Hello, World!");
-        // Read from the database
-//        myRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                // This method is called once with the initial value and again
-//                // whenever data at this location is updated.
-//                String value = dataSnapshot.getValue(String.class);
-//                Log.d("TAG", "Value is: " + value);
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError error) {
-//                // Failed to read value
-//                Log.w("TAG", "Failed to read value.", error.toException());
-//            }
-//        });
 
         mFirebaseAuth = FirebaseAuth.getInstance();
 
@@ -81,6 +61,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         };
+
 
         login_button.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("ShowToast")
@@ -160,7 +141,7 @@ public class LoginActivity extends AppCompatActivity {
 
     protected void onStart() {
         super.onStart();
-        //mFirebaseAuth.addAuthStateListener(mAuthStateListener);
+        mFirebaseAuth.addAuthStateListener(mAuthStateListener);
     }
 
     public static boolean isEmailValid(String email) {

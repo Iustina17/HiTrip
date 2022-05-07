@@ -19,6 +19,7 @@
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/drawable/ic_arrow_back.xml" value="0.1125" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/drawable/ic_arrow_forward.xml" value="0.1125" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/drawable/ic_baseline_check_24.xml" value="0.2703125" />
+        <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/drawable/ic_baseline_delete_24.xml" value="0.2703125" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/drawable/ic_clock.xml" value="0.2125" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/drawable/ic_close.xml" value="0.2703125" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/drawable/ic_dashboard.xml" value="0.2703125" />
@@ -38,6 +39,7 @@
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/drawable/ic_people.xml" value="0.2125" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/drawable/ic_profile.xml" value="0.2703125" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/drawable/ic_regulations.xml" value="0.26979166666666665" />
+        <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/drawable/ic_search.xml" value="0.18958333333333333" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/drawable/ic_stergere.xml" value="0.2015625" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/drawable/ic_suggestions.xml" value="0.26979166666666665" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/drawable/ic_tematici.xml" value="0.2109375" />
@@ -52,10 +54,10 @@
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_create_trip_2.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_edit_personal_info.xml" value="0.264" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_edit_profile.xml" value="0.264" />
-        <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_inside_trip1.xml" value="0.2785388127853881" />
+        <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_inside_trip1.xml" value="0.2607944732297064" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_login_2.xml" value="0.1125" />
-        <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_main.xml" value="0.4" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_messages.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_my_profile.xml" value="0.264" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_my_trips.xml" value="0.25416666666666665" />
@@ -74,6 +76,7 @@
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/main_nav_drawer.xml" value="0.264" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/main_toolbar.xml" value="0.264" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/row_add_stop.xml" value="0.264" />
+        <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/searchbar.xml" value="0.264" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/menu/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/menu/main_search.xml" value="0.16296296296296298" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/menu/main_search_more.xml" value="0.16296296296296298" />

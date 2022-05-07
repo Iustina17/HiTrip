@@ -1,11 +1,20 @@
 package com.tripshare.hitrip.Trips;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,6 +22,14 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.tripshare.hitrip.R;
 
 import java.util.Collections;
@@ -22,6 +39,8 @@ import java.util.List;
 class RecyclerViewConfigTrip {
     private Context mContext;
     private TripAdaptor adaptorTrip;
+
+    private DatabaseReference referenceTrip;
 
     void setconfig(RecyclerView recyclerView, Context context, List<Trip> tripsList, List<String> keys) {
         mContext = context;
@@ -40,9 +59,11 @@ class RecyclerViewConfigTrip {
     class TripItemView extends RecyclerView.ViewHolder {
         private TextView prenume_organiztor, nume_organiztor, tara, oras, nr_zile, nume_excursie, data_inceput, data_final, tip_excursie, pret, moneda;
         CardView card_view_trip;
+
+        ImageButton imageButton_sterge_trip;
 //        private TextView mtitlu, mdata, mautor, madresare, mcontinut;
 //        private ImageButton mediteaza, msterge;
-//        String key;
+ //       String key;
 
         TripItemView(@NonNull final ViewGroup parent) {
             super(LayoutInflater.from(mContext).
@@ -60,6 +81,7 @@ class RecyclerViewConfigTrip {
             pret = itemView.findViewById(R.id.pret);
             moneda = itemView.findViewById(R.id.moneda);
             card_view_trip = itemView.findViewById(R.id.card_view_trip);
+            imageButton_sterge_trip = itemView.findViewById(R.id.imageButton_sterge_trip);
 
         }
 
@@ -76,6 +98,12 @@ class RecyclerViewConfigTrip {
             tip_excursie.setText(trip.tip);
             pret.setText(trip.pret);
             moneda.setText(trip.tip_moneda);
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            if (user.getUid().equals(trip.UID_organiztor)) {
+                imageButton_sterge_trip.setVisibility(View.VISIBLE);
+            }
+            //this.key = key;
+            functionareButoane(trip, imageButton_sterge_trip);
         }
     }
 
@@ -115,4 +143,44 @@ class RecyclerViewConfigTrip {
             return tripsLista.size();
         }
     }
+
+    private void functionareButoane(Trip trip, ImageButton msterge) {
+        final Trip tripFinal = trip;
+
+        msterge.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final AlertDialog alertStergere = new AlertDialog.Builder(view.getContext())
+                        .setPositiveButton("Da", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                referenceTrip = FirebaseDatabase.getInstance().getReference().child("Calatorii");
+                                Query query = referenceTrip.orderByChild("UID_organiztor").equalTo(tripFinal.UID_organiztor);
+                                query.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        for (DataSnapshot child : dataSnapshot.getChildren()) {
+                                            String key = child.getKey();
+                                            if (tripFinal.data_inceput.equals(child.child("data_inceput").getValue())
+                                            && tripFinal.data_final.equals(child.child("data_final").getValue())) {
+                                                referenceTrip = referenceTrip.child(key);
+                                                referenceTrip.removeValue();
+                                            }
+                                        }
+                                    }
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                                    }
+                                });
+                            }
+                        })
+                        .setNegativeButton("Nu", null)
+                        .setTitle("Sunteţi sigur că doriţi să stergeţi excursia?")
+                        .create();
+                alertStergere.show();
+            }
+        });
+
+    }
+
 }

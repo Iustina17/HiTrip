@@ -343,29 +343,31 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="16dp"
-                        android:layout_marginRight="16dp"
                         android:layout_marginTop="32dp"
+                        android:layout_marginRight="16dp"
                         android:layout_marginBottom="32dp"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical">
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
                         <View
                             android:layout_width="0dp"
-                            android:layout_weight="1"
                             android:layout_height="1dp"
                             android:layout_marginRight="8dp"
+                            android:layout_weight="1"
                             android:background="@color/divider_color" />
+
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerHorizontal="true"
                             android:layout_gravity="center_vertical"
                             android:src="@drawable/itinerary"></ImageView>
+
                         <View
                             android:layout_width="0dp"
-                            android:layout_weight="1"
                             android:layout_height="1dp"
                             android:layout_marginLeft="8dp"
+                            android:layout_weight="1"
                             android:background="@color/divider_color" />
                     </LinearLayout>
 
@@ -573,29 +575,31 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="16dp"
-                        android:layout_marginRight="16dp"
                         android:layout_marginTop="32dp"
+                        android:layout_marginRight="16dp"
                         android:layout_marginBottom="32dp"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical">
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
                         <View
                             android:layout_width="0dp"
-                            android:layout_weight="1"
                             android:layout_height="1dp"
                             android:layout_marginRight="8dp"
+                            android:layout_weight="1"
                             android:background="@color/divider_color" />
+
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerHorizontal="true"
                             android:layout_gravity="center_vertical"
                             android:src="@drawable/itinerary2"></ImageView>
+
                         <View
                             android:layout_width="0dp"
-                            android:layout_weight="1"
                             android:layout_height="1dp"
                             android:layout_marginLeft="8dp"
+                            android:layout_weight="1"
                             android:background="@color/divider_color" />
                     </LinearLayout>
 
@@ -761,29 +765,31 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="16dp"
-                        android:layout_marginRight="16dp"
                         android:layout_marginTop="32dp"
+                        android:layout_marginRight="16dp"
                         android:layout_marginBottom="32dp"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical">
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
                         <View
                             android:layout_width="0dp"
-                            android:layout_weight="1"
                             android:layout_height="1dp"
                             android:layout_marginRight="8dp"
+                            android:layout_weight="1"
                             android:background="@color/divider_color" />
+
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerHorizontal="true"
                             android:layout_gravity="center_vertical"
                             android:src="@drawable/itinerary4"></ImageView>
+
                         <View
                             android:layout_width="0dp"
-                            android:layout_weight="1"
                             android:layout_height="1dp"
                             android:layout_marginLeft="8dp"
+                            android:layout_weight="1"
                             android:background="@color/divider_color" />
                     </LinearLayout>
 
@@ -830,14 +836,14 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginBottom="8dp"
                                     android:fontFamily="sans-serif"
-                                    android:text="Min"
+                                    android:text="Număr minim"
                                     android:textAlignment="center"
                                     android:textColor="@color/black"
                                     android:textSize="18sp"
                                     android:textStyle="bold"></TextView>
 
                                 <LinearLayout
-                                    android:layout_width="60dp"
+                                    android:layout_width="100dp"
                                     android:layout_height="match_parent">
 
                                     <EditText
@@ -866,14 +872,14 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginBottom="8dp"
                                     android:fontFamily="sans-serif"
-                                    android:text="Max"
+                                    android:text="Număr maxim"
                                     android:textAlignment="center"
                                     android:textColor="@color/black"
                                     android:textSize="18sp"
                                     android:textStyle="bold"></TextView>
 
                                 <LinearLayout
-                                    android:layout_width="60dp"
+                                    android:layout_width="100dp"
                                     android:layout_height="match_parent">
 
                                     <EditText
@@ -916,16 +922,62 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="16dp"
-                            android:layout_marginRight="16dp"
                             android:layout_marginBottom="16dp"
                             android:gravity="center"
                             android:orientation="horizontal">
 
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="16dp"
+                                android:fontFamily="sans-serif"
+                                android:text="Preţ fix"
+                                android:textColor="@color/black"
+                                android:textSize="18sp"
+                                android:textStyle="bold"></TextView>
+
+                            <Switch
+                                android:id="@+id/switch_tip_pret"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+
+                            </Switch>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="16dp"
+                                android:fontFamily="sans-serif"
+                                android:text="Preţ variabil"
+                                android:textColor="@color/black"
+                                android:textSize="18sp"
+                                android:textStyle="bold"></TextView>
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/layout_pret_fix"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="16dp"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="16dp"
+                                android:fontFamily="sans-serif"
+                                android:text="Suma:  "
+                                android:textColor="@color/black"
+                                android:textSize="18sp"
+                                android:textStyle="bold"></TextView>
+
                             <LinearLayout
                                 android:layout_width="100dp"
                                 android:layout_height="match_parent"
-                                android:layout_marginRight="8dp">
+                                android:layout_marginRight="32dp">
 
                                 <EditText
                                     android:id="@+id/cost"
@@ -937,12 +989,149 @@
                                     android:textSize="20dp"></EditText>
                             </LinearLayout>
 
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/layout_pret_variabil"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="16dp"
+                            android:visibility="gone"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="8dp"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="8dp"
+                                    android:fontFamily="sans-serif"
+                                    android:text="Preţ minim"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/black"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold"></TextView>
+
+                                <LinearLayout
+                                    android:layout_width="100dp"
+                                    android:layout_height="match_parent">
+
+                                    <EditText
+                                        android:id="@+id/pret_min"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:background="@drawable/edit_text_rectangle"
+                                        android:hint="0"
+                                        android:textAlignment="center"
+                                        android:textSize="18dp"></EditText>
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="8dp"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="8dp"
+                                    android:fontFamily="sans-serif"
+                                    android:text="Preţ maxim"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/black"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold"></TextView>
+
+                                <LinearLayout
+                                    android:layout_width="100dp"
+                                    android:layout_height="match_parent">
+
+                                    <EditText
+                                        android:id="@+id/pret_max"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:background="@drawable/edit_text_rectangle"
+                                        android:hint="0"
+                                        android:textAlignment="center"
+                                        android:textSize="18dp"></EditText>
+                                </LinearLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="16dp"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif"
+                                android:text="Selectează moneda  "
+                                android:textColor="@color/black"
+                                android:textSize="20sp"
+                                android:textStyle="bold"></TextView>
+
                             <Spinner
                                 android:id="@+id/spinner_moneda"
                                 android:layout_width="100dp"
                                 android:layout_height="match_parent"
                                 android:tooltipText="Selecteza"
                                 tools:ignore="RtlHardcoded"></Spinner>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="16dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="8dp"
+                                android:fontFamily="sans-serif"
+                                android:text="Detalii referitoare la preţ"
+                                android:textColor="@color/black"
+                                android:textSize="18sp"
+                                android:textStyle="bold"></TextView>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="150dp"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginRight="8dp"
+                                android:layout_marginBottom="8dp">
+
+                                <EditText
+                                    android:id="@+id/detalii_pret"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/edit_text_rectangle"
+                                    android:gravity="top"
+                                    android:hint="Ex: pretul include transport..."
+                                    android:inputType="textMultiLine"
+                                    android:maxLines="7"
+                                    android:padding="8dp"
+                                    android:scrollbars="vertical"
+                                    android:textSize="16dp" />
+                            </LinearLayout>
 
                         </LinearLayout>
                     </LinearLayout>

@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="20dp"
->
+    android:layout_marginTop="20dp">
 
     <LinearLayout
         android:id="@+id/scoll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
+        android:layout_marginTop="24dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/profile_layout_context_corners"
@@ -19,7 +19,6 @@
         android:orientation="vertical"
         app:cardCornerRadius="8dp"
         app:cardElevation="8dp"
-        android:layout_marginTop="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,6 +42,29 @@
                     android:layout_gravity="center_vertical"
                     android:elevation="5dp"
                     android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/trip_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"></ImageView>
+
+                        <ImageButton
+                            android:id="@+id/imageButton_sterge_trip1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignEnd="@+id/trip_layout"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginRight="8dp"
+                            android:background="@color/white"
+                            android:visibility="gone"
+                            app:srcCompat="@drawable/ic_baseline_delete_24" />
+
+                    </LinearLayout>
 
                     <ImageView
                         android:id="@+id/img_cover_trip"
@@ -203,6 +225,7 @@
                                 android:text="Tara"
                                 android:textColor="@color/black"
                                 android:textSize="18sp" />
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -424,6 +447,7 @@
                                 </LinearLayout>
 
                             </LinearLayout>
+
                             <LinearLayout
                                 android:id="@+id/grad_dif_layout"
                                 android:layout_width="match_parent"
@@ -474,6 +498,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/ll_pret_fix"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="16dp"
@@ -532,6 +557,133 @@
 
                         </LinearLayout>
                     </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_pret_var"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginRight="16dp"
+                        android:orientation="vertical">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="8dp"
+                                android:src="@drawable/ic_money"></ImageView>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Preţ per participant   "
+                                android:textColor="@color/black"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/pret_min1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="6dp"
+                                    android:text="pret"
+                                    android:textColor="@color/black"
+                                    android:textSize="20dp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="6dp"
+                                    android:text="-"
+                                    android:textColor="@color/black"
+                                    android:textSize="20dp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/pret_max1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="6dp"
+                                    android:text="pret"
+                                    android:textColor="@color/black"
+                                    android:textSize="20dp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/moneda_var"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="moneda"
+                                    android:textColor="@color/black"
+                                    android:textSize="20sp"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:padding="8dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="8dp"
+                                android:fontFamily="sans-serif"
+                                android:text="Detalii preţ"
+                                android:textColor="@color/black"
+                                android:textSize="18sp"
+                                android:textStyle="bold"></TextView>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginRight="8dp"
+                                android:layout_marginBottom="8dp">
+
+                                <TextView
+                                    android:id="@+id/detalii_pret1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="top"
+                                    android:hint=" - "
+                                    android:inputType="textMultiLine"
+                                    android:maxLines="7"
+                                    android:padding="8dp"
+                                    android:scrollbars="vertical"
+                                    android:textColor="@color/black"
+                                    android:textSize="16dp" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -721,11 +873,11 @@
                                         android:layout_height="match_parent"
                                         android:gravity="top"
                                         android:hint=" - "
-                                        android:textColor="@color/black"
                                         android:inputType="textMultiLine"
                                         android:maxLines="7"
                                         android:padding="8dp"
                                         android:scrollbars="vertical"
+                                        android:textColor="@color/black"
                                         android:textSize="16dp" />
                                 </LinearLayout>
 
@@ -760,11 +912,11 @@
                                         android:layout_height="match_parent"
                                         android:gravity="top"
                                         android:hint=" - "
-                                        android:textColor="@color/black"
                                         android:inputType="textMultiLine"
                                         android:maxLines="7"
                                         android:padding="8dp"
                                         android:scrollbars="vertical"
+                                        android:textColor="@color/black"
                                         android:textSize="16dp" />
                                 </LinearLayout>
 
@@ -800,10 +952,10 @@
                                         android:gravity="top"
                                         android:hint=" - "
                                         android:inputType="textMultiLine"
-                                        android:textColor="@color/black"
                                         android:maxLines="7"
                                         android:padding="8dp"
                                         android:scrollbars="vertical"
+                                        android:textColor="@color/black"
                                         android:textSize="16dp" />
                                 </LinearLayout>
 
@@ -839,10 +991,10 @@
                                         android:gravity="top"
                                         android:hint=" - "
                                         android:inputType="textMultiLine"
-                                        android:textColor="@color/black"
                                         android:maxLines="7"
                                         android:padding="8dp"
                                         android:scrollbars="vertical"
+                                        android:textColor="@color/black"
                                         android:textSize="16dp" />
                                 </LinearLayout>
 
@@ -1008,6 +1160,7 @@
                                     android:paddingStart="8dp"
                                     android:textColor="@color/black"
                                     android:textSize="16dp"></TextView>
+
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -1016,6 +1169,7 @@
                                     android:hint=","
                                     android:textColor="@color/black"
                                     android:textSize="16dp"></TextView>
+
                                 <TextView
                                     android:id="@+id/oras"
                                     android:layout_width="wrap_content"
@@ -1086,6 +1240,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
+            android:id="@+id/button_alaturare_la_excursie"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="64dp"

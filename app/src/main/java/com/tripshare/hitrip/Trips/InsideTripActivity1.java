@@ -5,19 +5,28 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.tripshare.hitrip.LoginActivity;
 import com.tripshare.hitrip.ProfileActivity;
 import com.tripshare.hitrip.R;
 import com.tripshare.hitrip.Trips.Oprire;
@@ -43,17 +52,26 @@ public class InsideTripActivity1 extends AppCompatActivity {
     LinearLayout grad_dif_layout;
     LinearLayout layout_echipament_necesar, layout_documente_necesare, layout_descreiere_plecare;
     RecyclerView inside_trip_profil_recycler;
+    Button button_alaturare_la_excursie;
+    ImageButton imageButton_sterge_trip1;
+
+    TextView pret_min1, pret_max1, moneda_var;
+    LinearLayout ll_pret_fix, ll_pret_var;
+    TextView detalii_pret1;
+
     Integer loc_ramase = 0;
 
     LinearLayout profil_organizator_layout;
 
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference referenceTrips = database.getReference("Calatorii");
+    DatabaseReference referenceTrip = FirebaseDatabase.getInstance().getReference().child("Calatorii");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inside_trip1);
+
         uid_organizator = getIntent().getStringExtra("uid_organizator");
         data_start = getIntent().getStringExtra("data_start");
         data_fin = getIntent().getStringExtra("data_final");
@@ -92,6 +110,15 @@ public class InsideTripActivity1 extends AppCompatActivity {
         layout_descreiere_plecare = findViewById(R.id.layout_descreiere_plecare);
         inside_trip_profil_recycler = findViewById(R.id.inside_trip_profil_recycler);
         profil_organizator_layout = findViewById(R.id.profil_organizator_layout);
+        button_alaturare_la_excursie = findViewById(R.id.button_alaturare_la_excursie);
+        imageButton_sterge_trip1 = findViewById(R.id.imageButton_sterge_trip1);
+
+        pret_min1 = findViewById(R.id.pret_min1);
+        pret_max1 = findViewById(R.id.pret_max1);
+        moneda_var = findViewById(R.id.moneda_var);
+        ll_pret_fix = findViewById(R.id.ll_pret_fix);
+        ll_pret_var = findViewById(R.id.ll_pret_var);
+        detalii_pret1 = findViewById(R.id.detalii_pret1);
 
 
         referenceTrips.addValueEventListener(new ValueEventListener() {
@@ -125,10 +152,17 @@ public class InsideTripActivity1 extends AppCompatActivity {
                         documente_necesare.setText(trip.documente_necesare);
                         nr_min_particip.setText(trip.nr_min_particip);
                         nr_max_particip.setText(trip.nr_max_particip);
-                        pret.setText(trip.pret);
                         tip_moneda.setText(trip.tip_moneda);
                         dificultate.setText(trip.dificultate);
+
+                        moneda_var.setText(trip.tip_moneda);
+                        pret.setText(trip.pret);
+                        pret_min1.setText(trip.pret_min);
+                        pret_max1.setText(trip.pret_max);
+                        detalii_pret1.setText(trip.detalii_pret);
+
                         //locuri_ramase.setText(); TODO
+
 
                         if (trip.tip.equals("Drumeţie")) {
                             grad_dif_layout.setVisibility(View.VISIBLE);
@@ -148,6 +182,18 @@ public class InsideTripActivity1 extends AppCompatActivity {
                         if (trip.descriere_plecare.isEmpty()) {
                             layout_descreiere_plecare.setVisibility(View.GONE);
                         }
+
+                        if ((trip.pret_min.isEmpty() && trip.pret_max.isEmpty() && (!trip.pret.isEmpty()))) {
+                            ll_pret_var.setVisibility(View.GONE);
+                            ll_pret_fix.setVisibility(View.VISIBLE);
+                        }
+
+                        if((!trip.pret_min.isEmpty()) && (!trip.pret_max.isEmpty()) && trip.pret.isEmpty()){
+                            ll_pret_var.setVisibility(View.VISIBLE);
+                            ll_pret_fix.setVisibility(View.GONE);
+                        }
+
+
                     }
                 }
             }
@@ -174,8 +220,64 @@ public class InsideTripActivity1 extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        button_alaturare_la_excursie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                referenceTrips.child("participanti");
+
+            }
+        });
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user.getUid().equals(uid_organizator)) {
+            imageButton_sterge_trip1.setVisibility(View.VISIBLE);
+        }
+        //this.key = key;
+        functionareButoane(imageButton_sterge_trip1);
     }
 
 
+    private void functionareButoane(ImageButton msterge) {
 
+        msterge.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final AlertDialog alertStergere = new AlertDialog.Builder(view.getContext())
+                        .setPositiveButton("Da", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Query query = referenceTrip.orderByChild("UID_organiztor").equalTo(uid_organizator);
+                                //Log.d("uid_organiztaor",uid_organizator);
+                                query.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        for (DataSnapshot child : dataSnapshot.getChildren()) {
+                                            String key = child.getKey();
+
+                                            if (data_inceput.getText().equals(child.child("data_inceput").getValue())
+                                                    && data_final.getText().equals(child.child("data_final").getValue())) {
+                                                referenceTrip = referenceTrip.child(key);
+                                                Log.d("uid_reference",referenceTrip.child(key).toString());
+                                                referenceTrip.removeValue();
+                                            }
+                                        }
+                                    }
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                                    }
+                                });
+                                Intent intToHome = new Intent(InsideTripActivity1.this, MainActivity.class);
+                                startActivity(intToHome);
+                                finish();
+                            }
+                        })
+                        .setNegativeButton("Nu", null)
+                        .setTitle("Sunteţi sigur că doriţi să stergeţi excursia?")
+                        .create();
+                alertStergere.show();
+            }
+        });
+
+    }
 }
