@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SugestiiActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/sugestii_sesizare_probleme_textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="Ai sugestii pentru îmbunătățirea aplicației? Ai sesizat probleme în funcționare ce trebuie remediate? Nu ezita să ne scrii."
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/sugestii_sesizare_probleme_titlu_editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:hint=" Titlul mesajului"
+                android:inputType="textMultiLine|textImeMultiLine"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/sugestii_sesizare_probleme_textView" />
+
+
+            <EditText
+                android:id="@+id/sugestii_sesizare_probleme_continut_editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:hint="Introduceti textul aici. Sugestii sau probleme referitoare la funcționarea aplicației. În cazul în care
+    există o problemă referitoare la funcționarea aplicației, vă rog să detaliați pașii pe care i-ați făcut înainte de întâmpinarea problemei."
+                android:inputType="textMultiLine|textImeMultiLine"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/sugestii_sesizare_probleme_titlu_editText" />
+
+            <Button
+                android:id="@+id/sugestii_sesizare_probleme_buton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="Trimite"
+                android:background="@drawable/button_standard"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/sugestii_sesizare_probleme_continut_editText" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

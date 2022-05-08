@@ -4,20 +4,29 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -44,15 +53,19 @@ public class EditPersonalInfoActivity extends AppCompatActivity {
     ArrayAdapter<CharSequence> adapter1;
     //TextView age_show;////////////////////////////////////
     TextView textCondition;
-    Button confirmaNrTelefon, confirmaAcreditare, schimba_email, schimba_parola, save_modif_personal_info, sterge_cont;
+    Button confirmaNrTelefon, confirmaAcreditare, schimba_parola, save_modif_personal_info, sterge_cont;
     TextView nr_tel_verificat;
     Integer nr_mobil_verificatS; ///daca e sau nu verificat
 
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference referenceUsers = database.getReference("Utilizatori");
     private DatabaseReference referenceUtiliztaori;
+    DatabaseReference referenceUtiliz;
 
     static int age;
+
+    Button schimbaEmail;
+    private int dateSchimbate = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +77,7 @@ public class EditPersonalInfoActivity extends AppCompatActivity {
         nationalitate_edit_pers_info = findViewById(R.id.nationalitate_edit_pers_info);
         confirmaNrTelefon = findViewById(R.id.confirmaNrTelefon);
         confirmaAcreditare = findViewById(R.id.confirmaAcreditare);
-        schimba_email = findViewById(R.id.schimba_email);
+        schimbaEmail = findViewById(R.id.schimbaEmail);
         schimba_parola = findViewById(R.id.schimba_parola);
         save_modif_personal_info = findViewById(R.id.save_modif_personal_info);
         sterge_cont = findViewById(R.id.sterge_cont);
@@ -89,11 +102,11 @@ public class EditPersonalInfoActivity extends AppCompatActivity {
                         nationalitate_edit_pers_info.setText(user.nationalitate.toString());
                         birthday_pers_info.setText(user.data_nasterii.toString());
                         //confirmaNrTelefon.setText(user.descriere.toString());
-                        if(user.sex.toString().equals("Bărbat")){
+                        if (user.sex.toString().equals("Bărbat")) {
                             spinner1.setSelection(0);
-                        }else if(user.sex.toString().equals("Femeie")){
+                        } else if (user.sex.toString().equals("Femeie")) {
                             spinner1.setSelection(1);
-                        }else if(user.sex.toString().equals("Altele")){
+                        } else if (user.sex.toString().equals("Altele")) {
                             spinner1.setSelection(2);
                         }
                         //nr_mobil_verificatS = user.nr_mobil_verificat; // am incercat sa fac asta mai jos
@@ -171,6 +184,14 @@ public class EditPersonalInfoActivity extends AppCompatActivity {
         });
 
         ShowVerificareNr();
+
+
+        schimbaEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                schimbareEmail();
+            }
+        });
     }
 
     int calculateAge(Calendar date) {
@@ -245,7 +266,7 @@ public class EditPersonalInfoActivity extends AppCompatActivity {
         if (user != null) {
             uid = user.getUid();
         }
-        Log.d("EDIT PERSONAL INFO", uid );
+        Log.d("EDIT PERSONAL INFO", uid);
         //cautam copilul dupa UID
         referenceUtiliztaori = FirebaseDatabase.getInstance().getReference().child("Utilizatori");
         Query query = referenceUtiliztaori.orderByChild("UID").equalTo(uid);
@@ -260,8 +281,8 @@ public class EditPersonalInfoActivity extends AppCompatActivity {
                     referenceUtiliztaori.child("sex").setValue(sexS);
                     referenceUtiliztaori.child("data_nasterii").setValue(birthday_pers_infoS);
                     String[] from = birthday_pers_infoS.split("/");
-                    Calendar cal = Calendar. getInstance();
-                    cal.set(Integer.parseInt(from[2]),Integer.parseInt(from[1]),Integer.parseInt(from[0]));
+                    Calendar cal = Calendar.getInstance();
+                    cal.set(Integer.parseInt(from[2]), Integer.parseInt(from[1]), Integer.parseInt(from[0]));
                     Calendar today = Calendar.getInstance();
                     Integer age_nou = today.get(Calendar.YEAR) - cal.get(Calendar.YEAR);
                     if (today.get(Calendar.DAY_OF_MONTH) < cal.get(Calendar.DAY_OF_MONTH)) {
@@ -290,6 +311,134 @@ public class EditPersonalInfoActivity extends AppCompatActivity {
             textCondition.setError(null);
         }
         redirectActivity(this, MyProfileActivity.class);
+
+        if (dateSchimbate == 1) {
+            FirebaseAuth.getInstance().signOut();
+            startActivity(new Intent(this, LoginActivity.class));
+        }
+    }
+
+    private void schimbareEmail() {
+        final AlertDialog alertEmail = new AlertDialog.Builder(this)
+                .setPositiveButton(R.string.alert_dialog_buton_salvare, null)
+                .setNegativeButton(R.string.alert_dialog_buton_anulare, null)
+                .setTitle("Schimbă adresa de e-mail")
+                .create();
+
+        //liniar layout pentru AlertDialog
+        LinearLayout layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        layout.setPadding(10, 10, 10, 10);
+
+        //edit text email
+        final EditText email = new EditText(this);
+        email.setHint(getString(R.string.alert_dialog_schimba_email));
+        layout.addView(email);
+
+        //edit text email verificare
+        final EditText emailVerificare = new EditText(this);
+        emailVerificare.setHint(getString(R.string.alert_dialog_schimba_email_confirmare));
+        layout.addView(emailVerificare);
+
+        alertEmail.setView(layout);
+        alertEmail.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                Button butonAnulare = alertEmail.getButton(Dialog.BUTTON_NEGATIVE);
+                butonAnulare.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertEmail.dismiss();
+                    }
+                });
+
+                Button butonSalvare = alertEmail.getButton(Dialog.BUTTON_POSITIVE);
+                butonSalvare.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String emailS = email.getText().toString().trim();
+                        String emailVerificareS = emailVerificare.getText().toString().trim();
+                        validareEmail(emailS, emailVerificareS, email, emailVerificare, alertEmail);
+                    }
+                });
+            }
+        });
+
+        alertEmail.show();
+    }
+
+    private void validareEmail(final String emailS, String emailVerificareS, EditText email, EditText emailVerificare, final AlertDialog alertEmail) {
+        //final String emailTest = emailS;
+        int verificareEmail = 10;
+
+        if (emailVerificareS.length() != 0 || emailS.length() != 0) {
+            if (emailS.length() == 0) {
+                verificareEmail = 0;
+            } else if (emailVerificareS.length() == 0) {
+                verificareEmail = 1;
+            } else if (!emailS.equals(emailVerificareS)) {
+                verificareEmail = 2;
+            } else if (!isEmailValid(emailS)) {
+                verificareEmail = 3;
+            } else if (emailS.equals(emailVerificareS))
+                verificareEmail = 4;
+        }
+
+        if (verificareEmail != 10) {
+            switch (verificareEmail) {
+                case 0:
+                    email.setError("Introdu adresa de e-mail");
+                    email.requestFocus();
+                    break;
+                case 1:
+                    emailVerificare.setError("Introdu din nou adresa de e-mail");
+                    emailVerificare.requestFocus();
+                    break;
+                case 2:
+                    emailVerificare.setError("Cele doua adrese de e-mail nu corespund");
+                    emailVerificare.requestFocus();
+                    break;
+                case 3:
+                    email.setError("Email invalid");
+                    email.requestFocus();
+                    break;
+                case 4:
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                    //user.updateEmail(emailS);
+                    Task task = user.updateEmail(emailS);
+                    if (user.getEmail().equals(emailS)) {
+                        referenceUtiliz = FirebaseDatabase.getInstance().getReference().child("Utilizatori");
+                        FirebaseUser userCurent = FirebaseAuth.getInstance().getCurrentUser();
+                        Query query = referenceUtiliz.orderByChild("UID").equalTo(userCurent.getUid());
+                        query.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                for (DataSnapshot child : dataSnapshot.getChildren()) {
+                                    String key = child.getKey();
+                                    referenceUtiliz = referenceUtiliz.child(key);
+                                    referenceUtiliz.child("email").setValue(emailS);
+                                    Toast.makeText(EditPersonalInfoActivity.this, "Adresă schimbată cu succes", Toast.LENGTH_LONG).show();
+                                    dateSchimbate = 1;
+                                    alertEmail.dismiss();
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                            }
+                        });
+                    }
+
+
+                    break;
+            }
+        }
+
+    }
+
+    private static boolean isEmailValid(String email) {
+        String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
+        return email.matches(regex);
     }
 
 }

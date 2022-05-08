@@ -169,7 +169,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:onClick="ClickRegulations">
+        android:onClick="ClickHelp">
 
         <TextView
             android:layout_width="0dp"
@@ -178,13 +178,13 @@
             android:layout_weight="1"
             android:fontFamily="sans-serif"
             android:padding="12dp"
-            android:text="Regulament"
+            android:text="Ajutor şi întrebări"
             android:textSize="16sp" />
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="48dp"
-            android:src="@drawable/ic_regulations"
+            android:src="@drawable/ic_baseline_live_help_24"
             />
     </LinearLayout>
 

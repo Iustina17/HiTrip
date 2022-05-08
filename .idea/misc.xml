@@ -20,6 +20,7 @@
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/drawable/ic_arrow_forward.xml" value="0.1125" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/drawable/ic_baseline_check_24.xml" value="0.2703125" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/drawable/ic_baseline_delete_24.xml" value="0.2703125" />
+        <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/drawable/ic_baseline_live_help_24.xml" value="0.22864583333333333" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/drawable/ic_clock.xml" value="0.2125" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/drawable/ic_close.xml" value="0.2703125" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/drawable/ic_dashboard.xml" value="0.2703125" />
@@ -54,6 +55,7 @@
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_create_trip_2.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_edit_personal_info.xml" value="0.264" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_edit_profile.xml" value="0.264" />
+        <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_help.xml" value="0.264" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_inside_trip1.xml" value="0.2607944732297064" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_login_2.xml" value="0.1125" />
@@ -65,6 +67,7 @@
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_regulations.xml" value="0.1" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_send_otpactivity.xml" value="0.4" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_signup.xml" value="0.264" />
+        <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_sugestii.xml" value="0.2125" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_suggestion.xml" value="0.23854166666666668" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_trip_list.xml" value="0.2" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_trips.xml" value="0.23854166666666668" />

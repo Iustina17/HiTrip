@@ -37,4 +37,10 @@
     <string name="title_activity_my_profile">MyProfileActivity</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
+
+
+    <string name="alert_dialog_buton_anulare">Anulează</string>
+    <string name="alert_dialog_buton_salvare">Salvează</string>
+    <string name="alert_dialog_schimba_email">Adresa de e-mail noua</string>
+    <string name="alert_dialog_schimba_email_confirmare">Confirmare adresa noua</string>
 </resources>

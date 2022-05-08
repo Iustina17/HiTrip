@@ -2,8 +2,6 @@ package com.tripshare.hitrip.Trips;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
-import androidx.core.view.ContentInfoCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,12 +10,10 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -28,16 +24,15 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.tripshare.hitrip.HelpActivity;
 import com.tripshare.hitrip.LoginActivity;
 import com.tripshare.hitrip.MessagesActivity;
 import com.tripshare.hitrip.MyProfileActivity;
 import com.tripshare.hitrip.MyTripsActivity;
 import com.tripshare.hitrip.R;
-import com.tripshare.hitrip.RegulationsActivity;
-import com.tripshare.hitrip.SuggestionActivity;
+import com.tripshare.hitrip.SugestiiActivity;
 import com.tripshare.hitrip.User;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -220,12 +215,12 @@ public class MainActivity extends AppCompatActivity {
         redirectActivity(this, MessagesActivity.class);
     }
 
-    public void ClickRegulations(View view) {
-        redirectActivity(this, RegulationsActivity.class);
+    public void ClickHelp(View view) {
+        redirectActivity(this, HelpActivity.class);
     }
 
     public void ClickSuggestions(View view) {
-        redirectActivity(this, SuggestionActivity.class);
+        redirectActivity(this, SugestiiActivity.class);
     }
 
     public void ClickLogout(View view) {
