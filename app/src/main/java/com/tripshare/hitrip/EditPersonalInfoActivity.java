@@ -12,6 +12,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -53,7 +54,7 @@ public class EditPersonalInfoActivity extends AppCompatActivity {
     ArrayAdapter<CharSequence> adapter1;
     //TextView age_show;////////////////////////////////////
     TextView textCondition;
-    Button confirmaNrTelefon, confirmaAcreditare, schimba_parola, save_modif_personal_info, sterge_cont;
+    Button confirmaNrTelefon, confirmaAcreditare, save_modif_personal_info, sterge_cont;
     TextView nr_tel_verificat;
     Integer nr_mobil_verificatS; ///daca e sau nu verificat
 
@@ -64,7 +65,7 @@ public class EditPersonalInfoActivity extends AppCompatActivity {
 
     static int age;
 
-    Button schimbaEmail;
+    Button schimbaEmail, schimbaParola;
     private int dateSchimbate = 0;
 
     @Override
@@ -78,7 +79,7 @@ public class EditPersonalInfoActivity extends AppCompatActivity {
         confirmaNrTelefon = findViewById(R.id.confirmaNrTelefon);
         confirmaAcreditare = findViewById(R.id.confirmaAcreditare);
         schimbaEmail = findViewById(R.id.schimbaEmail);
-        schimba_parola = findViewById(R.id.schimba_parola);
+        schimbaParola = findViewById(R.id.schimba_parola);
         save_modif_personal_info = findViewById(R.id.save_modif_personal_info);
         sterge_cont = findViewById(R.id.sterge_cont);
         birthday_pers_info = findViewById(R.id.birthday_pers_info);
@@ -190,6 +191,20 @@ public class EditPersonalInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 schimbareEmail();
+            }
+        });
+
+        schimbaParola.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                schimbareParola();
+            }
+        });
+
+        confirmaAcreditare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                confirmaAcreditare();
             }
         });
     }
@@ -328,7 +343,7 @@ public class EditPersonalInfoActivity extends AppCompatActivity {
         //liniar layout pentru AlertDialog
         LinearLayout layout = new LinearLayout(this);
         layout.setOrientation(LinearLayout.VERTICAL);
-        layout.setPadding(10, 10, 10, 10);
+        layout.setPadding(40, 20, 40, 10);
 
         //edit text email
         final EditText email = new EditText(this);
@@ -441,4 +456,136 @@ public class EditPersonalInfoActivity extends AppCompatActivity {
         return email.matches(regex);
     }
 
+    private void schimbareParola() {
+        final AlertDialog alertParola = new AlertDialog.Builder(this)
+                .setPositiveButton(R.string.alert_dialog_buton_salvare, null)
+                .setNegativeButton(R.string.alert_dialog_buton_anulare, null)
+                .setTitle("Schimbă parola")
+                .create();
+
+        //liniar layout pentru AlertDialog
+        LinearLayout layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        layout.setPadding(40, 20, 40, 10);
+
+        //edit text parola
+        final EditText parola = new EditText(this);
+        parola.setHint("Parola nouă");
+        parola.setTransformationMethod(PasswordTransformationMethod.getInstance());
+        layout.addView(parola);
+
+        //edit text parola verificare
+        final EditText parolaVerificare = new EditText(this);
+        parolaVerificare.setHint("Confirmare parolă");
+        parolaVerificare.setTransformationMethod(PasswordTransformationMethod.getInstance());
+        layout.addView(parolaVerificare);
+
+        alertParola.setView(layout);
+
+        alertParola.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                Button butonAnulare = alertParola.getButton(Dialog.BUTTON_NEGATIVE);
+                butonAnulare.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertParola.dismiss();
+                    }
+                });
+
+                Button butonSalvare = alertParola.getButton(Dialog.BUTTON_POSITIVE);
+                butonSalvare.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String parolaS = parola.getText().toString().trim();
+                        String parolaVerificareS = parolaVerificare.getText().toString().trim();
+                        validareParola(parolaS, parolaVerificareS, parola, parolaVerificare, alertParola);
+                    }
+                });
+            }
+        });
+
+        alertParola.show();
+    }
+
+    private void validareParola(String parolaS, String parolaVerificareS, EditText parola, EditText parolaVerificare, AlertDialog alertParola) {
+        //verificam parola
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        int verificareParola = 10;
+
+        if (parolaVerificareS.length() != 0 || parolaS.length() != 0) {
+            if (parolaS.length() == 0) {
+                verificareParola = 0;
+            } else if (parolaS.length() < 6) {
+                verificareParola = 1;
+            } else if (parolaVerificareS.length() == 0) {
+                verificareParola = 2;
+            } else if (!parolaS.equals(parolaVerificareS)) {
+                verificareParola = 3;
+            } else if (parolaS.equals(parolaVerificareS))
+                verificareParola = 4;
+        }
+        if (verificareParola != 10) {
+            switch (verificareParola) {
+                case 0:
+                    parola.setError("Introdu parola");
+                    parola.requestFocus();
+                    break;
+                case 1:
+                    parola.setError("Minim 6 caractere");
+                    parola.requestFocus();
+                    break;
+                case 2:
+                    parolaVerificare.setError("Introdu parola din nou");
+                    parolaVerificare.requestFocus();
+                    break;
+                case 3:
+                    parolaVerificare.setError("Cele doua parole nu corespund");
+                    parolaVerificare.requestFocus();
+                    break;
+                case 4:
+                    assert user != null;
+                    user.updatePassword(parolaS);
+                    Toast.makeText(EditPersonalInfoActivity.this, "Parola schimbată cu succes", Toast.LENGTH_LONG).show();
+                    alertParola.dismiss();
+                    dateSchimbate = 1;
+                    break;
+            }
+        }
+    }
+
+    private void confirmaAcreditare() {
+        final AlertDialog alertAcreditare = new AlertDialog.Builder(this)
+                .setPositiveButton("", null)
+                .setNegativeButton("ok", null)
+                .setTitle("Confirmă acreditare")
+                .create();
+
+        //liniar layout pentru AlertDialog
+        LinearLayout layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        layout.setPadding(40, 20, 40, 10);
+
+        //edit text parola verificare
+        final TextView acreditare = new TextView(this);
+        acreditare.setText("Pentru a vă confirma în cadrul aplicaţiei o acreditare pe care o deţineţi, ne puteţi contacta la adresa de email hitrip@gmail.com, trimiţând documentele de atestare. În cel mai scurt timp acestea vor fi verificate şi veţi primi răspunsul nostru.");
+        layout.addView(acreditare);
+
+        alertAcreditare.setView(layout);
+        alertAcreditare.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                Button butonAnulare = alertAcreditare.getButton(Dialog.BUTTON_NEGATIVE);
+                butonAnulare.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertAcreditare.dismiss();
+                    }
+
+                });
+            }
+        });
+
+        alertAcreditare.show();
+    }
 }

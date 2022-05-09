@@ -426,17 +426,11 @@
                                             android:layout_height="wrap_content"
                                             android:fontFamily="sans-serif"
                                             android:hint="Data de început a excursiei"
+                                            android:drawableEnd="@drawable/ic_calendar"
                                             android:inputType="none"
                                             android:paddingStart="8dp"
                                             android:textSize="16dp"></EditText>
 
-                                        <ImageView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="match_parent"
-                                            android:layout_alignRight="@id/date_start"
-                                            android:src="@drawable/ic_calendar">
-
-                                        </ImageView>
                                     </RelativeLayout>
                                 </LinearLayout>
 
@@ -467,15 +461,9 @@
                                             android:hint="Data de final a excursiei"
                                             android:inputType="none"
                                             android:paddingStart="8dp"
+                                            android:drawableEnd="@drawable/ic_calendar"
                                             android:textSize="16dp"></EditText>
 
-                                        <ImageView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="match_parent"
-                                            android:layout_alignRight="@id/date_end"
-                                            android:src="@drawable/ic_calendar">
-
-                                        </ImageView>
                                     </RelativeLayout>
                                 </LinearLayout>
 
@@ -500,6 +488,7 @@
                                     android:layout_marginBottom="8dp"
                                     android:fontFamily="sans-serif"
                                     android:hint="Ţară"
+                                    android:drawableEnd="@drawable/ic_location_outlined"
                                     android:paddingStart="8dp"
                                     android:textSize="16dp"></EditText>
 
@@ -512,6 +501,7 @@
                                     android:layout_marginBottom="8dp"
                                     android:fontFamily="sans-serif"
                                     android:hint="Oraş"
+                                    android:drawableEnd="@drawable/ic_location_outlined"
                                     android:paddingStart="8dp"
                                     android:textSize="16dp"></EditText>
 

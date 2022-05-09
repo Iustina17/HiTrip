@@ -57,7 +57,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         date_picker = findViewById((R.id.date_picker));
         register_button = findViewById(R.id.registrer_button);
-        age_show = findViewById(R.id.age_show);
+        //age_show = findViewById(R.id.age_show);
         textCondition = findViewById(R.id.textCondition);
         mEmail = findViewById(R.id.editTextEmail);
         mLastName = findViewById(R.id.editTextLastName);
