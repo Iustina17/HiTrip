@@ -241,6 +241,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 //Finish activity
                 Intent login_intent = new Intent(activity, LoginActivity.class);
+                FirebaseAuth.getInstance().signOut();
                 finish();
                 startActivity(login_intent);
             }

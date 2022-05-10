@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -64,6 +65,7 @@ public class InsideTripActivity1 extends AppCompatActivity {
     TextView detalii_pret1;
 
     String uid_posibil_participant;
+    BottomNavigationView inscriere_excursie_layout;
 
     Integer loc_ramase = 0;
 
@@ -131,6 +133,8 @@ public class InsideTripActivity1 extends AppCompatActivity {
         ll_pret_var = findViewById(R.id.ll_pret_var);
         detalii_pret1 = findViewById(R.id.detalii_pret1);
 
+        inscriere_excursie_layout= findViewById(R.id.inscriere_excursie_layout);
+
 
         referenceTrips.addValueEventListener(new ValueEventListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -176,23 +180,19 @@ public class InsideTripActivity1 extends AppCompatActivity {
                         //locuri_ramase.setText(); TODO
 
                         List<String> uids = new ArrayList<>();
-                        Log.d("participant", "-------------------------");
                         if (trip.participanti != null) {
                             trip.participanti.forEach(new BiConsumer<String, User>() {
                                 @Override
                                 public void accept(String s, User user) {
                                     uids.add(user.UID);
-                                    Log.d("participant", ""+user.UID);
                                 }
                             });
                         }
                         uid_posibil_participant = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                        Log.d("participant", ""+trip.UID_organiztor.equals(uid_posibil_participant));
-                        Log.d("participant", ""+uids.contains(uid_posibil_participant));
                         if (trip.UID_organiztor.equals(uid_posibil_participant) || uids.contains(uid_posibil_participant))
-                            button_alaturare_la_excursie.setVisibility(View.GONE);
+                            inscriere_excursie_layout.setVisibility(View.GONE);
                         else
-                            button_alaturare_la_excursie.setVisibility(View.VISIBLE);
+                            inscriere_excursie_layout.setVisibility(View.VISIBLE);
 
 
                         if (trip.tip.equals("Drumeţie")) {
