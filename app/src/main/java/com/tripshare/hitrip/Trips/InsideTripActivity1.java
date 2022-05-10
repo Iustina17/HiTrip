@@ -1,6 +1,7 @@
 package com.tripshare.hitrip.Trips;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,6 +11,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.Image;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -36,6 +38,7 @@ import com.tripshare.hitrip.User;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BiConsumer;
 
 public class InsideTripActivity1 extends AppCompatActivity {
     private String uid_organizator, data_start, data_fin;
@@ -130,11 +133,12 @@ public class InsideTripActivity1 extends AppCompatActivity {
 
 
         referenceTrips.addValueEventListener(new ValueEventListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
                 for (DataSnapshot keyNode : dataSnapshot.getChildren()) {
                     Trip trip = keyNode.getValue(Trip.class);
+
                     if (trip.UID_organiztor.equals(uid_organizator) && trip.data_inceput.equals(data_start) && trip.data_final.equals(data_fin)) {
                         //imagine_excursie.setAdjustViewBounds(trip.imagine_excursie);
                         nume.setText(trip.nume);
@@ -170,6 +174,25 @@ public class InsideTripActivity1 extends AppCompatActivity {
                         detalii_pret1.setText(trip.detalii_pret);
 
                         //locuri_ramase.setText(); TODO
+
+                        List<String> uids = new ArrayList<>();
+                        Log.d("participant", "-------------------------");
+                        if (trip.participanti != null) {
+                            trip.participanti.forEach(new BiConsumer<String, User>() {
+                                @Override
+                                public void accept(String s, User user) {
+                                    uids.add(user.UID);
+                                    Log.d("participant", ""+user.UID);
+                                }
+                            });
+                        }
+                        uid_posibil_participant = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                        Log.d("participant", ""+trip.UID_organiztor.equals(uid_posibil_participant));
+                        Log.d("participant", ""+uids.contains(uid_posibil_participant));
+                        if (trip.UID_organiztor.equals(uid_posibil_participant) || uids.contains(uid_posibil_participant))
+                            button_alaturare_la_excursie.setVisibility(View.GONE);
+                        else
+                            button_alaturare_la_excursie.setVisibility(View.VISIBLE);
 
 
                         if (trip.tip.equals("Drumeţie")) {
@@ -212,12 +235,16 @@ public class InsideTripActivity1 extends AppCompatActivity {
             }
         });
 
-        new FirebaseDatabaseHelperParticipanti().showParticipanti(new FirebaseDatabaseHelperParticipanti.DataStatus() {
-            @Override
-            public void DataIsLoaded(List<User> participanti, List<Integer> keys) {
-                new RecyclerViewConfigParticipant().setconfig(inside_trip_profil_recycler, InsideTripActivity1.this, participanti, keys);
-            }
-        }, uid_organizator, data_start, data_fin);
+        new
+
+                FirebaseDatabaseHelperParticipanti().
+
+                showParticipanti(new FirebaseDatabaseHelperParticipanti.DataStatus() {
+                    @Override
+                    public void DataIsLoaded(List<User> participanti, List<Integer> keys) {
+                        new RecyclerViewConfigParticipant().setconfig(inside_trip_profil_recycler, InsideTripActivity1.this, participanti, keys);
+                    }
+                }, uid_organizator, data_start, data_fin);
 
         profil_organizator_layout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -273,9 +300,12 @@ public class InsideTripActivity1 extends AppCompatActivity {
         });
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user.getUid().equals(uid_organizator)) {
+        if (user.getUid().
+
+                equals(uid_organizator)) {
             imageButton_sterge_trip1.setVisibility(View.VISIBLE);
         }
+
         //this.key = key;
         functionareButoane(imageButton_sterge_trip1);
     }
