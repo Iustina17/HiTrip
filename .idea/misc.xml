@@ -57,10 +57,11 @@
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/drawable/profile_layout_corners.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/drawable/rounded_corners.xml" value="0.264" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_adauga_impresie_pt_organizator.xml" value="0.264" />
+        <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_adauga_impresie_pt_participanti.xml" value="0.264" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_create_trip1.xml" value="0.264" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_create_trip2.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_create_trip_2.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_edit_personal_info.xml" value="0.4" />
+        <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_edit_personal_info.xml" value="0.35360908353609083" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_edit_profile.xml" value="0.264" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_help.xml" value="0.264" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_inside_trip1.xml" value="0.2607944732297064" />
@@ -81,6 +82,7 @@
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/activity_verify_otpactivity.xml" value="0.264" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/fragment_my_profile.xml" value="0.23854166666666668" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/inside_trip_row_add_stop.xml" value="0.264" />
+        <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/item_adauga_impresie_pt_participanti.xml" value="0.22708333333333333" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/item_profile_inside_trip.xml" value="0.4" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/item_trip.xml" value="0.264" />
         <entry key="..\:/Users/iusti/AndroidStudioProjects/HiTrip/app/src/main/res/layout/main_nav_drawer.xml" value="0.264" />

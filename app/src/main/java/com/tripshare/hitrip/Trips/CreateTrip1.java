@@ -43,6 +43,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Vector;
 import java.util.concurrent.TimeUnit;
 
 public class CreateTrip1 extends AppCompatActivity {
@@ -81,7 +83,7 @@ public class CreateTrip1 extends AppCompatActivity {
     Integer index_opriri = 0;
     String tematica;
     ArrayList<Oprire> vect_opriri;
-    ArrayList<User> participanti;
+    HashMap<String, User> participanti;
 
     String natura1 = "", sport1 = "", relaxare1 = "", divertisment1 = "", gastronomie1 = "", muzica1 = "", arhitectura1 = "", industrie1 = "", istorie1 = "", etnografie1 = "", arta1 = "", literatura1 = "", altele1 = "";
 
@@ -559,9 +561,9 @@ public class CreateTrip1 extends AppCompatActivity {
         locatieV = locatie.getText().toString();
         descriere_oprireV = descriere_oprire.getText().toString();
         descriere_transportV = descriere_transport.getText().toString();
-        Log.d("Locatie", locatieV);
-        Log.d("DOprire", descriere_oprireV);
-        Log.d("Dtransport", descriere_transportV);
+        Log.d("vect_opriri", locatieV);
+        Log.d("vect_opriri", descriere_oprireV);
+        Log.d("vect_opriri", descriere_transportV);
 
         Oprire oprire = new Oprire(index_opriri, locatieV, descriere_oprireV, descriere_transportV);
         vect_opriri = new ArrayList<Oprire>();
@@ -577,7 +579,6 @@ public class CreateTrip1 extends AppCompatActivity {
                 removeView(stopView);
             }
         });
-
     }
 
     private void removeView(View view) {

@@ -1,10 +1,12 @@
 
 package com.tripshare.hitrip.Trips;
 
+import android.os.Build;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -14,8 +16,12 @@ import com.google.firebase.database.ValueEventListener;
 import com.tripshare.hitrip.Trips.Trip;
 import com.tripshare.hitrip.User;
 
+import java.util.AbstractMap;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.function.BiConsumer;
 
 public class FirebaseDatabaseHelperParticipanti {
 
@@ -46,6 +52,7 @@ public class FirebaseDatabaseHelperParticipanti {
         this.data_start = data_start;
         this.data_fin = data_fin;
         referenceTrips.addValueEventListener(new ValueEventListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 participanti.clear();
@@ -54,14 +61,18 @@ public class FirebaseDatabaseHelperParticipanti {
                     if (uid_organizator.equals(trip.UID_organiztor) && data_start.equals(trip.data_inceput) && data_fin.equals(trip.data_final)) {
                         //for (int i = 0; i < trip.participanti.size();i++)
                         if (trip.participanti != null) {
-                            for (User participant : trip.participanti) {
-                                keys.add(trip.participanti.indexOf(participant));
-                                participanti.add(participant);
+                            trip.participanti.forEach(new BiConsumer<String, User>() {
+                                @Override
+                                public void accept(String s, User user) {
+                                    participanti.add(user);
+                                }
+                            });
+                            for (int i = 0; i<trip.participanti.size(); i++) {
+                                keys.add(i);
                             }
                         } else {
                                 Log.d("participanti","Nu exista participanti");
                         }
-
                     }
 
                 }

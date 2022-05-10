@@ -26,7 +26,6 @@
         tools:context=".Trips.InsideTripActivity1">
 
         <ScrollView
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:elevation="10dp">
@@ -733,7 +732,7 @@
                             android:layout_marginRight="16dp"
                             android:orientation="horizontal">
 
-                            <ScrollView
+                            <HorizontalScrollView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content">
 
@@ -751,11 +750,12 @@
                                         <androidx.recyclerview.widget.RecyclerView
                                             android:id="@+id/inside_trip_profil_recycler"
                                             android:layout_width="match_parent"
-                                            android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
+                                            android:layout_height="match_parent"
+                                            android:orientation="horizontal"></androidx.recyclerview.widget.RecyclerView>
                                     </LinearLayout>
 
                                 </LinearLayout>
-                            </ScrollView>
+                            </HorizontalScrollView>
 
 
                         </LinearLayout>

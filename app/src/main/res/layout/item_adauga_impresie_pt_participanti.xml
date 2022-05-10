@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@drawable/profile_layout_context_corners"
+        android:elevation="5dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/trip_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"></ImageView>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp"
+                android:src="@drawable/ic_close"></ImageView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/ic_account"></ImageView>
+
+                <TextView
+                    android:id="@+id/prenume_particpip_rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_gravity="center_vertical"
+                    android:text="Prenume"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/nume_particpip_rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_gravity="center_vertical"
+                    android:text="Nume"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <RatingBar
+                android:id="@+id/adauga_impresie_rating"
+                android:layout_width="238dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_margin="8dp" />
+
+            <EditText
+                android:id="@+id/adauga_impresie_titlu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:autofillHints="-"
+                android:hint="Titlu (rezumat scurt)"
+                android:textSize="18sp"
+                android:inputType="textMultiLine|textImeMultiLine"
+                android:paddingStart="3dp" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginBottom="8dp">
+
+                <EditText
+                    android:id="@+id/adauga_impresie_continut"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:background="@drawable/edit_text_rectangle"
+                    android:gravity="top"
+                    android:hint="Cum ai interacționat cu acest participant? V-ați înțeles? A cooperat? Lasă un feedback!"
+                    android:inputType="textMultiLine"
+                    android:maxLines="7"
+                    android:padding="8dp"
+                    android:scrollbars="vertical"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/adauga_impresie_buton_trimite"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/button_standard"
+                android:text="Trimite feedback" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

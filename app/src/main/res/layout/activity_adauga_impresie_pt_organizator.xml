@@ -51,8 +51,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="56dp"
+                    android:layout_marginBottom="16dp"
                     android:text="Adaugă impresia ta despre organizator"
                     android:textColor="@color/black"
                     android:textSize="18dp"
@@ -75,8 +75,13 @@
                     android:id="@+id/adauga_impresie_titlu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
                     android:autofillHints="-"
                     android:hint="Titlu (rezumat scurt)"
+                    android:textSize="18sp"
                     android:inputType="textMultiLine|textImeMultiLine"
                     android:paddingStart="3dp"
                     app:layout_constraintEnd_toStartOf="@+id/adauga_impresie_rating"
@@ -84,24 +89,34 @@
                     app:layout_constraintTop_toBottomOf="@id/adauga_impresie_rating" />
 
 
-                <EditText
-                    android:id="@+id/adauga_impresie_continut"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:autofillHints="-"
-                    android:hint="Cum ai interacționat cu organizatorul? V-ați înțeles? A cooperat? Și-a îndeplinit îndatoririle? Lasă un feedback!"
-                    android:inputType="textMultiLine|textImeMultiLine"
-                    android:paddingStart="3dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/adauga_impresie_titlu" />
+                    android:layout_height="100dp"
+                    android:layout_marginBottom="8dp">
+
+                    <EditText
+                        android:id="@+id/adauga_impresie_continut"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:background="@drawable/edit_text_rectangle"
+                        android:gravity="top"
+                        android:hint="Cum ai interacționat cu organizatorul? V-ați înțeles? A cooperat? Și-a îndeplinit îndatoririle? Lasă un feedback!"
+                        android:inputType="textMultiLine"
+                        android:maxLines="7"
+                        android:padding="8dp"
+                        android:scrollbars="vertical"
+                        android:textSize="18sp" />
+                </LinearLayout>
 
                 <Button
                     android:id="@+id/adauga_impresie_buton_trimite"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginBottom="24dp"
                     android:background="@drawable/button_standard"
                     android:text="Trimite feedback"
                     app:layout_constraintEnd_toEndOf="parent"

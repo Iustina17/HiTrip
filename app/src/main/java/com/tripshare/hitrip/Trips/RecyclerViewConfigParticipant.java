@@ -60,7 +60,7 @@ class RecyclerViewConfigParticipant {
         @SuppressLint("SetTextI18n")
         void bind(User user, Integer key) {
             prenume_particip.setText(user.prenume);
-           // poza.setText(user.poza_profil); TODO
+            // poza.setText(user.poza_profil); TODO
         }
     }
 

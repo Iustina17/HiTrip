@@ -2,6 +2,7 @@ package com.tripshare.hitrip.Trips;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
@@ -59,13 +60,17 @@ public class InsideTripActivity1 extends AppCompatActivity {
     LinearLayout ll_pret_fix, ll_pret_var;
     TextView detalii_pret1;
 
+    String uid_posibil_participant;
+
     Integer loc_ramase = 0;
 
     LinearLayout profil_organizator_layout;
 
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
+
     private DatabaseReference referenceTrips = database.getReference("Calatorii");
     DatabaseReference referenceTrip = FirebaseDatabase.getInstance().getReference().child("Calatorii");
+    DatabaseReference referenceUsers = database.getReference("Utilizatori");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,6 +114,9 @@ public class InsideTripActivity1 extends AppCompatActivity {
         layout_documente_necesare = findViewById(R.id.layout_documente_necesare);
         layout_descreiere_plecare = findViewById(R.id.layout_descreiere_plecare);
         inside_trip_profil_recycler = findViewById(R.id.inside_trip_profil_recycler);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        inside_trip_profil_recycler.setLayoutManager(layoutManager);
+
         profil_organizator_layout = findViewById(R.id.profil_organizator_layout);
         button_alaturare_la_excursie = findViewById(R.id.button_alaturare_la_excursie);
         imageButton_sterge_trip1 = findViewById(R.id.imageButton_sterge_trip1);
@@ -188,7 +196,7 @@ public class InsideTripActivity1 extends AppCompatActivity {
                             ll_pret_fix.setVisibility(View.VISIBLE);
                         }
 
-                        if((!trip.pret_min.isEmpty()) && (!trip.pret_max.isEmpty()) && trip.pret.isEmpty()){
+                        if ((!trip.pret_min.isEmpty()) && (!trip.pret_max.isEmpty()) && trip.pret.isEmpty()) {
                             ll_pret_var.setVisibility(View.VISIBLE);
                             ll_pret_fix.setVisibility(View.GONE);
                         }
@@ -226,6 +234,41 @@ public class InsideTripActivity1 extends AppCompatActivity {
             public void onClick(View view) {
                 referenceTrips.child("participanti");
 
+
+                uid_posibil_participant = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+                Query query = referenceUsers.orderByChild("UID").equalTo(uid_posibil_participant);
+                //Log.d("uid_organiztaor",uid_organizator);
+                query.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot child : dataSnapshot.getChildren()) {
+                            User user = child.getValue(User.class);
+                            User participant = new User(user.UID, user.prenume, user.poza_profil);
+                            Query query = referenceTrips.orderByChild("UID_organiztor").equalTo(uid_organizator);
+                            query.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    for (DataSnapshot child : dataSnapshot.getChildren()) {
+                                        String key = child.getKey();
+                                        DatabaseReference referenceTripParticipanti = referenceTrips.child(key);
+                                        referenceTripParticipanti.child("participanti").push().setValue(participant);
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+                                }
+                            });
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                    }
+                });
+
+
             }
         });
 
@@ -258,11 +301,12 @@ public class InsideTripActivity1 extends AppCompatActivity {
                                             if (data_inceput.getText().equals(child.child("data_inceput").getValue())
                                                     && data_final.getText().equals(child.child("data_final").getValue())) {
                                                 referenceTrip = referenceTrip.child(key);
-                                                Log.d("uid_reference",referenceTrip.child(key).toString());
+                                                Log.d("uid_reference", referenceTrip.child(key).toString());
                                                 referenceTrip.removeValue();
                                             }
                                         }
                                     }
+
                                     @Override
                                     public void onCancelled(@NonNull DatabaseError databaseError) {
                                     }
