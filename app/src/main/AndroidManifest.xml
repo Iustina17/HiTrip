@@ -13,6 +13,12 @@
         android:theme="@style/Theme.HiTrip"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".InsideSectionForumActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FormularActivity"
+            android:exported="false" />
+        <activity
             android:name=".AdaugaImpresiePtParticipantiActivity"
             android:exported="false" />
         <activity

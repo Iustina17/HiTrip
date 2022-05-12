@@ -58,6 +58,8 @@ class RecyclerViewConfigTrip {
 
     class TripItemView extends RecyclerView.ViewHolder {
         private TextView prenume_organiztor, nume_organiztor, tara, oras, nr_zile, nume_excursie, data_inceput, data_final, tip_excursie, pret, moneda;
+        private TextView pret_min, pret_max, moneda_var;
+        LinearLayout linl_pretFix, linl_pretVariabil;
         CardView card_view_trip;
 
         ImageButton imageButton_sterge_trip;
@@ -78,10 +80,16 @@ class RecyclerViewConfigTrip {
             data_inceput = itemView.findViewById(R.id.data_inceput);
             data_final = itemView.findViewById(R.id.data_final);
             tip_excursie = itemView.findViewById(R.id.tip_excursie);
-            pret = itemView.findViewById(R.id.pret);
             moneda = itemView.findViewById(R.id.moneda);
             card_view_trip = itemView.findViewById(R.id.card_view_trip);
             imageButton_sterge_trip = itemView.findViewById(R.id.imageButton_sterge_trip);
+
+            pret = itemView.findViewById(R.id.pret);
+            pret_min = itemView.findViewById(R.id.pret_min);
+            pret_max = itemView.findViewById(R.id.pret_max);
+            moneda_var = itemView.findViewById(R.id.moneda_var);
+            linl_pretFix = itemView.findViewById(R.id.linl_pretFix);
+            linl_pretVariabil = itemView.findViewById(R.id.linl_pretVariabil);
 
         }
 
@@ -96,14 +104,29 @@ class RecyclerViewConfigTrip {
             data_inceput.setText(trip.data_inceput);
             data_final.setText(trip.data_final);
             tip_excursie.setText(trip.tip);
+
             pret.setText(trip.pret);
+            pret_min.setText(trip.pret_min);
+            pret_max.setText(trip.pret_max);
             moneda.setText(trip.tip_moneda);
+            moneda_var.setText(trip.tip_moneda);
+
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             if (user.getUid().equals(trip.UID_organiztor)) {
                 imageButton_sterge_trip.setVisibility(View.VISIBLE);
             }
-            //this.key = key;
             functionareButoane(trip, imageButton_sterge_trip);
+
+            if ((trip.pret_min.isEmpty() && trip.pret_max.isEmpty() && (!trip.pret.isEmpty()))) {
+                linl_pretVariabil.setVisibility(View.GONE);
+                linl_pretFix.setVisibility(View.VISIBLE);
+            }
+
+            if ((!trip.pret_min.isEmpty()) && (!trip.pret_max.isEmpty()) && trip.pret.isEmpty()) {
+                linl_pretVariabil.setVisibility(View.VISIBLE);
+                linl_pretFix.setVisibility(View.GONE);
+            }
+            //this.key = key;
         }
     }
 
