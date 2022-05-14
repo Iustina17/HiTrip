@@ -26,6 +26,9 @@ class RecyclerViewConfigParticipant {
     private Context mContext;
     private ParticipantAdaptor adaptorParticipant;
 
+    RecyclerView.LayoutManager RecyclerViewLayoutManager;
+    LinearLayoutManager HorizontalLayout;
+
     void setconfig(RecyclerView recyclerView, Context context, List<User> participantList, List<Integer> keys) {
         mContext = context;
 //        Collections.sort(tripsList, new Comparator<Trip>() {
@@ -34,9 +37,9 @@ class RecyclerViewConfigParticipant {
 //                return a2.data_inceput.compareTo(a1.data_inceput);
 //            }
 //        });
-
         adaptorParticipant = new ParticipantAdaptor(participantList, keys);
-        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        HorizontalLayout = new LinearLayoutManager(recyclerView.getContext(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(HorizontalLayout);
         recyclerView.setAdapter(adaptorParticipant);
     }
 

@@ -57,11 +57,34 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignEnd="@+id/trip_layout"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginRight="8dp"
-                            android:background="@color/white"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginRight="16dp"
+                            android:background="@drawable/button_black_corners"
                             android:visibility="gone"
                             app:srcCompat="@drawable/ic_baseline_delete_24" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/finalizeaza_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"></ImageView>
+
+                        <ImageButton
+                            android:id="@+id/imageButton_finalizeaza_trip1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignEnd="@+id/trip_layout"
+                            android:layout_marginTop="56dp"
+                            android:layout_marginRight="16dp"
+                            android:background="@drawable/button_black_corners"
+                            android:visibility="gone"
+                            app:srcCompat="@drawable/ic_end_trip" />
 
                     </LinearLayout>
 
@@ -730,31 +753,21 @@
                             android:layout_marginLeft="16dp"
                             android:layout_marginTop="16dp"
                             android:layout_marginRight="16dp"
+                            android:layout_marginBottom="16dp"
                             android:orientation="horizontal">
 
                             <HorizontalScrollView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content">
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginBottom="16dp"
-                                    android:orientation="vertical">
-
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:orientation="vertical">
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:scrollbars="horizontal">
 
                                         <androidx.recyclerview.widget.RecyclerView
                                             android:id="@+id/inside_trip_profil_recycler"
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
+                                            android:scrollbars="horizontal"
                                             android:orientation="horizontal"></androidx.recyclerview.widget.RecyclerView>
-                                    </LinearLayout>
 
-                                </LinearLayout>
                             </HorizontalScrollView>
 
 
@@ -1217,18 +1230,6 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/scoll">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="dfhdngjhfmgj"></TextView>
-    </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/inscriere_excursie_layout"

@@ -92,6 +92,8 @@ public class CreateTrip1 extends AppCompatActivity {
     EditText pret_min, pret_max;
     EditText detalii_pret;
 
+    String status = "viitoare";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -379,12 +381,10 @@ public class CreateTrip1 extends AppCompatActivity {
                             mtip, mdata_inceput, mdata_final, mnr_zile, mtara,
                             moras, mdescriere_plecare, nr_opriri, vect_opriri,
                             mdescriere_excursie, mregulament, mechipament_necesar,
-                            mdocumente_necesare, mnr_min_particpip, mnr_max_particpip, mcost, mtip_moneda, dificultate, participanti, mpretMin, mpretMax, mDetalii_pret);
+                            mdocumente_necesare, mnr_min_particpip, mnr_max_particpip, mcost, mtip_moneda, dificultate, participanti, mpretMin, mpretMax, mDetalii_pret, status);
                     reference.push().setValue(trip);
                     redirectActivity(CreateTrip1.this, MainActivity.class);
                 }
-
-
             }
         });
 

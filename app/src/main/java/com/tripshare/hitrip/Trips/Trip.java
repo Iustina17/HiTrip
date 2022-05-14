@@ -38,6 +38,8 @@ public class Trip {
     public String tip_moneda;
 
     public String dificultate;
+
+    public String status;
 //TODO grad_dificultate
 
     public Trip(String UID_organiztor, String imagine_excursie, String prenume, String nume, String titlu_excursie, String tematica, String tip, String data_inceput, String data_final, Integer nr_zile, String tara, String oras, String descriere_plecare, Integer nr_opriri, ArrayList<Oprire> vect_opriri, String descriere_excursie, String regulament, String echipament_necesar, String documente_necesare, String nr_min_particip, String nr_max_particip, String pret, String pret_min, String pret_max, String detalii_pret, String tip_moneda, String dificultate) {
@@ -73,7 +75,7 @@ public class Trip {
     public Trip() {
     }
 
-    public Trip(String UID_organiztor, String imagine_excursie, String prenume, String nume, String titlu_excursie, String tematica, String tip, String data_inceput, String data_final, Integer nr_zile, String tara, String oras, String descriere_plecare, Integer nr_opriri, ArrayList<Oprire> vect_opriri, String descriere_excursie, String regulament, String echipament_necesar, String documente_necesare, String nr_min_particip, String nr_max_particip, String pret, String tip_moneda, String dificultate, HashMap<String, User> participanti, String pret_min, String pret_max, String detalii_pret) {
+    public Trip(String UID_organiztor, String imagine_excursie, String prenume, String nume, String titlu_excursie, String tematica, String tip, String data_inceput, String data_final, Integer nr_zile, String tara, String oras, String descriere_plecare, Integer nr_opriri, ArrayList<Oprire> vect_opriri, String descriere_excursie, String regulament, String echipament_necesar, String documente_necesare, String nr_min_particip, String nr_max_particip, String pret, String tip_moneda, String dificultate, HashMap<String, User> participanti, String pret_min, String pret_max, String detalii_pret, String status) {
         this.UID_organiztor = UID_organiztor;
         this.imagine_excursie = imagine_excursie;
         this.prenume = prenume;
@@ -102,5 +104,6 @@ public class Trip {
         this.pret_min = pret_min;
         this.pret_max = pret_max;
         this.detalii_pret = detalii_pret;
+        this.status = status;
     }
 }

@@ -39,11 +39,34 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignEnd="@+id/trip_layout"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginRight="8dp"
-                    android:background="@color/white"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="16dp"
+                    android:background="@drawable/button_black_corners"
                     android:visibility="gone"
                     app:srcCompat="@drawable/ic_baseline_delete_24" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/finalizeaza_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"></ImageView>
+
+                <ImageButton
+                    android:id="@+id/imageButton_finalizeaza_trip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignEnd="@+id/trip_layout"
+                    android:layout_marginTop="56dp"
+                    android:layout_marginRight="16dp"
+                    android:background="@drawable/button_black_corners"
+                    android:visibility="gone"
+                    app:srcCompat="@drawable/ic_end_trip" />
 
             </LinearLayout>
 

@@ -37,7 +37,10 @@ import com.tripshare.hitrip.Trips.Oprire;
 import com.tripshare.hitrip.Trips.Trip;
 import com.tripshare.hitrip.User;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.function.BiConsumer;
 
@@ -57,8 +60,11 @@ public class InsideTripActivity1 extends AppCompatActivity {
     LinearLayout grad_dif_layout;
     LinearLayout layout_echipament_necesar, layout_documente_necesare, layout_descreiere_plecare;
     RecyclerView inside_trip_profil_recycler;
+    RecyclerView.LayoutManager RecyclerViewLayoutManager;
+    LinearLayoutManager HorizontalLayout;
     Button button_alaturare_la_excursie;
     ImageButton imageButton_sterge_trip1;
+    ImageButton imageButton_finalizeaza_trip1;
 
     TextView pret_min1, pret_max1, moneda_var;
     LinearLayout ll_pret_fix, ll_pret_var;
@@ -119,12 +125,13 @@ public class InsideTripActivity1 extends AppCompatActivity {
         layout_documente_necesare = findViewById(R.id.layout_documente_necesare);
         layout_descreiere_plecare = findViewById(R.id.layout_descreiere_plecare);
         inside_trip_profil_recycler = findViewById(R.id.inside_trip_profil_recycler);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        inside_trip_profil_recycler.setLayoutManager(layoutManager);
+        RecyclerViewLayoutManager = new LinearLayoutManager(getApplicationContext());
+        inside_trip_profil_recycler.setLayoutManager(RecyclerViewLayoutManager);
 
         profil_organizator_layout = findViewById(R.id.profil_organizator_layout);
         button_alaturare_la_excursie = findViewById(R.id.button_alaturare_la_excursie);
         imageButton_sterge_trip1 = findViewById(R.id.imageButton_sterge_trip1);
+        imageButton_finalizeaza_trip1 = findViewById(R.id.imageButton_finalizeaza_trip1);
 
         pret_min1 = findViewById(R.id.pret_min1);
         pret_max1 = findViewById(R.id.pret_max1);
@@ -188,6 +195,10 @@ public class InsideTripActivity1 extends AppCompatActivity {
                                 }
                             });
                         }
+
+                        HorizontalLayout=new LinearLayoutManager(InsideTripActivity1.this,LinearLayoutManager.HORIZONTAL,false);
+                        inside_trip_profil_recycler.setLayoutManager(HorizontalLayout);
+
                         uid_posibil_participant = FirebaseAuth.getInstance().getCurrentUser().getUid();
                         if (trip.UID_organiztor.equals(uid_posibil_participant) || uids.contains(uid_posibil_participant))
                             inscriere_excursie_layout.setVisibility(View.GONE);
@@ -224,7 +235,65 @@ public class InsideTripActivity1 extends AppCompatActivity {
                             ll_pret_fix.setVisibility(View.GONE);
                         }
 
+                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                        if (user.getUid().equals(uid_organizator)) {
+                            imageButton_sterge_trip1.setVisibility(View.VISIBLE);
 
+                            String sDate1=trip.data_final;
+                            Date date_fin= null;
+                            try {
+                                date_fin = new SimpleDateFormat("dd/MM/yyyy").parse(sDate1);
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+
+                            String sDate2=trip.data_inceput;
+                            Date date_incep= null;
+                            try {
+                                date_incep = new SimpleDateFormat("dd/MM/yyyy").parse(sDate2);
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+
+                            Date date_now = new Date();
+
+
+                            if(date_fin.before(date_now)){
+                                trip.status = "incheiata";
+                            }else if((date_incep.before(date_now)||date_incep.equals(date_now)) && (date_fin.after(date_now)||date_fin.equals(date_now))){
+                                trip.status = "desfasurare";
+                            }else if(date_incep.after(date_now)){
+                                trip.status = "viitoare";
+                            }
+                        }
+                        String sDate2=trip.data_final;
+                        Date date_fin2= null;
+                        try {
+                            date_fin2 = new SimpleDateFormat("dd/MM/yyyy").parse(sDate2);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
+                        String sDate3=trip.data_inceput;
+                        Date date_incep2= null;
+                        try {
+                            date_incep2 = new SimpleDateFormat("dd/MM/yyyy").parse(sDate3);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
+                        Date date_now2 = new Date();
+
+                        if(date_fin2.before(date_now2)){
+                            //trip.status = "incheiata";
+                            imageButton_finalizeaza_trip1.setVisibility(View.GONE);
+                        }else if((date_incep2.before(date_now2)||date_incep2.equals(date_now2)) && (date_fin2.after(date_now2)||date_fin2.equals(date_now2))){
+                            //trip.status = "desfasurare";
+                            imageButton_finalizeaza_trip1.setVisibility(View.VISIBLE);
+                        }else if(date_incep2.after(date_now2)){
+                            //trip.status = "viitoare";
+                            imageButton_finalizeaza_trip1.setVisibility(View.GONE);
+                        }
                     }
                 }
             }
@@ -298,13 +367,6 @@ public class InsideTripActivity1 extends AppCompatActivity {
 
             }
         });
-
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user.getUid().
-
-                equals(uid_organizator)) {
-            imageButton_sterge_trip1.setVisibility(View.VISIBLE);
-        }
 
         //this.key = key;
         functionareButoane(imageButton_sterge_trip1);
