@@ -10,5 +10,12 @@ public class AdaugaImpresiePtOrganizatorActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adauga_impresie_pt_organizator);
+
+        String data_start, data_fin, titlu;
+        titlu = getIntent().getStringExtra("titlu");
+        data_start = getIntent().getStringExtra("data_inceput");
+        data_fin = getIntent().getStringExtra("data_final");
+
+
     }
 }

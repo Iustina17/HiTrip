@@ -41,7 +41,7 @@ public class SignUpActivity extends AppCompatActivity {
     Button register_button;
     TextView age_show, textCondition;
     EditText mEmail,mLastName, mFirstName,mPassword, mConfirm_password;
-    Integer age;
+    Integer age = 0;
     Spinner mspinner_sex_login;
     EditText mnationalitate_login;
     static String date;
@@ -82,7 +82,7 @@ public class SignUpActivity extends AppCompatActivity {
                     int bMonth = date_picker.getMonth();
                     int bDay = date_picker.getDayOfMonth();
                     birthdate.set(bYear, bMonth, bDay);
-                    age_show.setText(Integer.toString(calculateAge(birthdate)));
+                    //age_show.setText(Integer.toString(calculateAge(birthdate)));
                     age = calculateAge(birthdate);
                     date = bDay+"/"+bMonth+"/"+bYear+"/";
                 }
@@ -111,6 +111,25 @@ public class SignUpActivity extends AppCompatActivity {
                     return;
                 }
 
+                if(mLastName.getText().toString().trim().equals("")){
+                    mLastName.setError("Câmpul trebuie completat");
+                    mLastName.requestFocus();
+                    return;
+                }
+
+
+                if(mFirstName.getText().toString().trim().equals("")){
+                    mFirstName.setError("Câmpul trebuie completat");
+                    mFirstName.requestFocus();
+                    return;
+                }
+
+                if(mnationalitate_login.getText().toString().trim().equals("")){
+                    mnationalitate_login.setError("Câmpul trebuie completat");
+                    mnationalitate_login.requestFocus();
+                    return;
+                }
+
                 if(TextUtils.isEmpty(password)){
                     mPassword.setError("Introduceţi o parolă");
                     mEmail.requestFocus();
@@ -135,11 +154,7 @@ public class SignUpActivity extends AppCompatActivity {
                     return;
                 }
 
-                if(mnationalitate_login.getText().toString().trim().equals("")){
-                    mnationalitate_login.setError("Câmpul trebuie completat");
-                    mnationalitate_login.requestFocus();
-                    return;
-                }
+
 
                 fAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
