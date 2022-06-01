@@ -225,58 +225,80 @@ public class InsideTripActivity1 extends AppCompatActivity {
                         pret_max1.setText(trip.pret_max);
                         detalii_pret1.setText(trip.detalii_pret);
 
+                        for ( Map.Entry<String, Oprire> entry : trip.vect_opriri.entrySet()) {
+                            View stopView = getLayoutInflater().inflate(R.layout.inside_trip_row_add_stop, null, false);
+                            inside_layout_list.addView(stopView);
+                            View v = inside_layout_list.getChildAt(nr_op);
+                            nr_op++;
+
+                            inside_nr_oprire = v.findViewById(R.id.inside_nr_oprire);
+                            inside_descriere_transport = v.findViewById(R.id.inside_descriere_transport);
+                            inside_locatie_item = v.findViewById(R.id.inside_locatie_item);
+                            inside_descriere_item = v.findViewById(R.id.inside_descriere_item);
+
+                            Oprire oprire = entry.getValue();
+
+                            inside_nr_oprire.setText(String.valueOf(nr_op));
+                            inside_descriere_item.setText(oprire.descriere_oprire);
+                            inside_descriere_transport.setText(oprire.descriere_transport);
+                            inside_locatie_item.setText(oprire.locatie_oprire);
+                        }
+
+
                         //DatabaseReference vectOpReference = referenceTrip.child("vect_opriri");
 
-                        referenceTrip.child("vect_opriri").addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                if(snapshot.exists()){
-                                    //for (int i=0; i < trip.nr_opriri; i++) {
-                                    for(DataSnapshot ds: snapshot.getChildren()){
-                                        View stopView = getLayoutInflater().inflate(R.layout.inside_trip_row_add_stop, null, false);
-                                        inside_layout_list.addView(stopView);
 
-                                        View v = inside_layout_list.getChildAt(nr_op);
-                                        nr_op++;
-                                        Log.d("message", "onDataChange: ");
-                                        Log.d("nr_op", String.valueOf(nr_op));
-                                        Log.d("ds", String.valueOf(ds));
-
-
-                                        inside_nr_oprire = v.findViewById(R.id.inside_nr_oprire);
-                                        inside_descriere_transport = v.findViewById(R.id.inside_descriere_transport);
-                                        inside_locatie_item = v.findViewById(R.id.inside_locatie_item);
-                                        inside_descriere_item = v.findViewById(R.id.inside_descriere_item);
-
-//                                        Map<String, Object> map = (Map<String, Object>) ds.getValue();
+//                        referenceTrip.child("vect_opriri").addValueEventListener(new ValueEventListener() {
+//                            @Override
+//                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                                if(snapshot.exists()){
+//                                    //for (int i=0; i < trip.nr_opriri; i++) {
+//                                    for(DataSnapshot ds: snapshot.getChildren()){
+//                                        //Log.d("message", "onDataChange: ");
+//                                        View stopView = getLayoutInflater().inflate(R.layout.inside_trip_row_add_stop, null, false);
+//                                        inside_layout_list.addView(stopView);
 //
-//                                        String descriere_oprire = (String) map.get("descriere_oprire");
-//                                        String descriere_transport = (String) map.get("descriere_transport");
-//                                        String locatie = (String) map.get("locatie_oprire");
-
-//                                        Log.d("descriere oprire", descriere_oprire);
-//                                        Log.d("descriere transport", descriere_transport);
-//                                        Log.d("locatie", locatie);
-
-
-                                        String descriere_oprire = ds.child("descriere_oprire").getValue(String.class);
-                                        String descriere_transport = ds.child("descriere_transport").getValue(String.class);
-                                        String locatie = ds.child("locatie_oprire").getValue(String.class);
-
-           //                             inside_nr_oprire.setText(nr_op);
-                                        inside_descriere_item.setText(descriere_oprire);
-                                        inside_descriere_transport.setText(descriere_transport);
-                                        inside_locatie_item.setText(locatie);
-                                    }
-
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-
-                            }
-                        });
+//                                        View v = inside_layout_list.getChildAt(nr_op);
+//                                        nr_op++;
+//
+//                                        Log.d("nr_op", String.valueOf(nr_op));
+//                                        Log.d("ds", String.valueOf(ds));
+//
+//
+//                                        inside_nr_oprire = v.findViewById(R.id.inside_nr_oprire);
+//                                        inside_descriere_transport = v.findViewById(R.id.inside_descriere_transport);
+//                                        inside_locatie_item = v.findViewById(R.id.inside_locatie_item);
+//                                        inside_descriere_item = v.findViewById(R.id.inside_descriere_item);
+//
+////                                        Map<String, Object> map = (Map<String, Object>) ds.getValue();
+////
+////                                        String descriere_oprire = (String) map.get("descriere_oprire");
+////                                        String descriere_transport = (String) map.get("descriere_transport");
+////                                        String locatie = (String) map.get("locatie_oprire");
+//
+////                                        Log.d("descriere oprire", descriere_oprire);
+////                                        Log.d("descriere transport", descriere_transport);
+////                                        Log.d("locatie", locatie);
+//
+//
+//                                        String descriere_oprire = ds.child("descriere_oprire").getValue(String.class);
+//                                        String descriere_transport = ds.child("descriere_transport").getValue(String.class);
+//                                        String locatie = ds.child("locatie_oprire").getValue(String.class);
+//
+//           //                             inside_nr_oprire.setText(nr_op);
+//                                        inside_descriere_item.setText(descriere_oprire);
+//                                        inside_descriere_transport.setText(descriere_transport);
+//                                        inside_locatie_item.setText(locatie);
+//                                    }
+//
+//                                }
+//                            }
+//
+//                            @Override
+//                            public void onCancelled(@NonNull DatabaseError error) {
+//
+//                            }
+//                        });
 
 //                        if (trip.participanti != null) {
 //                            trip.vect_opriri.forEach(new BiConsumer<String, Oprire>() {
@@ -289,7 +311,6 @@ public class InsideTripActivity1 extends AppCompatActivity {
 //                                }
 //                            });
 //                        }
-
 
 
                         //locuri_ramase.setText(); TODO
@@ -428,11 +449,11 @@ public class InsideTripActivity1 extends AppCompatActivity {
         });
 
         new FirebaseDatabaseHelperParticipanti().showParticipanti(new FirebaseDatabaseHelperParticipanti.DataStatus() {
-                    @Override
-                    public void DataIsLoaded(List<User> participanti, List<Integer> keys) {
-                        new RecyclerViewConfigParticipant().setconfig(inside_trip_profil_recycler, InsideTripActivity1.this, participanti, keys);
-                    }
-                }, uid_organizator, data_start, data_fin);
+            @Override
+            public void DataIsLoaded(List<User> participanti, List<Integer> keys) {
+                new RecyclerViewConfigParticipant().setconfig(inside_trip_profil_recycler, InsideTripActivity1.this, participanti, keys);
+            }
+        }, uid_organizator, data_start, data_fin);
 
         profil_organizator_layout.setOnClickListener(new View.OnClickListener() {
             @Override
