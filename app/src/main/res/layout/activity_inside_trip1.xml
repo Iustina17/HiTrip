@@ -792,6 +792,7 @@
                                 android:orientation="horizontal">
 
                                 <TextView
+                                    android:id="@+id/locuri_ramase"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="nr.locuri ramase"
@@ -800,7 +801,6 @@
                                     android:textStyle="bold" />
 
                                 <TextView
-                                    android:id="@+id/locuri_ramase"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text=" locuri ramase"
@@ -1222,8 +1222,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
-                        android:layout_marginLeft="54dp"
-                        android:layout_marginRight="54dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
                         android:orientation="vertical"></LinearLayout>
 
 
