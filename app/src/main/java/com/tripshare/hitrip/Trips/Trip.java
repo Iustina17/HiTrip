@@ -2,9 +2,7 @@ package com.tripshare.hitrip.Trips;
 
 import com.tripshare.hitrip.User;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Vector;
 
 public class Trip {
     public String UID_organiztor;
@@ -22,7 +20,7 @@ public class Trip {
     public String descriere_plecare;
     public Integer nr_opriri;
 
-    public ArrayList<Oprire> vect_opriri;
+    public HashMap<String, Oprire> vect_opriri;
     public HashMap<String, User> participanti;
     public String descriere_excursie;
     public String regulament;
@@ -42,7 +40,7 @@ public class Trip {
     public String status;
 //TODO grad_dificultate
 
-    public Trip(String UID_organiztor, String imagine_excursie, String prenume, String nume, String titlu_excursie, String tematica, String tip, String data_inceput, String data_final, Integer nr_zile, String tara, String oras, String descriere_plecare, Integer nr_opriri, ArrayList<Oprire> vect_opriri, String descriere_excursie, String regulament, String echipament_necesar, String documente_necesare, String nr_min_particip, String nr_max_particip, String pret, String pret_min, String pret_max, String detalii_pret, String tip_moneda, String dificultate) {
+    public Trip(String UID_organiztor, String imagine_excursie, String prenume, String nume, String titlu_excursie, String tematica, String tip, String data_inceput, String data_final, Integer nr_zile, String tara, String oras, String descriere_plecare, Integer nr_opriri, HashMap<String, Oprire> vect_opriri, String descriere_excursie, String regulament, String echipament_necesar, String documente_necesare, String nr_min_particip, String nr_max_particip, String pret, String pret_min, String pret_max, String detalii_pret, String tip_moneda, String dificultate) {
         this.UID_organiztor = UID_organiztor;
         this.imagine_excursie = imagine_excursie;
         this.prenume = prenume;
@@ -75,7 +73,7 @@ public class Trip {
     public Trip() {
     }
 
-    public Trip(String UID_organiztor, String imagine_excursie, String prenume, String nume, String titlu_excursie, String tematica, String tip, String data_inceput, String data_final, Integer nr_zile, String tara, String oras, String descriere_plecare, Integer nr_opriri, ArrayList<Oprire> vect_opriri, String descriere_excursie, String regulament, String echipament_necesar, String documente_necesare, String nr_min_particip, String nr_max_particip, String pret, String tip_moneda, String dificultate, HashMap<String, User> participanti, String pret_min, String pret_max, String detalii_pret, String status) {
+    public Trip(String UID_organiztor, String imagine_excursie, String prenume, String nume, String titlu_excursie, String tematica, String tip, String data_inceput, String data_final, Integer nr_zile, String tara, String oras, String descriere_plecare, Integer nr_opriri, HashMap<String, Oprire> vect_opriri, String descriere_excursie, String regulament, String echipament_necesar, String documente_necesare, String nr_min_particip, String nr_max_particip, String pret, String tip_moneda, String dificultate, HashMap<String, User> participanti, String pret_min, String pret_max, String detalii_pret, String status) {
         this.UID_organiztor = UID_organiztor;
         this.imagine_excursie = imagine_excursie;
         this.prenume = prenume;

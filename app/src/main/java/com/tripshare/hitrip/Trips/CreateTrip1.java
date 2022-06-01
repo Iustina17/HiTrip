@@ -40,11 +40,9 @@ import com.tripshare.hitrip.User;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Vector;
 import java.util.concurrent.TimeUnit;
 
 public class CreateTrip1 extends AppCompatActivity {
@@ -82,7 +80,7 @@ public class CreateTrip1 extends AppCompatActivity {
 
     Integer index_opriri = 0;
     String tematica;
-    ArrayList<Oprire> vect_opriri;
+    HashMap<String, Oprire> vect_opriri;
     HashMap<String, User> participanti;
 
     String natura1 = "", sport1 = "", relaxare1 = "", divertisment1 = "", gastronomie1 = "", muzica1 = "", arhitectura1 = "", industrie1 = "", istorie1 = "", etnografie1 = "", arta1 = "", literatura1 = "", altele1 = "";
@@ -329,7 +327,6 @@ public class CreateTrip1 extends AppCompatActivity {
                 String mtara = tara.getText().toString();
                 String moras = oras.getText().toString();
                 String mdescriere_plecare = descriere_plecare.getText().toString();
-                Integer nr_opriri = vect_opriri.size();
                 String mdescriere_excursie = descriere_excursie.getText().toString();
                 String mregulament = regulament.getText().toString();
                 String mechipament_necesar = echipament_necesar.getText().toString();
@@ -338,6 +335,30 @@ public class CreateTrip1 extends AppCompatActivity {
                 String mnr_max_particpip = nr_max_particpip.getText().toString();
                 String mtip_moneda = spinner3.getSelectedItem().toString();
                 String dificultate = spinner2.getSelectedItem().toString();
+                int childcount = layoutList.getChildCount();
+                vect_opriri = new HashMap<String, Oprire>();
+
+                for (int i=0; i < childcount; i++){
+                    View v = layoutList.getChildAt(i);
+
+                    EditText locatie = (EditText) v.findViewById(R.id.locatie_item);
+                    EditText descriere_oprire = (EditText) v.findViewById(R.id.descriere_item);
+                    EditText descriere_transport = (EditText) v.findViewById(R.id.descriere_transport);
+
+                    locatieV = locatie.getText().toString();
+                    descriere_oprireV = descriere_oprire.getText().toString();
+                    descriere_transportV = descriere_transport.getText().toString();
+                    Log.d("vect_opriri", locatieV);
+                    Log.d("vect_opriri", descriere_oprireV);
+                    Log.d("vect_opriri", descriere_transportV);
+
+                    Oprire oprire = new Oprire(index_opriri, locatieV, descriere_oprireV, descriere_transportV);
+                    vect_opriri.put(String.valueOf(i)+"_key", oprire);
+
+                    //        Log.d("Locatie1", oprire.index_opriri);
+                    //        Log.d("DOprire2", descriere_oprireV);
+                    //        Log.d("Dtransport3", descriere_transportV);
+                }
 
                 if (mtitlu.isEmpty()) {
                     titlu.setError("Stabiliţi titlul");
@@ -379,7 +400,7 @@ public class CreateTrip1 extends AppCompatActivity {
                     DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Calatorii");
                     Trip trip = new Trip(mUID_organiztor, mimagine_excursie, mprenume, mnume, mtitlu, mtematica,
                             mtip, mdata_inceput, mdata_final, mnr_zile, mtara,
-                            moras, mdescriere_plecare, nr_opriri, vect_opriri,
+                            moras, mdescriere_plecare, layoutList.getChildCount(), vect_opriri,
                             mdescriere_excursie, mregulament, mechipament_necesar,
                             mdocumente_necesare, mnr_min_particpip, mnr_max_particpip, mcost, mtip_moneda, dificultate, participanti, mpretMin, mpretMax, mDetalii_pret, status);
                     reference.push().setValue(trip);
@@ -552,26 +573,26 @@ public class CreateTrip1 extends AppCompatActivity {
         index_opriri++;
 
         layoutList.addView(stopView);
-
-        EditText locatie = (EditText) stopView.findViewById(R.id.locatie_item);
-        EditText descriere_oprire = (EditText) stopView.findViewById(R.id.descriere_item);
-        EditText descriere_transport = (EditText) stopView.findViewById(R.id.descriere_transport);
+//
+//        EditText locatie = (EditText) stopView.findViewById(R.id.locatie_item);
+//        EditText descriere_oprire = (EditText) stopView.findViewById(R.id.descriere_item);
+//        EditText descriere_transport = (EditText) stopView.findViewById(R.id.descriere_transport);
+//
+//        locatieV = locatie.getText().toString();
+//        descriere_oprireV = descriere_oprire.getText().toString();
+//        descriere_transportV = descriere_transport.getText().toString();
+//        Log.d("vect_opriri", locatieV);
+//        Log.d("vect_opriri", descriere_oprireV);
+//        Log.d("vect_opriri", descriere_transportV);
+//
+//        Oprire oprire = new Oprire(index_opriri, locatieV, descriere_oprireV, descriere_transportV);
+//        vect_opriri = new ArrayList<Oprire>();
+//        vect_opriri.add(oprire);
+//
+////        Log.d("Locatie1", oprire.index_opriri);
+////        Log.d("DOprire2", descriere_oprireV);
+////        Log.d("Dtransport3", descriere_transportV);
         ImageButton stopDelete = (ImageButton) stopView.findViewById(R.id.close_stop_button);
-
-        locatieV = locatie.getText().toString();
-        descriere_oprireV = descriere_oprire.getText().toString();
-        descriere_transportV = descriere_transport.getText().toString();
-        Log.d("vect_opriri", locatieV);
-        Log.d("vect_opriri", descriere_oprireV);
-        Log.d("vect_opriri", descriere_transportV);
-
-        Oprire oprire = new Oprire(index_opriri, locatieV, descriere_oprireV, descriere_transportV);
-        vect_opriri = new ArrayList<Oprire>();
-        vect_opriri.add(oprire);
-
-//        Log.d("Locatie1", oprire.index_opriri);
-//        Log.d("DOprire2", descriere_oprireV);
-//        Log.d("Dtransport3", descriere_transportV);
 
         stopDelete.setOnClickListener(new View.OnClickListener() {
             @Override

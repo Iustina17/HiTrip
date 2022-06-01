@@ -16,6 +16,5 @@ public class AdaugaImpresiePtOrganizatorActivity extends AppCompatActivity {
         data_start = getIntent().getStringExtra("data_inceput");
         data_fin = getIntent().getStringExtra("data_final");
 
-
     }
 }

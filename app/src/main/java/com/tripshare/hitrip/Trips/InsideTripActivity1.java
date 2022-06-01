@@ -43,6 +43,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.function.BiConsumer;
 
@@ -53,7 +54,7 @@ public class InsideTripActivity1 extends AppCompatActivity {
     TextView titlu_excursie, tematica, tip, data_inceput, data_final, data_inceput1, data_final1;
     TextView nr_zile, nr_zile2, tara, oras, tara1, oras1;
     TextView descriere_plecare, nr_opriri;
-    ArrayList<Oprire> vect_opriri;
+    HashMap<String, Oprire> vect_opriri;
     TextView descriere_excursie, regulament, echipament_necesar, documente_necesare;
     TextView nr_min_particip, nr_max_particip;
     TextView pret, tip_moneda;
@@ -165,16 +166,16 @@ public class InsideTripActivity1 extends AppCompatActivity {
                             });
                         }
 
-                        if(trip.status.equals("incheiata")){
+                        if (trip.status.equals("incheiata")) {
                             uid_posibil_participant = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-                            if(trip.UID_organiztor.equals(uid_posibil_participant)){
+                            if (trip.UID_organiztor.equals(uid_posibil_participant)) {
                                 Intent intent = new Intent(InsideTripActivity1.this, AdaugaImpresiePtParticipantiActivity.class);
                                 intent.putExtra("titlu", trip.titlu_excursie);
                                 intent.putExtra("data_inceput", trip.data_inceput);
                                 intent.putExtra("data_final", trip.data_final);
                                 startActivity((intent));
-                            }else if(uids.contains(uid_posibil_participant)){
+                            } else if (uids.contains(uid_posibil_participant)) {
                                 Intent intent = new Intent(InsideTripActivity1.this, AdaugaImpresiePtOrganizatorActivity.class);
                                 intent.putExtra("titlu", trip.titlu_excursie);
                                 intent.putExtra("data_inceput", trip.data_inceput);
@@ -376,10 +377,7 @@ public class InsideTripActivity1 extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 referenceTrips.child("participanti");
-
-
                 uid_posibil_participant = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
                 Query query = referenceUsers.orderByChild("UID").equalTo(uid_posibil_participant);
                 //Log.d("uid_organiztaor",uid_organizator);
                 query.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -394,8 +392,11 @@ public class InsideTripActivity1 extends AppCompatActivity {
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                     for (DataSnapshot child : dataSnapshot.getChildren()) {
                                         String key = child.getKey();
-                                        DatabaseReference referenceTripParticipanti = referenceTrips.child(key);
-                                        referenceTripParticipanti.child("participanti").push().setValue(participant);
+                                        Trip trip = child.getValue(Trip.class);
+                                        if (trip.data_final.equals(data_fin) && trip.data_inceput.equals(data_start)) {
+                                            DatabaseReference referenceTripParticipanti = referenceTrips.child(key);
+                                            referenceTripParticipanti.child("participanti").push().setValue(participant);
+                                        }
                                     }
                                 }
 
