@@ -56,7 +56,7 @@
                     android:textStyle="bold"></TextView>
 
                 <TextView
-                    android:id="@+id/descriere_transport"
+                    android:id="@+id/inside_descriere_transport"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
@@ -121,7 +121,7 @@
                         android:textStyle="bold"></TextView>
 
                     <TextView
-                        android:id="@+id/nr_oprire"
+                        android:id="@+id/inside_nr_oprire"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8dp"
@@ -160,7 +160,7 @@
                         android:textStyle="bold"></TextView>
 
                     <TextView
-                        android:id="@+id/locatie_item"
+                        android:id="@+id/inside_locatie_item"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8dp"
@@ -181,7 +181,7 @@
                     android:layout_marginBottom="8dp">
 
                     <TextView
-                        android:id="@+id/descriere_item"
+                        android:id="@+id/inside_descriere_item"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="top"

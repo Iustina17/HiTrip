@@ -352,7 +352,7 @@ public class CreateTrip1 extends AppCompatActivity {
                     Log.d("vect_opriri", descriere_oprireV);
                     Log.d("vect_opriri", descriere_transportV);
 
-                    Oprire oprire = new Oprire(index_opriri, locatieV, descriere_oprireV, descriere_transportV);
+                    Oprire oprire = new Oprire(i, locatieV, descriere_oprireV, descriere_transportV);
                     vect_opriri.put(String.valueOf(i)+"_key", oprire);
 
                     //        Log.d("Locatie1", oprire.index_opriri);
