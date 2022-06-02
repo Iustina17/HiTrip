@@ -1,16 +1,19 @@
-package com.tripshare.hitrip.Trips;
+package com.tripshare.hitrip.MyTrips;
 
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.SearchView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+
+import com.tripshare.hitrip.Trips.Trip;
+import com.tripshare.hitrip.User;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,23 +21,26 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
-public class FirebaseDatabaseHelperTrips {
+public class FirebaseDatabaseHelperMyTrips {
 
     private FirebaseDatabase database;
     private DatabaseReference referenceTrips;
     private List<Trip> trips = new ArrayList<>();
     private List<String> keys = new ArrayList<>();
-    String search;
+    String buton1, buton2;
 
     public interface DataStatus {
         void DataIsLoaded(List<Trip> trips, List<String> keys);
     }
 
-    FirebaseDatabaseHelperTrips(String search) {
+    FirebaseDatabaseHelperMyTrips(String buton1, String buton2) {
         this.database = FirebaseDatabase.getInstance();
         this.referenceTrips = database.getReference("Calatorii");
-        this.search = search;
+        this.buton1 = buton1;
+        this.buton2 = buton2;
+
     }
 
     void showTrips(final DataStatus dataStatus) {
@@ -42,9 +48,9 @@ public class FirebaseDatabaseHelperTrips {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 trips.clear();
+                keys.clear();
                 for (DataSnapshot keyNode : dataSnapshot.getChildren()) {
                     Trip trip = keyNode.getValue(Trip.class);
-
                     String sDate1 = trip.data_final;
                     Date date_fin = null;
                     try {
@@ -53,7 +59,6 @@ public class FirebaseDatabaseHelperTrips {
                         e.printStackTrace();
                     }
 
-
                     String sDate2 = trip.data_inceput;
                     Date date_incep = null;
                     try {
@@ -61,10 +66,7 @@ public class FirebaseDatabaseHelperTrips {
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
-
                     Date date_now = new Date();
-
-
                     if (date_fin.before(date_now)) {
                         trip.status = "incheiata";
                     } else if ((date_incep.before(date_now) || date_incep.equals(date_now)) && (date_fin.after(date_now) || date_fin.equals(date_now))) {
@@ -80,18 +82,26 @@ public class FirebaseDatabaseHelperTrips {
                     DatabaseReference referenceTripss = referenceTrips.child(keyNode.getKey());
                     referenceTripss.child("status").setValue(statusF);
                     // }
+                    String uid_user = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-                    if (trip.status.equals("viitoare"))
-                        if (search.equals("all")) {
-                            keys.add(keyNode.getKey());
-                            trips.add(trip);
-                        } else if (trip.titlu_excursie.toLowerCase(Locale.ROOT).contains(search) ||
-                                trip.prenume.toLowerCase(Locale.ROOT).contains(search) ||
-                                trip.nume.toLowerCase(Locale.ROOT).contains(search) ||
-                                trip.tip.toLowerCase(Locale.ROOT).contains(search)) {
+                    if (trip.status.equals(buton2)) {
+                        if (buton1.equals("organizare") && trip.UID_organiztor.equals(uid_user)) {
                             keys.add(keyNode.getKey());
                             trips.add(trip);
                         }
+
+                        if ((buton1.equals("participare") && !trip.UID_organiztor.equals(uid_user))) {
+                            if (trip.participanti != null) {
+                                for (Map.Entry<String, User> entry : trip.participanti.entrySet()) {
+                                    User user = entry.getValue();
+                                    if (user.UID.equals(uid_user)) {
+                                        keys.add(keyNode.getKey());
+                                        trips.add(trip);
+                                    }
+                                }
+                            }
+                        }
+                    }
 
                 }
                 dataStatus.DataIsLoaded(trips, keys);

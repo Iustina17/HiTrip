@@ -46,10 +46,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
+                    android:layout_gravity="center"
                     android:fontFamily="sans-serif"
+                    android:padding="8dp"
                     android:text="Transport"
                     android:textColor="@color/black"
                     android:textSize="20sp"
@@ -66,8 +65,9 @@
                     android:hint="Transport..."
                     android:inputType="textMultiLine"
                     android:maxLines="3"
-                    android:padding="8dp"
+                    android:paddingBottom="5dp"
                     android:scrollbars="vertical"
+                    android:textColor="@color/black"
                     android:textSize="16dp" />
             </LinearLayout>
         </LinearLayout>
@@ -163,12 +163,13 @@
                         android:id="@+id/inside_locatie_item"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="8dp"
+                        android:layout_marginLeft="5dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginRight="8dp"
                         android:layout_marginBottom="8dp"
                         android:fontFamily="sans-serif"
                         android:hint="Ţară, Oraş"
+                        android:textColor="@color/black"
                         android:paddingStart="8dp"
                         android:textSize="16dp"></TextView>
                 </LinearLayout>
@@ -188,7 +189,8 @@
                         android:hint="Descriere..."
                         android:inputType="textMultiLine"
                         android:maxLines="6"
-                        android:padding="8dp"
+                        android:paddingBottom="5dp"
+                        android:textColor="@color/black"
                         android:scrollbars="vertical"
                         android:textSize="16dp" />
                 </LinearLayout>

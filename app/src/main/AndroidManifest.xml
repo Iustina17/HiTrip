@@ -69,7 +69,7 @@
             android:name=".MessagesActivity"
             android:exported="false" />
         <activity
-            android:name=".MyTripsActivity"
+            android:name=".MyTrips.MyTripsActivity"
             android:exported="false" />
         <activity
             android:name=".TripsActivity"

@@ -28,7 +28,7 @@ import com.tripshare.hitrip.HelpActivity;
 import com.tripshare.hitrip.LoginActivity;
 import com.tripshare.hitrip.MessagesActivity;
 import com.tripshare.hitrip.MyProfileActivity;
-import com.tripshare.hitrip.MyTripsActivity;
+import com.tripshare.hitrip.MyTrips.MyTripsActivity;
 import com.tripshare.hitrip.R;
 import com.tripshare.hitrip.SugestiiActivity;
 import com.tripshare.hitrip.User;
@@ -207,7 +207,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void ClickMyTrips(View view) {
         //Redirect activity to feed
-        redirectActivity(this, MyTripsActivity.class);
+        Intent intent = new Intent(MainActivity.this, MyTripsActivity.class);
+        intent.putExtra("buton1", "organizare");
+        intent.putExtra("buton2", "prezente");
+        startActivity(intent);
     }
 
     public void ClickMessages(View view) {

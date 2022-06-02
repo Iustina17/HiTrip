@@ -322,7 +322,6 @@ public class InsideTripActivity1 extends AppCompatActivity {
                             trip.status = "viitoare";
                         }
 
-                        Log.d("status1", trip.status);
                         final String statusF = trip.status;
                         Query query = referenceTripss.orderByChild("UID_organiztor").equalTo(trip.UID_organiztor);
                         query.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -332,7 +331,6 @@ public class InsideTripActivity1 extends AppCompatActivity {
                                     Trip tripuita = child.getValue(Trip.class);
                                     String key = child.getKey();
                                     if (tripuita.data_inceput.equals(data_start) && tripuita.data_final.equals(data_fin)) {
-                                        Log.d("status2", statusF);
                                         referenceTripss = referenceTripss.child(key);
                                         referenceTripss.child("status").setValue(statusF);
                                     }
