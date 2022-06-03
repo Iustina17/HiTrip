@@ -1,6 +1,8 @@
 package com.tripshare.hitrip.MyTrips;
 
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
@@ -31,15 +33,18 @@ public class FirebaseDatabaseHelperMyTrips {
     private List<String> keys = new ArrayList<>();
     String buton1, buton2;
 
+    TextView text_nuExista_excursii;
+
     public interface DataStatus {
         void DataIsLoaded(List<Trip> trips, List<String> keys);
     }
 
-    FirebaseDatabaseHelperMyTrips(String buton1, String buton2) {
+    FirebaseDatabaseHelperMyTrips(String buton1, String buton2,    TextView text_nuExista_excursii) {
         this.database = FirebaseDatabase.getInstance();
         this.referenceTrips = database.getReference("Calatorii");
         this.buton1 = buton1;
         this.buton2 = buton2;
+        this.text_nuExista_excursii = text_nuExista_excursii;
 
     }
 
@@ -87,7 +92,11 @@ public class FirebaseDatabaseHelperMyTrips {
                     if (trip.status.equals(buton2)) {
                         if (buton1.equals("organizare") && trip.UID_organiztor.equals(uid_user)) {
                             keys.add(keyNode.getKey());
+                            if(trips!=null){
+                                text_nuExista_excursii.setVisibility(View.GONE);
+                            }
                             trips.add(trip);
+
                         }
 
                         if ((buton1.equals("participare") && !trip.UID_organiztor.equals(uid_user))) {
@@ -96,7 +105,11 @@ public class FirebaseDatabaseHelperMyTrips {
                                     User user = entry.getValue();
                                     if (user.UID.equals(uid_user)) {
                                         keys.add(keyNode.getKey());
+                                        if(trips!=null){
+                                            text_nuExista_excursii.setVisibility(View.GONE);
+                                        }
                                         trips.add(trip);
+
                                     }
                                 }
                             }

@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
         editText_search = findViewById(R.id.editText_search);
 
         cauta_lupa = findViewById(R.id.button_cauta_lupa);
+        cauta_lupa.setVisibility(View.VISIBLE);
         cauta_buton = findViewById(R.id.search_button);
         search_bar = findViewById(R.id.layout_searchbar);
         close_search_button = findViewById(R.id.close_search_button);
@@ -211,6 +212,7 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("buton1", "organizare");
         intent.putExtra("buton2", "prezente");
         startActivity(intent);
+        closeDrawer(drawerLayout);
     }
 
     public void ClickMessages(View view) {

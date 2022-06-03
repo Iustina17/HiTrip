@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:id="@+id/drawer_layout"
     tools:context=".MyTrips.MyTripsActivity">
 
     <LinearLayout
@@ -14,84 +13,124 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <Button
-                android:id="@+id/organizare"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/borders_button"
-                android:text="ORGANIZARE"
-                android:textSize="20dp">
-
-            </Button>
-
-            <Button
-                android:id="@+id/participare"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/borders_button"
-                android:text="PARTICIPARE"
-                android:textSize="20dp">
-
-            </Button>
+            <include layout="@layout/main_toolbar" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <Button
-                android:id="@+id/trecute"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@color/green6"
-                android:text="Trecute"
-                android:textSize="16dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
-            </Button>
+                <Button
+                    android:id="@+id/organizare"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/dell"
+                    android:text="ORGANIZARE"
+                    android:textSize="20dp">
 
-            <Button
-                android:id="@+id/prezente"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@color/green6"
-                android:text="Prezente"
-                android:textSize="16dp">
+                </Button>
 
-            </Button>
+                <Button
+                    android:id="@+id/participare"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/dell"
+                    android:text="PARTICIPARE"
+                    android:textSize="20dp">
 
-            <Button
-                android:id="@+id/viitoare"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@color/green6"
-                android:text="Viitoare"
-                android:textSize="16dp">
+                </Button>
 
-            </Button>
+            </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/trecute"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/green6"
+                    android:text="Trecute"
+                    android:textSize="16dp">
+
+                </Button>
+
+                <Button
+                    android:id="@+id/prezente"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/green6"
+                    android:text="Prezente"
+                    android:textSize="16dp">
+
+                </Button>
+
+                <Button
+                    android:id="@+id/viitoare"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/green6"
+                    android:text="Viitoare"
+                    android:textSize="16dp">
+
+                </Button>
+
+
+            </LinearLayout>
 
         </LinearLayout>
 
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/my_trips1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp" />
+
+                <TextView
+                    android:id="@+id/text_nuExista_excursii"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="32dp"
+                    android:textSize="16dp"></TextView>
+            </RelativeLayout>
+
+
+        </ScrollView>
     </LinearLayout>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@android:color/white">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/my_trips1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </ScrollView>
+        <include layout="@layout/main_nav_drawer" />
+    </RelativeLayout>
 
-</LinearLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

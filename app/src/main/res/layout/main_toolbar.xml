@@ -4,7 +4,8 @@
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
     android:orientation="vertical"
-    android:padding="12dp">
+    android:padding="12dp"
+    android:background="@color/purple_700">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,7 +24,7 @@
             android:layout_weight="1"
             android:text="HiTrip"
             android:textAlignment="center"
-            android:textColor="#636363"
+            android:textColor="@color/black"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -32,7 +33,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:src="@drawable/ic_search" />
+            android:src="@drawable/ic_search"
+            android:backgroundTint="@color/purple_700"
+            android:visibility="gone"/>
     </LinearLayout>
 
 </LinearLayout>
