@@ -9,8 +9,9 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.tripshare.hitrip.Impresii.Feedback;
+import com.tripshare.hitrip.User;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class FirebaseDatabaseHelperTrips {
 
@@ -25,6 +27,7 @@ public class FirebaseDatabaseHelperTrips {
     private DatabaseReference referenceTrips;
     private List<Trip> trips = new ArrayList<>();
     private List<String> keys = new ArrayList<>();
+    DatabaseReference referenceTripss;
     String search;
 
     public interface DataStatus {
@@ -65,8 +68,19 @@ public class FirebaseDatabaseHelperTrips {
                     Date date_now = new Date();
 
 
-                    if (date_fin.before(date_now)) {
+                    User user;
+                    if (date_fin.before(date_now) && trip.status.equals("desfasurare")) {
                         trip.status = "incheiata";
+                        if (trip.participanti != null && trip.impresii_date_de_organizator == null && trip.impresii_date_de_participanti == null) {
+                            for (Map.Entry<String, User> entry : trip.participanti.entrySet()) {
+                                referenceTripss = referenceTrips.child(keyNode.getKey());
+                                user = entry.getValue();
+                                Log.d("User prenume", "onDataChange: "+user.prenume);
+                                Feedback feedback = new Feedback(user.UID, "nu", user.nume, user.prenume, user.poza_profil);
+                                referenceTripss.child("impresii_date_de_organizator").push().setValue(feedback);
+                                referenceTripss.child("impresii_date_de_participanti").push().setValue(feedback);
+                            }
+                        }
                     } else if ((date_incep.before(date_now) || date_incep.equals(date_now)) && (date_fin.after(date_now) || date_fin.equals(date_now))) {
                         trip.status = "desfasurare";
                     } else if (date_incep.after(date_now)) {
@@ -75,9 +89,8 @@ public class FirebaseDatabaseHelperTrips {
 
                     final String statusF = trip.status;
 
-
                     //if (tripuita.data_inceput.equals(data_start) && tripuita.data_final.equals(data_fin)) {
-                    DatabaseReference referenceTripss = referenceTrips.child(keyNode.getKey());
+                    referenceTripss = referenceTrips.child(keyNode.getKey());
                     referenceTripss.child("status").setValue(statusF);
                     // }
 

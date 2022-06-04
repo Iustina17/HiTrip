@@ -115,6 +115,7 @@ class RecyclerViewConfigTrip {
             if (user.getUid().equals(trip.UID_organiztor)) {
                 imageButton_sterge_trip.setVisibility(View.VISIBLE);
             }
+
             functionareButoane(trip, imageButton_sterge_trip);
 
             if ((trip.pret_min.isEmpty() && trip.pret_max.isEmpty() && (!trip.pret.isEmpty()))) {

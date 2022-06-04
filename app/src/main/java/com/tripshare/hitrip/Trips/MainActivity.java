@@ -25,6 +25,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.tripshare.hitrip.HelpActivity;
+import com.tripshare.hitrip.Impresii.AdaugaImpresiePtOrganizatorActivity;
+import com.tripshare.hitrip.Impresii.AdaugaImpresiePtParticipantiActivity;
 import com.tripshare.hitrip.LoginActivity;
 import com.tripshare.hitrip.MessagesActivity;
 import com.tripshare.hitrip.MyProfileActivity;
@@ -207,7 +209,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void ClickMyTrips(View view) {
-        //Redirect activity to feed
         Intent intent = new Intent(MainActivity.this, MyTripsActivity.class);
         intent.putExtra("buton1", "organizare");
         intent.putExtra("buton2", "prezente");

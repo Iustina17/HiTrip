@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AdaugaImpresiePtParticipantiActivity">
+    tools:context=".Impresii.AdaugaImpresiePtParticipantiActivity">
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -24,6 +24,28 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+                <LinearLayout
+                    android:id="@+id/trip_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"></ImageView>
+
+                    <ImageButton
+                        android:id="@+id/buton_close"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignEnd="@+id/trip_layout"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginRight="16dp"
+                        android:background="@drawable/button_black_corners"
+                        android:visibility="visible"
+                        app:srcCompat="@drawable/ic_close" />
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -37,10 +59,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="64dp"
-                    android:layout_marginBottom="8dp"
                     android:layout_marginLeft="16dp"
+                    android:layout_marginTop="64dp"
                     android:layout_marginRight="16dp"
+                    android:layout_marginBottom="8dp"
                     android:background="@drawable/profile_layout_context_corners"
                     android:elevation="@dimen/cardview_default_radius"
                     android:orientation="vertical">
@@ -50,13 +72,39 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_margin="16dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginBottom="8dp"
                         android:text="Lasă o impresie celor care au participat în excursie "
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="16dp"
+                        android:textStyle="bold"></TextView>
+
+                    <TextView
+                        android:id="@+id/titlu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="8dp"
+                        android:text="titlu excursie"
                         android:textAlignment="center"
                         android:textColor="@color/black"
                         android:textSize="20dp"
                         android:textStyle="bold"></TextView>
 
+                    <TextView
+                        android:id="@+id/data"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="8dp"
+                        android:text="titlu excursie"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="14dp"
+                        android:textStyle="bold"></TextView>
                 </LinearLayout>
             </RelativeLayout>
 

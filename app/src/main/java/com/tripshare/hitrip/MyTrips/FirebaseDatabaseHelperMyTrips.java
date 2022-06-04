@@ -1,19 +1,16 @@
 package com.tripshare.hitrip.MyTrips;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import com.tripshare.hitrip.Trips.Trip;
 import com.tripshare.hitrip.User;
 
@@ -22,7 +19,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 public class FirebaseDatabaseHelperMyTrips {
@@ -88,8 +84,15 @@ public class FirebaseDatabaseHelperMyTrips {
                     referenceTripss.child("status").setValue(statusF);
                     // }
                     String uid_user = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                    String status="";
+                    if(buton2.equals("trecute"))
+                        status = "incheiata";
+                    else if(buton2.equals("prezente"))
+                        status = "desfasurare";
+                    else if(buton2.equals("viitoare"))
+                        status = "viitoare";
 
-                    if (trip.status.equals(buton2)) {
+                    if (trip.status.equals(status)) {
                         if (buton1.equals("organizare") && trip.UID_organiztor.equals(uid_user)) {
                             keys.add(keyNode.getKey());
                             if(trips!=null){

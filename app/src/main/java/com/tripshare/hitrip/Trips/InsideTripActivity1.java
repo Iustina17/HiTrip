@@ -1,16 +1,8 @@
 package com.tripshare.hitrip.Trips;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +12,13 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,20 +29,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.tripshare.hitrip.AdaugaImpresiePtOrganizatorActivity;
-import com.tripshare.hitrip.AdaugaImpresiePtParticipantiActivity;
-import com.tripshare.hitrip.LoginActivity;
 import com.tripshare.hitrip.ProfileActivity;
 import com.tripshare.hitrip.R;
-import com.tripshare.hitrip.Trips.Oprire;
-import com.tripshare.hitrip.Trips.Trip;
 import com.tripshare.hitrip.User;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
@@ -55,7 +48,6 @@ public class InsideTripActivity1 extends AppCompatActivity {
     TextView titlu_excursie, tematica, tip, data_inceput, data_final, data_inceput1, data_final1;
     TextView nr_zile, nr_zile2, tara, oras, tara1, oras1;
     TextView descriere_plecare, nr_opriri;
-    HashMap<String, Oprire> vect_opriri;
     TextView descriere_excursie, regulament, echipament_necesar, documente_necesare;
     TextView nr_min_particip, nr_max_particip;
     TextView pret, tip_moneda;
@@ -174,23 +166,23 @@ public class InsideTripActivity1 extends AppCompatActivity {
                             });
                         }
 
-                        if (trip.status.equals("incheiata")) {
-                            uid_posibil_participant = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-                            if (trip.UID_organiztor.equals(uid_posibil_participant)) {
-                                Intent intent = new Intent(InsideTripActivity1.this, AdaugaImpresiePtParticipantiActivity.class);
-                                intent.putExtra("titlu", trip.titlu_excursie);
-                                intent.putExtra("data_inceput", trip.data_inceput);
-                                intent.putExtra("data_final", trip.data_final);
-                                startActivity((intent));
-                            } else if (uids.contains(uid_posibil_participant)) {
-                                Intent intent = new Intent(InsideTripActivity1.this, AdaugaImpresiePtOrganizatorActivity.class);
-                                intent.putExtra("titlu", trip.titlu_excursie);
-                                intent.putExtra("data_inceput", trip.data_inceput);
-                                intent.putExtra("data_final", trip.data_final);
-                                startActivity((intent));
-                            }
-                        }
+//                        if (trip.status.equals("incheiata")) {
+//                            uid_posibil_participant = FirebaseAuth.getInstance().getCurrentUser().getUid();
+//
+//                            if (trip.UID_organiztor.equals(uid_posibil_participant)) {
+//                                Intent intent = new Intent(InsideTripActivity1.this, AdaugaImpresiePtParticipantiActivity.class);
+//                                intent.putExtra("titlu", trip.titlu_excursie);
+//                                intent.putExtra("data_inceput", trip.data_inceput);
+//                                intent.putExtra("data_final", trip.data_final);
+//                                startActivity((intent));
+//                            } else if (uids.contains(uid_posibil_participant)) {
+//                                Intent intent = new Intent(InsideTripActivity1.this, AdaugaImpresiePtOrganizatorActivity.class);
+//                                intent.putExtra("titlu", trip.titlu_excursie);
+//                                intent.putExtra("data_inceput", trip.data_inceput);
+//                                intent.putExtra("data_final", trip.data_final);
+//                                startActivity((intent));
+//                            }
+//                        }
 
                         //imagine_excursie.setAdjustViewBounds(trip.imagine_excursie);
                         nume.setText(trip.nume);
@@ -225,7 +217,7 @@ public class InsideTripActivity1 extends AppCompatActivity {
                         pret_max1.setText(trip.pret_max);
                         detalii_pret1.setText(trip.detalii_pret);
 
-                        if(trip.vect_opriri!=null) {
+                        if (trip.vect_opriri != null) {
                             for (Map.Entry<String, Oprire> entry : trip.vect_opriri.entrySet()) {
                                 View stopView = getLayoutInflater().inflate(R.layout.inside_trip_row_add_stop, null, false);
                                 inside_layout_list.addView(stopView);
@@ -244,14 +236,14 @@ public class InsideTripActivity1 extends AppCompatActivity {
                                 inside_descriere_transport.setText(oprire.descriere_transport);
                                 inside_locatie_item.setText(oprire.locatie_oprire);
                             }
-                        }else{
+                        } else {
                             Log.d("Nu exista opriri", "yes: ");
                         }
 
-                        if(trip.participanti!=null) {
-                            int l_ramase = Integer.parseInt(trip.nr_max_particip) - trip.participanti.size();
-                            locuri_ramase.setText(String.valueOf(l_ramase)); //TODO
-                        }else{
+                        if (trip.participanti != null) {
+                            loc_ramase = Integer.parseInt(trip.nr_max_particip) - trip.participanti.size();
+                            locuri_ramase.setText(String.valueOf(loc_ramase)); //TODO
+                        } else {
                             locuri_ramase.setText(trip.nr_max_particip);
                         }
 
@@ -403,51 +395,57 @@ public class InsideTripActivity1 extends AppCompatActivity {
             }
         });
 
+
         button_alaturare_la_excursie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                referenceTrips.child("participanti");
-                uid_posibil_participant = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                Query query = referenceUsers.orderByChild("UID").equalTo(uid_posibil_participant);
-                //Log.d("uid_organiztaor",uid_organizator);
-                query.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        for (DataSnapshot child : dataSnapshot.getChildren()) {
-                            User user = child.getValue(User.class);
-                            User participant = new User(user.UID, user.prenume, user.poza_profil);
-                            Query query = referenceTrips.orderByChild("UID_organiztor").equalTo(uid_organizator);
-                            query.addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                    for (DataSnapshot child : dataSnapshot.getChildren()) {
-                                        String key = child.getKey();
-                                        Trip trip = child.getValue(Trip.class);
-                                        if (trip.data_final.equals(data_fin) && trip.data_inceput.equals(data_start)) {
-                                            DatabaseReference referenceTripParticipanti = referenceTrips.child(key);
-                                            referenceTripParticipanti.child("participanti").push().setValue(participant);
+//                if (loc_ramase == 0) {
+//                    Toast.makeText(getApplicationContext(), "This is a message displayed in a Toast", Toast.LENGTH_LONG).show();
+//                } else {
+                    referenceTrips.child("participanti");
+                    uid_posibil_participant = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                    Query query = referenceUsers.orderByChild("UID").equalTo(uid_posibil_participant);
+                    //Log.d("uid_organiztaor",uid_organizator);
+                    query.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            for (DataSnapshot child : dataSnapshot.getChildren()) {
+                                User user = child.getValue(User.class);
+                                User participant = new User(user.UID, user.prenume, user.poza_profil);
+                                Query query = referenceTrips.orderByChild("UID_organiztor").equalTo(uid_organizator);
+                                query.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        for (DataSnapshot child : dataSnapshot.getChildren()) {
+                                            String key = child.getKey();
+                                            Trip trip = child.getValue(Trip.class);
+                                            if (trip.data_final.equals(data_fin) && trip.data_inceput.equals(data_start)) {
+                                                DatabaseReference referenceTripParticipanti = referenceTrips.child(key);
+                                                referenceTripParticipanti.child("participanti").push().setValue(participant);
+                                            }
                                         }
                                     }
-                                }
 
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError databaseError) {
-                                }
-                            });
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                                    }
+                                });
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                    }
-                });
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                        }
+                    });
 
-
-            }
+                }
+  //          }
         });
+
 
         //this.key = key;
         functionareButoane(imageButton_sterge_trip1);
+
     }
 
 

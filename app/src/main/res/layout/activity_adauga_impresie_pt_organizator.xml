@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AdaugaImpresiePtOrganizatorActivity">
+    tools:context=".Impresii.AdaugaImpresiePtOrganizatorActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -60,9 +60,31 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/titlu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="8dp"
+                    android:text="titlu excursie"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="20dp"
+                    android:textStyle="bold"></TextView>
 
+                <TextView
+                    android:id="@+id/data"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="8dp"
+                    android:text="data excursie"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="14dp"
+                    android:textStyle="bold"></TextView>
                 <RatingBar
-                    android:id="@+id/adauga_impresie_rating"
+                    android:id="@+id/adauga_impresie_rating_organizator"
                     android:layout_width="238dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
@@ -70,7 +92,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/adauga_impresie_label" />
-
+<!--
                 <EditText
                     android:id="@+id/adauga_impresie_titlu"
                     android:layout_width="match_parent"
@@ -87,7 +109,7 @@
                     app:layout_constraintEnd_toStartOf="@+id/adauga_impresie_rating"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/adauga_impresie_rating" />
-
+-->
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -99,6 +121,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="8dp"
+                        android:layout_marginTop="16dp"
                         android:layout_marginRight="8dp"
                         android:background="@drawable/edit_text_rectangle"
                         android:gravity="top"

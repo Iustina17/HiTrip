@@ -59,7 +59,7 @@ public class CreateTrip1 extends AppCompatActivity {
     Button buttonAdd;
 
     String UID_organiztor;
-    static String prenume, nume;
+    static String prenume, nume, poza;
     EditText titlu;
     CheckBox natura, sport, relaxare, divertisment, gastronomie, muzica, arhitectura, industrie, istorie, etnografie, arta, literatura, altele;
     EditText altele_text;
@@ -175,6 +175,7 @@ public class CreateTrip1 extends AppCompatActivity {
                     User userCurent = data.getValue(User.class);
                     nume = userCurent.nume;
                     prenume = userCurent.prenume;
+                    poza = userCurent.poza_profil;
                 }
             }
 
@@ -402,7 +403,7 @@ public class CreateTrip1 extends AppCompatActivity {
                             mtip, mdata_inceput, mdata_final, mnr_zile, mtara,
                             moras, mdescriere_plecare, layoutList.getChildCount(), vect_opriri,
                             mdescriere_excursie, mregulament, mechipament_necesar,
-                            mdocumente_necesare, mnr_min_particpip, mnr_max_particpip, mcost, mtip_moneda, dificultate, participanti, mpretMin, mpretMax, mDetalii_pret, status);
+                            mdocumente_necesare, mnr_min_particpip, mnr_max_particpip, mcost, mtip_moneda, dificultate, participanti, mpretMin, mpretMax, mDetalii_pret, status,null,null,poza);
                     reference.push().setValue(trip);
                     redirectActivity(CreateTrip1.this, MainActivity.class);
                 }
