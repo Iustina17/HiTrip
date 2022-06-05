@@ -56,7 +56,6 @@ public class FirebaseDatabaseHelperTrips {
                         e.printStackTrace();
                     }
 
-
                     String sDate2 = trip.data_inceput;
                     Date date_incep = null;
                     try {
@@ -67,7 +66,6 @@ public class FirebaseDatabaseHelperTrips {
 
                     Date date_now = new Date();
 
-
                     User user;
                     if (date_fin.before(date_now) && trip.status.equals("desfasurare")) {
                         trip.status = "incheiata";
@@ -75,7 +73,6 @@ public class FirebaseDatabaseHelperTrips {
                             for (Map.Entry<String, User> entry : trip.participanti.entrySet()) {
                                 referenceTripss = referenceTrips.child(keyNode.getKey());
                                 user = entry.getValue();
-                                Log.d("User prenume", "onDataChange: "+user.prenume);
                                 Feedback feedback = new Feedback(user.UID, "nu", user.nume, user.prenume, user.poza_profil);
                                 referenceTripss.child("impresii_date_de_organizator").push().setValue(feedback);
                                 referenceTripss.child("impresii_date_de_participanti").push().setValue(feedback);

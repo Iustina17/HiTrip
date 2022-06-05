@@ -4,21 +4,13 @@ import android.os.Bundle;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.tripshare.hitrip.R;
 import com.tripshare.hitrip.Trips.Trip;
 
 import java.util.List;
-import java.util.Map;
 
 public class AdaugaImpresiePtParticipantiActivity extends AppCompatActivity {
 
@@ -50,7 +42,7 @@ public class AdaugaImpresiePtParticipantiActivity extends AppCompatActivity {
 
             @Override
             public void DataIsLoaded(List<Feedback> feedbackList, List<String> keys, Trip trip) {
-                new RecyclerViewConfigImpresiiPtParticipanti().setconfig(recyclerView_impresie_pt_participanti, AdaugaImpresiePtParticipantiActivity.this, feedbackList, keys, trip);
+                new RecyclerViewConfigAdaugaImpresiePtParticipanti().setconfig(recyclerView_impresie_pt_participanti, AdaugaImpresiePtParticipantiActivity.this, feedbackList, keys, trip);
             }
         });
 

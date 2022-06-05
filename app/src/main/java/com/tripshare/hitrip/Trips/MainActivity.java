@@ -1,11 +1,5 @@
 package com.tripshare.hitrip.Trips;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -18,6 +12,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,8 +25,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.tripshare.hitrip.HelpActivity;
-import com.tripshare.hitrip.Impresii.AdaugaImpresiePtOrganizatorActivity;
-import com.tripshare.hitrip.Impresii.AdaugaImpresiePtParticipantiActivity;
 import com.tripshare.hitrip.LoginActivity;
 import com.tripshare.hitrip.MessagesActivity;
 import com.tripshare.hitrip.MyProfileActivity;

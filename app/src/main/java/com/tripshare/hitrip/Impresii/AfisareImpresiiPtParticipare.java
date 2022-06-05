@@ -1,36 +1,30 @@
 package com.tripshare.hitrip.Impresii;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.tripshare.hitrip.EditPersonalInfoActivity;
-import com.tripshare.hitrip.MyTrips.FirebaseDatabaseHelperMyTrips;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.tripshare.hitrip.R;
-import com.tripshare.hitrip.Trips.Trip;
 
-import java.util.List;
-
-public class AfisareImpresii extends AppCompatActivity {
+public class AfisareImpresiiPtParticipare extends AppCompatActivity {
 
     TextView titlu, data;
-    RecyclerView recyclerView_impresii;
-    ImageButton button_close;
     EditText text_impresie;
     RatingBar adauga_impresie_rating;
+
+    RecyclerView recyclerView_impresii;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pag_impresii);
         titlu = findViewById(R.id.titlu);
-        button_close = findViewById(R.id.buton_close);
         data = findViewById(R.id.data);
         text_impresie = findViewById(R.id.text_impresie);
         adauga_impresie_rating = findViewById(R.id.adauga_impresie_rating);
@@ -41,8 +35,6 @@ public class AfisareImpresii extends AppCompatActivity {
         titlu = getIntent().getStringExtra("titlu");
         data_start = getIntent().getStringExtra("data_inceput");
         data_fin = getIntent().getStringExtra("data_final");
-
-        button_close.bringToFront();
 
 //        new FirebaseDatabaseHelperImpresiiPtParticipanti(titlu, data_start, data_fin).showTrips(new FirebaseDatabaseHelperImpresiiPtParticipanti.DataStatus() {
 //

@@ -13,6 +13,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -153,15 +154,15 @@ public class MyTripsActivity extends AppCompatActivity {
     }
 
     private void verificare_feedback(String buton1) {
-        String uid_utilizator_curent = FirebaseAuth.getInstance().getCurrentUser().getUid();
         if (buton1.equals("organizare")) {
+            String uid_utilizator_curent = FirebaseAuth.getInstance().getCurrentUser().getUid();
             referenceTrip.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     for (DataSnapshot keyNode : dataSnapshot.getChildren()) {
                         Trip trip = keyNode.getValue(Trip.class);
                         if (trip.UID_organiztor.equals(uid_utilizator_curent)) {
-                            if (trip.status.equals("incheiata")) {
+                            if (trip.status.equals("incheiata") && trip.impresii_date_de_organizator != null) {
                                 for (Map.Entry<String, Feedback> entry : trip.impresii_date_de_organizator.entrySet()) {
                                     Feedback feedback = entry.getValue();
                                     if (feedback.stare_feedback.equals("nu")) {
@@ -185,49 +186,58 @@ public class MyTripsActivity extends AppCompatActivity {
                 }
             });
         }
-//        if (buton1.equals("participare")) {
-//            referenceTrip.addValueEventListener(new ValueEventListener() {
-//                @Override
-//                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                    for (DataSnapshot keyNode : dataSnapshot.getChildren()) {
-//                        Trip trip = keyNode.getValue(Trip.class);
-//                        List<String> uids = new ArrayList<>();
-//                        if (trip.participanti != null) {
-//                            trip.participanti.forEach(new BiConsumer<String, User>() {
-//                                @Override
-//                                public void accept(String s, User user) {
-//                                    uids.add(user.UID);
-//                                }
-//                            });
-//                        }
-//                        if (trip.UID_organiztor.equals(uid_utilizator_curent)) {
-//                            if (trip.status.equals("incheiata")) {
-//                                uid_posibil_participant = FirebaseAuth.getInstance().getCurrentUser().getUid();
-//                                if (trip.UID_organiztor.equals(uid_posibil_participant)) {
-//                                    Intent intent = new Intent(MyTripsActivity.this, AdaugaImpresiePtParticipantiActivity.class);
-//                                    intent.putExtra("titlu", trip.titlu_excursie);
-//                                    intent.putExtra("data_inceput", trip.data_inceput);
-//                                    intent.putExtra("data_final", trip.data_final);
-//                                    startActivity((intent));
-//                                } else if (uids.contains(uid_posibil_participant)) {
-//                                    Intent intent = new Intent(MyTripsActivity.this, AdaugaImpresiePtOrganizatorActivity.class);
-//                                    intent.putExtra("titlu", trip.titlu_excursie);
-//                                    intent.putExtra("data_inceput", trip.data_inceput);
-//                                    intent.putExtra("data_final", trip.data_final);
-//                                    startActivity((intent));
-//                                }
-//                            }
-//                        } else if(uids.contains(uid_utilizator_curent)) {
-//                        }
-//                    }
-//                }
-//
-//                @Override
-//                public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//                }
-//            });
-//        }
+        if (buton1.equals("participare")) {
+            Log.d("Feedback", "verificare_feedback:am ajuns aici");
+            referenceTrip.addValueEventListener(new ValueEventListener() {
+                @RequiresApi(api = Build.VERSION_CODES.N)
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    Log.d("Feedback", "verificare_feedback:am ajuns aici - 2");
+
+                    for (DataSnapshot keyNode : dataSnapshot.getChildren()) {
+                        Trip trip = keyNode.getValue(Trip.class);
+                        if (trip.status.equals("incheiata")) {
+                            Log.d("Feedback", "verificare_feedback:am ajuns aici - 3");
+
+                            List<String> uids = new ArrayList<>();
+                            if (trip.participanti != null) {
+                                trip.participanti.forEach(new BiConsumer<String, User>() {
+                                    @Override
+                                    public void accept(String s, User user) {
+                                        uids.add(user.UID);
+                                    }
+                                });
+                            }
+                            Log.d("Feedback", "verificare_feedback:am ajuns aici - 4");
+
+                            String uid_utilizator_curent = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                            if (uids.contains(uid_utilizator_curent)) {
+                                Log.d("Feedback", "verificare_feedback:am ajuns aici - 5");
+
+
+                                for (Map.Entry<String, Feedback> entry : trip.impresii_date_de_participanti.entrySet()) {
+                                    Feedback feedback = entry.getValue();
+                                    if (feedback.uid_participant.equals(uid_utilizator_curent) && feedback.stare_feedback.equals("nu")) {
+                                        Log.d("Feedback", "verificare_feedback:am ajuns aici - 6");
+
+                                        Intent intent = new Intent(MyTripsActivity.this, AdaugaImpresiePtOrganizatorActivity.class);
+                                        intent.putExtra("titlu", trip.titlu_excursie);
+                                        intent.putExtra("data_inceput", trip.data_inceput);
+                                        intent.putExtra("data_final", trip.data_final);
+                                        startActivity((intent));
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
 
 
     }

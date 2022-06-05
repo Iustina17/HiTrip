@@ -29,14 +29,17 @@
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/profile_layout_context_corners"
                     android:layout_weight="1"></ImageView>
 
-                <ImageView
+                <ImageButton
+                    android:id="@+id/buton_cancel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    android:background="@drawable/profile_layout_context_corners"
                     android:layout_marginRight="8dp"
-                    android:src="@drawable/ic_close"></ImageView>
+                    android:src="@drawable/ic_close"></ImageButton>
             </LinearLayout>
 
             <LinearLayout
@@ -61,7 +64,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
                 <TextView
-                    android:id="@+id/titlu"
+                    android:id="@+id/titlu_exc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

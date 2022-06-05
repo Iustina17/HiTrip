@@ -23,11 +23,14 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.tripshare.hitrip.R;
 import com.tripshare.hitrip.Trips.Trip;
+import com.tripshare.hitrip.User;
 
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-class RecyclerViewConfigImpresiiPtParticipanti {
+class RecyclerViewConfigAdaugaImpresiePtParticipanti {
     private Context mContext;
     private FeedbackAdaptor adaptorFeedback;
     private Trip trip;
@@ -75,27 +78,54 @@ class RecyclerViewConfigImpresiiPtParticipanti {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             for (DataSnapshot child : dataSnapshot.getChildren()) {
+                                User participant = child.getValue(User.class);
+
                                 String key = child.getKey();
                                 Impresie impresie = new Impresie(trip.nume, trip.prenume, trip.UID_organiztor, trip.titlu_excursie,
                                         Calendar.getInstance().getTime().toString(), ratingBar.getRating(), trip.poza, editText.getText().toString());
                                 referenceUsers.child(key).child("impresie_participare_user").push().setValue(impresie);
 
+                                referenceUsers.child(key).child("nr_impresii_organizator").setValue(participant.nr_impresii_organizator+1);
+                                Float rating_actualizat = ((participant.rating_organizator * participant.nr_impresii_organizator) +  ratingBar.getRating() )/(participant.nr_impresii_organizator + 1);
+                                referenceUsers.child(key).child("rating_organizator").setValue(rating_actualizat);
+
+
                                 DatabaseReference referenceTrip = FirebaseDatabase.getInstance().getReference().child("Calatorii");
-                                Query query = referenceTrip.orderByChild("UID_organizator").equalTo(trip.UID_organiztor);
+
+                                Query query = referenceTrip.orderByChild("UID_organiztor").equalTo(trip.UID_organiztor);
                                 query.addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                         for (DataSnapshot child : dataSnapshot.getChildren()) {
                                             String key = child.getKey();
                                             Trip trip_nou = child.getValue(Trip.class);
+
                                             if (trip_nou.titlu_excursie.equals(trip.titlu_excursie) && trip.data_inceput.equals(trip_nou.data_inceput) && trip.data_final.equals(trip_nou.data_final)) {
-                                                Query query2 = referenceTrip.child(key).child("impresie_participare_user").orderByChild(feedback.uid_participant);
+                                                DatabaseReference referenceFeedback = referenceTrip.child(key).child("impresii_date_de_organizator");
+                                                Query query2 = referenceFeedback.orderByChild("uid_participant").equalTo(feedback.uid_participant);
                                                 query2.addListenerForSingleValueEvent(new ValueEventListener() {
                                                     @Override
                                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                                                         for (DataSnapshot child : dataSnapshot.getChildren()) {
-                                                            String key2 = child.getKey();
-                                                            referenceTrip.child(key).child("impresie_participare_user").child(key2).child("stare_feedback").setValue("da");
+                                                            Trip trip = child.getValue(Trip.class);
+                                                            referenceTrip.child(key).child("impresii_date_de_organizator").removeValue();
+                                                            HashMap<String, Feedback> hashMapFeedbacks;
+                                                            if (trip.impresii_date_de_organizator != null) {
+                                                                hashMapFeedbacks = trip.impresii_date_de_organizator;
+                                                                if (hashMapFeedbacks != null)
+                                                                    for (Map.Entry<String, Feedback> entry : hashMapFeedbacks.entrySet()) {
+                                                                        Feedback feedback1 = entry.getValue();
+                                                                        if (feedback1.uid_participant.equals(feedback.uid_participant)) {
+                                                                            hashMapFeedbacks.entrySet().remove(entry);
+                                                                            Feedback feedback2 = new Feedback(feedback.uid_participant, "da", feedback.nume, feedback.prenume, feedback.poza);
+                                                                            hashMapFeedbacks.put(feedback.uid_participant, feedback2);
+                                                                            for (Map.Entry<String, Feedback> entry_push : hashMapFeedbacks.entrySet()) {
+                                                                                referenceTrip.child(key).child("impresii_date_de_organizator").push().setValue(entry_push.getValue());
+                                                                            }
+                                                                        }
+                                                                    }
+
+                                                            }
                                                         }
                                                     }
 
