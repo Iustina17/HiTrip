@@ -6,6 +6,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,67 +14,77 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tripshare.hitrip.R;
-import com.tripshare.hitrip.User;
 
 import java.util.List;
 
 class RecyclerViewConfigAfisareImpresii {
     private Context mContext;
-    private ParticipantAdaptor adaptorParticipant;
+    private ImpresieAdaptor adaptorImpresie;
     
-    void setconfig(RecyclerView recyclerView, Context context, List<Impresie> participantList, List<String> keys) {
+    void setconfig(RecyclerView recyclerView, Context context, List<Impresie> impresiiList, List<String> keys) {
         mContext = context;
-        adaptorParticipant = new ParticipantAdaptor(participantList, keys);
-        recyclerView.setAdapter(adaptorParticipant);
+        adaptorImpresie = new ImpresieAdaptor(impresiiList, keys);
+        recyclerView.setAdapter(adaptorImpresie);
     }
 
-    class ParticipantItemView extends RecyclerView.ViewHolder {
-        private TextView prenume_particip;
+    class ImpresieItemView extends RecyclerView.ViewHolder {
+        TextView prenume_pers_care_a_dat_feedback, nume_pers_care_a_dat_feedback;
+        TextView titlu_excursie;
+        TextView data_adaugare_impresie;
         ImageView poza;
+        RatingBar impresie_rating;
+        TextView text_impresie;
         String poza_string;
-        CardView card_view_participant;
-//        private TextView mtitlu, mdata, mautor, madresare, mcontinut;
-//        private ImageButton mediteaza, msterge;
-//        String key;
 
-        ParticipantItemView(@NonNull final ViewGroup parent) {
+
+        ImpresieItemView(@NonNull final ViewGroup parent) {
             super(LayoutInflater.from(mContext).
                     inflate(R.layout.item_profile_inside_trip, parent, false));
 
-            prenume_particip = itemView.findViewById(R.id.prenume_particip);
+            prenume_pers_care_a_dat_feedback = itemView.findViewById(R.id.prenume_pers_care_a_dat_feedback);
+            nume_pers_care_a_dat_feedback = itemView.findViewById(R.id.nume_pers_care_a_dat_feedback);
+            titlu_excursie = itemView.findViewById(R.id.titlu_excursie);
+            data_adaugare_impresie = itemView.findViewById(R.id.data_adaugare_impresie);
+            impresie_rating = itemView.findViewById(R.id.impresie_rating);
+            text_impresie = itemView.findViewById(R.id.text_impresie);
             poza = itemView.findViewById(R.id.poza_profil_item);
         }
 
         @SuppressLint("SetTextI18n")
-        void bind(User user, Integer key) {
-            prenume_particip.setText(user.prenume);
-            // poza.setText(user.poza_profil); TODO
+        void bind(Impresie impresie, String key) {
+            prenume_pers_care_a_dat_feedback.setText(impresie.prenume);
+            nume_pers_care_a_dat_feedback.setText(impresie.nume);
+            titlu_excursie.setText(impresie.titlu_excursie);
+            data_adaugare_impresie.setText(impresie.data);
+            impresie_rating.setRating(impresie.nota);
+            text_impresie.setText(impresie.continut);
+            poza_string = impresie.imagineAutor;
         }
     }
 
-    class ParticipantAdaptor extends RecyclerView.Adapter<ParticipantItemView> {
-        private List<User> participantLista;
-        private List<Integer> keys;
+    class ImpresieAdaptor extends RecyclerView.Adapter<ImpresieItemView> {
+        private List<Impresie> impresieLista;
+        private List<String> keys;
 
-        ParticipantAdaptor(List<User> participantLista, List<Integer> keys) {
-            this.participantLista = participantLista;
+        ImpresieAdaptor(List<Impresie> impresieLista, List<String> keys) {
+            this.impresieLista = impresieLista;
             this.keys = keys;
         }
 
         @NonNull
         @Override
-        public ParticipantItemView onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            return new ParticipantItemView(parent);
+        public ImpresieItemView onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            return new ImpresieItemView(parent);
         }
 
         @Override
-        public void onBindViewHolder(@NonNull ParticipantItemView holder, int position) {
-            holder.bind(participantLista.get(position), keys.get(position));
+        public void onBindViewHolder(@NonNull ImpresieItemView holder, int position) {
+            holder.bind(impresieLista.get(position), keys.get(position));
         }
 
         @Override
         public int getItemCount() {
-            return participantLista.size();
+            return impresieLista.size();
         }
     }
 }

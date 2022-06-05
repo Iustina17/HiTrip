@@ -195,6 +195,7 @@
                             </LinearLayout>
 
                             <Button
+                                android:id="@+id/vezi_impresii_organizator_buton"
                                 android:layout_width="100dp"
                                 android:layout_height="30dp"
                                 android:layout_gravity="center"
@@ -295,6 +296,7 @@
                             </LinearLayout>
 
                             <Button
+                                android:id="@+id/vezi_impresii_participant_buton"
                                 android:layout_width="100dp"
                                 android:layout_height="30dp"
                                 android:layout_gravity="center"

@@ -7,7 +7,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -16,6 +18,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.tripshare.hitrip.Impresii.AfisareImpresiiPtOrganizator;
+import com.tripshare.hitrip.Impresii.AfisareImpresiiPtParticipare;
 
 public class MyProfileActivity extends AppCompatActivity {
 
@@ -27,6 +31,10 @@ public class MyProfileActivity extends AppCompatActivity {
     LinearLayout nr_tel_verificat_my;
     LinearLayout nu_exista_info_verificate_my;
     Integer nr_mobil_verificatS_my; ///daca e sau nu verificat
+    RatingBar ratingOrganizatorBar;
+    RatingBar ratingParticipantBar;
+    Button vezi_impresii_organizator_buton;
+    Button vezi_impresii_participant_buton;
 
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference referenceUsers = database.getReference("Utilizatori");
@@ -49,6 +57,8 @@ public class MyProfileActivity extends AppCompatActivity {
         limbi_vorbite_my = findViewById(R.id.limbi_vorbite_my);
         nr_tel_verificat_my = findViewById(R.id.nr_tel_verificat_my);
         nu_exista_info_verificate_my = findViewById(R.id.nu_exista_info_verificate_my);
+        vezi_impresii_organizator_buton = findViewById(R.id.vezi_impresii_organizator_buton);
+        vezi_impresii_participant_buton = findViewById(R.id.vezi_impresii_participant_buton);
 
         referenceUsers.addValueEventListener(new ValueEventListener() {
             @Override
@@ -82,6 +92,23 @@ public class MyProfileActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+
+        vezi_impresii_organizator_buton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MyProfileActivity.this, AfisareImpresiiPtOrganizator.class);
+                startActivity(intent);
+
+            }
+        });
+
+        vezi_impresii_participant_buton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MyProfileActivity.this, AfisareImpresiiPtParticipare.class);
+                startActivity(intent);
             }
         });
     }

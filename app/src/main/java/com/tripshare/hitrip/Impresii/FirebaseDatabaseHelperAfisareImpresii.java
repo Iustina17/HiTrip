@@ -32,7 +32,7 @@ public class FirebaseDatabaseHelperAfisareImpresii {
 
 
     public interface DataStatus {
-        void DataIsLoaded(List<Impresie> impresii, List<String> keys);
+        void DataIsLoaded(List<Impresie> impresiiList, List<String> keys);
     }
 
 
@@ -43,7 +43,7 @@ public class FirebaseDatabaseHelperAfisareImpresii {
     }
 
 
-    void showImpresii(final DataStatus dataStatus, String stare) {
+    void showImpresii(final DataStatus dataStatus) {
 
         referenceUsers.addValueEventListener(new ValueEventListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -56,7 +56,7 @@ public class FirebaseDatabaseHelperAfisareImpresii {
                     User user = keyNode.getValue(User.class);
                     String uid_user = FirebaseAuth.getInstance().getCurrentUser().getUid();
                     if (user.UID.equals(uid_user)) {
-                        if (stare.equals("organizare")) {
+                        if (stare.equals("organizator")) {
                             for (Map.Entry<String, Impresie> entry : user.impresie_organizare_user.entrySet()) {
                                 Impresie impresie = entry.getValue();
                                 impresii.add(impresie);
