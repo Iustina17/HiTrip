@@ -100,12 +100,12 @@ public class InsideSectionForumActivity extends AppCompatActivity {
                             for (DataSnapshot keyNodeSectiuni : dataSnapshot.getChildren()) {
                                 String key = keyNodeSectiuni.getKey();
                                 SectiuneForum sectiuneForum = keyNodeSectiuni.getValue(SectiuneForum.class);
-                                Log.d("Ciclu infinit - 0", "onDataChange:" + sectiuneForum.titlu_excursie + " " + sectiuneForum.denumire_sectiune);
+                                //Log.d("Ciclu infinit - 0", "onDataChange:" + sectiuneForum.titlu_excursie + " " + sectiuneForum.denumire_sectiune);
                                 if (sectiuneForum.uid_organizator.equals(uid_organizator)
                                         && sectiuneForum.data_final.equals(data_fin)
                                         && sectiuneForum.data_inceput.equals(data_start)
                                         && sectiuneForum.denumire_sectiune.equals(denumire_sectiune)) {
-                                    Log.d("Ciclu infinit - 1", "onDataChange:" + sectiuneForum.titlu_excursie + " " + sectiuneForum.denumire_sectiune);
+                                    //Log.d("Ciclu infinit - 1", "onDataChange:" + sectiuneForum.titlu_excursie + " " + sectiuneForum.denumire_sectiune);
 
                                     Comentariu comentariu = new Comentariu(user.nume, user.prenume,
                                             user.UID, adauga_comentariu_continut.getText().toString(),

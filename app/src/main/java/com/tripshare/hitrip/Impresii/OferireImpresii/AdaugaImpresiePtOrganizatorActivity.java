@@ -26,8 +26,11 @@ import com.tripshare.hitrip.R;
 import com.tripshare.hitrip.Trips.Trip;
 import com.tripshare.hitrip.ProfileRelated.User;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class AdaugaImpresiePtOrganizatorActivity extends AppCompatActivity {
@@ -86,7 +89,7 @@ public class AdaugaImpresiePtOrganizatorActivity extends AppCompatActivity {
                                                 user = entry.getValue();
                                                 if (user.UID.equals(uid_curent)) {
                                                     Impresie impresie = new Impresie(user.nume, user.prenume, uid_curent, trip.titlu_excursie,
-                                                            Calendar.getInstance().getTime().toString(), adauga_impresie_rating.getRating(), user.poza_profil, adauga_impresie_continut.getText().toString());
+                                                            new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date()), adauga_impresie_rating.getRating(), user.poza_profil, adauga_impresie_continut.getText().toString());
                                                     referenceUsers.child(key).child("impresie_organizare_user").push().setValue(impresie);
 
                                                     referenceUsers.child(key).child("nr_impresii_organizator").setValue(organizator.nr_impresii_organizator+1);

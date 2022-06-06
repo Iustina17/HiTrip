@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     //ImageView search_trips;
     String search = "all";
     TextView nume, prenume;
+    ImageView poza;
     String uid_user_nav;
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference referenceUsers = database.getReference("Utilizatori");
@@ -63,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
         nume = findViewById(R.id.nume_nav);
         prenume = findViewById(R.id.prenume_nav);
+        poza = findViewById(R.id.menu_profile);
 
         editText_search = findViewById(R.id.editText_search);
 

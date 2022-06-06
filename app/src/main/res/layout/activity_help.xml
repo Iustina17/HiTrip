@@ -1,125 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HelpActivity">
 
-    <ScrollView
-        android:id="@+id/scrollView"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+            <include layout="@layout/main_toolbar" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="104dp"
-                    android:background="@drawable/gradient_background"
-                    android:orientation="vertical">
+        </LinearLayout>
 
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="318dp"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="80dp"
-                    android:layout_marginBottom="8dp"
-                    android:background="@drawable/profile_layout_context_corners"
-                    android:elevation="@dimen/cardview_default_radius"
-                    android:orientation="vertical">
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_margin="16dp"
-                        android:text="Întrebări şi răspunsuri "
-                        android:textColor="@color/black"
-                        android:textSize="24dp"
-                        android:textStyle="bold"></TextView>
-
-                </LinearLayout>
-            </RelativeLayout>
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="8dp"
-                android:background="@drawable/profile_layout_context_corners"
-                android:elevation="@dimen/cardview_default_radius"
                 android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="104dp"
+                        android:background="@drawable/gradient_background"
+                        android:orientation="vertical">
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="318dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="80dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/profile_layout_context_corners"
+                        android:elevation="@dimen/cardview_default_radius"
+                        android:orientation="vertical">
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_margin="16dp"
+                            android:text="Întrebări şi răspunsuri "
+                            android:textColor="@color/black"
+                            android:textSize="24dp"
+                            android:textStyle="bold"></TextView>
+
+                    </LinearLayout>
+                </RelativeLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/profile_layout_context_corners"
+                    android:elevation="@dimen/cardview_default_radius"
                     android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Participanţi"
-                        android:textColor="@color/black"
-                        android:textSize="22dp"
-                        android:textStyle="bold"></TextView>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
-                        android:text="Cum te poţi alătura unei excursii şi tot ce trebuie să stii despre asta"
-                        android:textSize="16sp"
-                        android:textStyle="bold"></TextView>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp">
+                        android:layout_margin="16dp"
+                        android:orientation="vertical">
 
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="8dp"
-                            android:src="@drawable/ic_arrow_forward"></ImageView>
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Cum mă alătur unei excursii?"
+                            android:text="Participanţi"
                             android:textColor="@color/black"
-                            android:textStyle="bold"
-                            android:textSize="18dp">
-                        </TextView>
+                            android:textSize="22dp"
+                            android:textStyle="bold"></TextView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="16dp"
+                            android:text="Cum te poţi alătura unei excursii şi tot ce trebuie să stii despre asta"
+                            android:textSize="16sp"
+                            android:textStyle="bold"></TextView>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="8dp"
+                                android:src="@drawable/ic_arrow_forward"></ImageView>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Cum mă alătur unei excursii?"
+                                android:textColor="@color/black"
+                                android:textSize="18dp"
+                                android:textStyle="bold"></TextView>
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="8dp"
+                            android:text="      Când ați găsit o călătorie care vă interează, faceți click pe butonul „Înscrie-te în excursie” și scrieți un scurt mesaj către TripLeader cu câteva informații despre dvs. și orice întrebări pe care le puteți avea. Acesta vă va răspnde la întrbări şi vă va confirma sau nu cererea de alăturare. Odată ce v-a confirmat solicitarea..."></TextView>
+
+
                     </LinearLayout>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="8dp"
-                        android:text="      Când ați găsit o călătorie care vă interează, faceți click pe butonul „Înscrie-te în excursie” și scrieți un scurt mesaj către TripLeader cu câteva informații despre dvs. și orice întrebări pe care le puteți avea. Acesta vă va răspnde la întrbări şi vă va confirma sau nu cererea de alăturare. Odată ce v-a confirmat solicitarea...">
-                    </TextView>
-
-
                 </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
+        </ScrollView>
+    </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

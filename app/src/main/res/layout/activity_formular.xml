@@ -52,7 +52,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_margin="16dp"
-                        android:text="Forum colaborativ"
+                        android:text="Forum excursie"
                         android:textColor="@color/black"
                         android:textSize="24dp"
                         android:textStyle="bold"></TextView>
@@ -75,5 +75,20 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/buton_adauga_sectiune"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:elevation="3dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:backgroundTint="@color/purple_700"
+        app:srcCompat="@drawable/ic_adauga_sectiune_forum" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

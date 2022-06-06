@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -48,7 +49,15 @@ public class MyTripsActivity extends AppCompatActivity {
     RecyclerView mRecyclerView;
     TextView text_nuExista_excursii;
 
+    //pentru nav_drawer
+    TextView nume, prenume;
+    ImageView poza;
     DrawerLayout drawerLayout;
+    String uid_user_nav;
+
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private DatabaseReference referenceUsers = database.getReference("Utilizatori");
+
     DatabaseReference referenceTrip = FirebaseDatabase.getInstance().getReference().child("Calatorii");
 
     @Override
@@ -65,7 +74,34 @@ public class MyTripsActivity extends AppCompatActivity {
 
         text_nuExista_excursii = findViewById(R.id.text_nuExista_excursii);
 
+        //nav_drawer
         drawerLayout = findViewById((R.id.drawer_layout));
+        nume = findViewById(R.id.nume_nav);
+        prenume = findViewById(R.id.prenume_nav);
+        poza = findViewById(R.id.menu_profile);
+
+        referenceUsers.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot keyNode : snapshot.getChildren()) {
+                    User user = keyNode.getValue(User.class);
+
+                    uid_user_nav = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+                    if (user.UID.equals(uid_user_nav)) {
+                        //imagine_excursie.setAdjustViewBounds(trip.imagine_excursie);
+                        nume.setText(user.nume);
+                        prenume.setText(user.prenume);
+                    }
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         String buton1 = "", buton2 = "";
         if (getIntent().hasExtra("buton1"))
@@ -290,6 +326,8 @@ public class MyTripsActivity extends AppCompatActivity {
             }
         }
     }
+
+    //nav_drawer
 
     public void ClickMenu(View view) {
         //Open drawer
