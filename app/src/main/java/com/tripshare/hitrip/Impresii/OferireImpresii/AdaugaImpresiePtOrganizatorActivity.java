@@ -1,16 +1,14 @@
-package com.tripshare.hitrip.Impresii;
+package com.tripshare.hitrip.Impresii.OferireImpresii;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -21,10 +19,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.tripshare.hitrip.Impresii.Feedback;
+import com.tripshare.hitrip.Impresii.Impresie;
 import com.tripshare.hitrip.MyTrips.MyTripsActivity;
 import com.tripshare.hitrip.R;
 import com.tripshare.hitrip.Trips.Trip;
-import com.tripshare.hitrip.User;
+import com.tripshare.hitrip.ProfileRelated.User;
 
 import java.util.Calendar;
 import java.util.HashMap;

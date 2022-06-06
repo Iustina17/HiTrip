@@ -1,7 +1,7 @@
 package com.tripshare.hitrip.Trips;
 
 import com.tripshare.hitrip.Impresii.Feedback;
-import com.tripshare.hitrip.User;
+import com.tripshare.hitrip.ProfileRelated.User;
 
 import java.util.HashMap;
 

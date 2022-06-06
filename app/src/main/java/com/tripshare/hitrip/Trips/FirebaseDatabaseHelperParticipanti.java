@@ -3,7 +3,6 @@ package com.tripshare.hitrip.Trips;
 
 import android.os.Build;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -13,14 +12,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.tripshare.hitrip.Trips.Trip;
-import com.tripshare.hitrip.User;
+import com.tripshare.hitrip.ProfileRelated.User;
 
-import java.util.AbstractMap;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.function.BiConsumer;
 
 public class FirebaseDatabaseHelperParticipanti {

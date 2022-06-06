@@ -12,7 +12,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.tripshare.hitrip.Trips.Trip;
-import com.tripshare.hitrip.User;
+import com.tripshare.hitrip.ProfileRelated.User;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

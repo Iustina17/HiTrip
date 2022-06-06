@@ -1,5 +1,5 @@
 //TODO
-package com.tripshare.hitrip.Impresii;
+package com.tripshare.hitrip.Impresii.AfisareImpresii;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.tripshare.hitrip.Impresii.Impresie;
 import com.tripshare.hitrip.R;
 
 import java.util.List;

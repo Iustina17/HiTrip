@@ -26,17 +26,16 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.slider.Slider;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.tripshare.hitrip.Forum.Sectiuni.SectiuneForum;
 import com.tripshare.hitrip.R;
-import com.tripshare.hitrip.User;
+import com.tripshare.hitrip.ProfileRelated.User;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -425,6 +424,16 @@ public class CreateTrip1 extends AppCompatActivity {
                     public void onCancelled(@NonNull DatabaseError databaseError) {
                     }
                 });
+                DatabaseReference referenceSectiuni = FirebaseDatabase.getInstance().getReference("Sectiuni");
+                SectiuneForum sectiuneForumTransport = new SectiuneForum(mUID_organiztor, mtitlu, mdata_inceput, mdata_final, "Transport", null);
+                SectiuneForum sectiuneForumCazare = new SectiuneForum(mUID_organiztor, mtitlu, mdata_inceput, mdata_final, "Cazare", null);
+                SectiuneForum sectiuneForumMancare = new SectiuneForum(mUID_organiztor, mtitlu, mdata_inceput, mdata_final, "Mese şi alimente", null);
+                SectiuneForum sectiuneForumProgram = new SectiuneForum(mUID_organiztor, mtitlu, mdata_inceput, mdata_final, "Program şi activităţi", null);
+                referenceSectiuni.push().setValue(sectiuneForumTransport);
+                referenceSectiuni.push().setValue(sectiuneForumCazare);
+                referenceSectiuni.push().setValue(sectiuneForumMancare);
+                referenceSectiuni.push().setValue(sectiuneForumProgram);
+
             }
         });
 

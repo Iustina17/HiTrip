@@ -1,4 +1,4 @@
-package com.tripshare.hitrip;
+package com.tripshare.hitrip.ProfileRelated;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,8 +19,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.tripshare.hitrip.Impresii.AfisareImpresiiPtOrganizator;
-import com.tripshare.hitrip.Impresii.AfisareImpresiiPtParticipare;
+import com.tripshare.hitrip.Impresii.AfisareImpresii.AfisareImpresiiPtOrganizator;
+import com.tripshare.hitrip.Impresii.AfisareImpresii.AfisareImpresiiPtParticipare;
+import com.tripshare.hitrip.R;
 
 public class MyProfileActivity extends AppCompatActivity {
 

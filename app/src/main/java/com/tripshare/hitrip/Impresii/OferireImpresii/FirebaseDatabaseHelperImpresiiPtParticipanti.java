@@ -1,4 +1,4 @@
-package com.tripshare.hitrip.Impresii;
+package com.tripshare.hitrip.Impresii.OferireImpresii;
 
 import androidx.annotation.NonNull;
 
@@ -8,6 +8,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.tripshare.hitrip.Impresii.Feedback;
 import com.tripshare.hitrip.Trips.Trip;
 
 import java.util.ArrayList;

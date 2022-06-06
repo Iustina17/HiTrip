@@ -13,48 +13,48 @@
         android:theme="@style/Theme.HiTrip"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".InsideSectionForumActivity"
+            android:name=".Forum.Comentarii.InsideSectionForumActivity"
             android:exported="false" />
         <activity
-            android:name=".FormularActivity"
+            android:name=".Forum.Sectiuni.FormularActivity"
             android:exported="false" />
         <activity
-            android:name=".Impresii.AdaugaImpresiePtParticipantiActivity"
+            android:name=".Impresii.OferireImpresii.AdaugaImpresiePtParticipantiActivity"
             android:exported="false" />
         <activity
-            android:name=".Impresii.AdaugaImpresiePtOrganizatorActivity"
+            android:name=".Impresii.OferireImpresii.AdaugaImpresiePtOrganizatorActivity"
             android:exported="false" />
         <activity
             android:name=".HelpActivity"
             android:exported="false" />
         <activity
-            android:name=".SugestiiActivity"
+            android:name=".Sugestii.SugestiiActivity"
             android:exported="false" />
         <activity
             android:name=".Trips.InsideTripActivity1"
             android:exported="false" />
         <activity
-            android:name=".EditPersonalInfoActivity"
+            android:name=".ProfileRelated.EditPersonalInfoActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".EditProfileActivity"
+            android:name=".ProfileRelated.EditProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".MyProfileActivity"
+            android:name=".ProfileRelated.MyProfileActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".VerifyOTPActivity"
+            android:name=".OTP.VerifyOTPActivity"
             android:exported="false" />
         <activity
-            android:name=".SendOTPActivity"
+            android:name=".OTP.SendOTPActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -66,16 +66,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MessagesActivity"
-            android:exported="false" />
-        <activity
             android:name=".MyTrips.MyTripsActivity"
             android:exported="false" />
         <activity
-            android:name=".TripsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ProfileActivity"
+            android:name=".ProfileRelated.ProfileActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -89,7 +83,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".LoginSignUp.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -98,18 +92,18 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SignUpActivity"
+            android:name=".LoginSignUp.SignUpActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-        <activity android:name=".Impresii.AfisareImpresiiPtOrganizator">
+        <activity android:name=".Impresii.AfisareImpresii.AfisareImpresiiPtOrganizator">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-        <activity android:name=".Impresii.AfisareImpresiiPtParticipare">
+        <activity android:name=".Impresii.AfisareImpresii.AfisareImpresiiPtParticipare">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>

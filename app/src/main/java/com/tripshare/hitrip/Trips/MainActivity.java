@@ -25,13 +25,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.tripshare.hitrip.HelpActivity;
-import com.tripshare.hitrip.LoginActivity;
-import com.tripshare.hitrip.MessagesActivity;
-import com.tripshare.hitrip.MyProfileActivity;
+import com.tripshare.hitrip.LoginSignUp.LoginActivity;
+import com.tripshare.hitrip.ProfileRelated.MyProfileActivity;
 import com.tripshare.hitrip.MyTrips.MyTripsActivity;
 import com.tripshare.hitrip.R;
-import com.tripshare.hitrip.SugestiiActivity;
-import com.tripshare.hitrip.User;
+import com.tripshare.hitrip.Sugestii.SugestiiActivity;
+import com.tripshare.hitrip.ProfileRelated.User;
 
 import java.util.List;
 
@@ -214,10 +213,6 @@ public class MainActivity extends AppCompatActivity {
         closeDrawer(drawerLayout);
     }
 
-    public void ClickMessages(View view) {
-        //Redirect actvity to about us
-        redirectActivity(this, MessagesActivity.class);
-    }
 
     public void ClickHelp(View view) {
         redirectActivity(this, HelpActivity.class);

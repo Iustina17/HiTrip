@@ -1,4 +1,4 @@
-package com.tripshare.hitrip;
+package com.tripshare.hitrip.ProfileRelated;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,14 +7,11 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -26,7 +23,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -36,13 +32,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.tripshare.hitrip.Trips.FirebaseDatabaseHelperTrips;
-import com.tripshare.hitrip.Trips.Trip;
+import com.tripshare.hitrip.LoginSignUp.LoginActivity;
+import com.tripshare.hitrip.OTP.SendOTPActivity;
+import com.tripshare.hitrip.R;
 
-import java.time.LocalDate;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 
 public class EditPersonalInfoActivity extends AppCompatActivity {
 

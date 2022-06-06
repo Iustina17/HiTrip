@@ -1,10 +1,9 @@
-package com.tripshare.hitrip;
+package com.tripshare.hitrip.LoginSignUp;
 
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -32,8 +31,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
+import com.tripshare.hitrip.R;
 import com.tripshare.hitrip.Trips.MainActivity;
-import com.tripshare.hitrip.User;
+import com.tripshare.hitrip.ProfileRelated.User;
 
 public class SignUpActivity extends AppCompatActivity {
 

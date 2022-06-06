@@ -1,9 +1,6 @@
 package com.tripshare.hitrip.Trips;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.SearchView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -11,7 +8,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.tripshare.hitrip.Impresii.Feedback;
-import com.tripshare.hitrip.User;
+import com.tripshare.hitrip.ProfileRelated.User;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

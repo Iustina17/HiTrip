@@ -1,4 +1,4 @@
-package com.tripshare.hitrip;
+package com.tripshare.hitrip.Sugestii;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.tripshare.hitrip.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

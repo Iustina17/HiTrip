@@ -1,4 +1,4 @@
-package com.tripshare.hitrip;
+package com.tripshare.hitrip.LoginSignUp;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -17,6 +17,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.SignInMethodQueryResult;
+import com.tripshare.hitrip.R;
 import com.tripshare.hitrip.Trips.MainActivity;
 
 import java.util.regex.Matcher;

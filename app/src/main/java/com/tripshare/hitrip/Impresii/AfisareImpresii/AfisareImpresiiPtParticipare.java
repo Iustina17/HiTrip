@@ -1,4 +1,4 @@
-package com.tripshare.hitrip.Impresii;
+package com.tripshare.hitrip.Impresii.AfisareImpresii;
 
 import android.os.Bundle;
 import android.widget.EditText;
@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.tripshare.hitrip.Impresii.Impresie;
 import com.tripshare.hitrip.R;
 
 import java.util.List;

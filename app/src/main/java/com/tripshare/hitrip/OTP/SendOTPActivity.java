@@ -1,4 +1,4 @@
-package com.tripshare.hitrip;
+package com.tripshare.hitrip.OTP;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.tripshare.hitrip.R;
 
 import java.util.concurrent.TimeUnit;
 
@@ -74,7 +75,7 @@ public class SendOTPActivity extends AppCompatActivity {
                                     public void onCodeSent(@NonNull String verificationId, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
                                         progressBarOTP.setVisibility(view.GONE);
                                         buttonGetOTP.setVisibility(View.VISIBLE);
-                                        Intent intent = new Intent(getApplicationContext(),VerifyOTPActivity.class);
+                                        Intent intent = new Intent(getApplicationContext(), VerifyOTPActivity.class);
                                         intent.putExtra("număr de telefon", inputMobile.getText().toString());
                                         intent.putExtra("verificationId", verificationId);
                                         startActivity((intent));

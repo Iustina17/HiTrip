@@ -1,4 +1,4 @@
-package com.tripshare.hitrip;
+package com.tripshare.hitrip.ProfileRelated;
 
 import com.tripshare.hitrip.Impresii.Impresie;
 

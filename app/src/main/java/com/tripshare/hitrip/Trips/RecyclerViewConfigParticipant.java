@@ -3,9 +3,7 @@ package com.tripshare.hitrip.Trips;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,10 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tripshare.hitrip.R;
-import com.tripshare.hitrip.User;
+import com.tripshare.hitrip.ProfileRelated.User;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 class RecyclerViewConfigParticipant {

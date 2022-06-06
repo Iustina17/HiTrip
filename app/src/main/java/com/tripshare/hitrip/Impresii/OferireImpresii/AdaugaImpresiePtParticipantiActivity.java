@@ -1,4 +1,4 @@
-package com.tripshare.hitrip.Impresii;
+package com.tripshare.hitrip.Impresii.OferireImpresii;
 
 import android.os.Bundle;
 import android.widget.ImageButton;
@@ -7,6 +7,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.tripshare.hitrip.Impresii.Feedback;
 import com.tripshare.hitrip.R;
 import com.tripshare.hitrip.Trips.Trip;
 

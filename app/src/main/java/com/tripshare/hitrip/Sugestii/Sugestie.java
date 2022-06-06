@@ -1,4 +1,4 @@
-package com.tripshare.hitrip;
+package com.tripshare.hitrip.Sugestii;
 
 public class Sugestie {
     public String continut;
