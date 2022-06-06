@@ -17,6 +17,8 @@ public class User {
     public String descriere, preferinte, locuri_vizitate, limbi_vorbite;
     public HashMap<String, Impresie> impresie_organizare_user = null;
     public HashMap<String, Impresie> impresie_participare_user = null;
+    public Integer nr_excursii_organizate=0, nr_excursii_participare=0;
+
 
     public User(){
 
@@ -26,7 +28,8 @@ public class User {
                 Float rating_participant, Integer nr_exc_organiz, Integer getNr_exc_partic, Integer nr_impresii_organizator, Integer nr_impresii_participant,
                 String sex, String data_nasterii, String nationalitate, Integer nr_mobil_verificat,
                 Integer acreditare1_vierificat, String descriere, String preferinte,
-                String locuri_vizitate, String limbi_vorbite, HashMap<String, Impresie> impresie_organizare_user, HashMap<String, Impresie> impresie_participare_user) {
+                String locuri_vizitate, String limbi_vorbite, HashMap<String, Impresie> impresie_organizare_user, HashMap<String, Impresie> impresie_participare_user,
+                Integer nr_excursii_organizate, Integer nr_excursii_participare) {
         this.UID = UID;
         this.email = email;
         this.nume = nume;
@@ -50,6 +53,9 @@ public class User {
         this.limbi_vorbite = limbi_vorbite;
         this.impresie_participare_user = impresie_participare_user;
         this.impresie_organizare_user = impresie_organizare_user;
+        this.nr_excursii_participare = nr_excursii_participare;
+        this.nr_excursii_organizate = nr_excursii_organizate;
+
     }
 
     public User(String UID, String prenume, String poza_profil) {

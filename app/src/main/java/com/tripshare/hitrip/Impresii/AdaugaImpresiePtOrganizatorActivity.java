@@ -90,8 +90,7 @@ public class AdaugaImpresiePtOrganizatorActivity extends AppCompatActivity {
                                                     referenceUsers.child(key).child("impresie_organizare_user").push().setValue(impresie);
 
                                                     referenceUsers.child(key).child("nr_impresii_organizator").setValue(organizator.nr_impresii_organizator+1);
-                                                    Float rating_actualizat = ((organizator.rating_organizator * organizator.nr_impresii_organizator) +  adauga_impresie_rating.getRating() )/(organizator.nr_impresii_organizator + 1);
-                                                    referenceUsers.child(key).child("rating_organizator").setValue(rating_actualizat);
+                                                    referenceUsers.child(key).child("rating_organizator").setValue(((organizator.rating_organizator * organizator.nr_impresii_organizator) +  adauga_impresie_rating.getRating() )/(organizator.nr_impresii_organizator + 1));
 
                                                     DatabaseReference referenceTrip = FirebaseDatabase.getInstance().getReference().child("Calatorii");
                                                     Query query = referenceTrip.orderByChild("UID_organiztor").equalTo(trip.UID_organiztor);

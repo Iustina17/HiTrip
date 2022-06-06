@@ -60,6 +60,7 @@ public class FirebaseDatabaseHelperAfisareImpresii {
                             for (Map.Entry<String, Impresie> entry : user.impresie_organizare_user.entrySet()) {
                                 Impresie impresie = entry.getValue();
                                 impresii.add(impresie);
+
                                 keys.add(String.valueOf(i) + "_key");
                                 i++;
                             }

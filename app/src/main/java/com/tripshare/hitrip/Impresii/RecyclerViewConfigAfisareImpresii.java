@@ -3,6 +3,7 @@ package com.tripshare.hitrip.Impresii;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -10,7 +11,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tripshare.hitrip.R;
@@ -20,11 +21,14 @@ import java.util.List;
 class RecyclerViewConfigAfisareImpresii {
     private Context mContext;
     private ImpresieAdaptor adaptorImpresie;
-    
+
     void setconfig(RecyclerView recyclerView, Context context, List<Impresie> impresiiList, List<String> keys) {
         mContext = context;
         adaptorImpresie = new ImpresieAdaptor(impresiiList, keys);
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(adaptorImpresie);
+        Log.d("Impresie in ", "setconfig: " + impresiiList.get(0).prenume + " " + impresiiList.get(0).titlu_excursie);
+
     }
 
     class ImpresieItemView extends RecyclerView.ViewHolder {
@@ -39,7 +43,7 @@ class RecyclerViewConfigAfisareImpresii {
 
         ImpresieItemView(@NonNull final ViewGroup parent) {
             super(LayoutInflater.from(mContext).
-                    inflate(R.layout.item_profile_inside_trip, parent, false));
+                    inflate(R.layout.item_impresie_afisare, parent, false));
 
             prenume_pers_care_a_dat_feedback = itemView.findViewById(R.id.prenume_pers_care_a_dat_feedback);
             nume_pers_care_a_dat_feedback = itemView.findViewById(R.id.nume_pers_care_a_dat_feedback);
@@ -59,15 +63,16 @@ class RecyclerViewConfigAfisareImpresii {
             impresie_rating.setRating(impresie.nota);
             text_impresie.setText(impresie.continut);
             poza_string = impresie.imagineAutor;
+            Log.d("Impresie in bind", "bind: " + impresie.prenume + " " + impresie.titlu_excursie);
         }
     }
 
     class ImpresieAdaptor extends RecyclerView.Adapter<ImpresieItemView> {
-        private List<Impresie> impresieLista;
+        private List<Impresie> impresiiLista;
         private List<String> keys;
 
-        ImpresieAdaptor(List<Impresie> impresieLista, List<String> keys) {
-            this.impresieLista = impresieLista;
+        ImpresieAdaptor(List<Impresie> impresiiLista, List<String> keys) {
+            this.impresiiLista = impresiiLista;
             this.keys = keys;
         }
 
@@ -79,12 +84,14 @@ class RecyclerViewConfigAfisareImpresii {
 
         @Override
         public void onBindViewHolder(@NonNull ImpresieItemView holder, int position) {
-            holder.bind(impresieLista.get(position), keys.get(position));
+            holder.bind(impresiiLista.get(position), keys.get(position));
+            Log.d("Impresie in ", "onBindViewHolder: " + impresiiLista.get(position).prenume + " " + impresiiLista.get(position).titlu_excursie);
+
         }
 
         @Override
         public int getItemCount() {
-            return impresieLista.size();
+            return impresiiLista.size();
         }
     }
 }

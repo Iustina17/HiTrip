@@ -339,7 +339,7 @@ public class CreateTrip1 extends AppCompatActivity {
                 int childcount = layoutList.getChildCount();
                 vect_opriri = new HashMap<String, Oprire>();
 
-                for (int i=0; i < childcount; i++){
+                for (int i = 0; i < childcount; i++) {
                     View v = layoutList.getChildAt(i);
 
                     EditText locatie = (EditText) v.findViewById(R.id.locatie_item);
@@ -354,7 +354,7 @@ public class CreateTrip1 extends AppCompatActivity {
                     Log.d("vect_opriri", descriere_transportV);
 
                     Oprire oprire = new Oprire(i, locatieV, descriere_oprireV, descriere_transportV);
-                    vect_opriri.put(String.valueOf(i)+"_key", oprire);
+                    vect_opriri.put(String.valueOf(i) + "_key", oprire);
 
                     //        Log.d("Locatie1", oprire.index_opriri);
                     //        Log.d("DOprire2", descriere_oprireV);
@@ -403,10 +403,28 @@ public class CreateTrip1 extends AppCompatActivity {
                             mtip, mdata_inceput, mdata_final, mnr_zile, mtara,
                             moras, mdescriere_plecare, layoutList.getChildCount(), vect_opriri,
                             mdescriere_excursie, mregulament, mechipament_necesar,
-                            mdocumente_necesare, mnr_min_particpip, mnr_max_particpip, mcost, mtip_moneda, dificultate, participanti, mpretMin, mpretMax, mDetalii_pret, status,null,null,poza);
+                            mdocumente_necesare, mnr_min_particpip, mnr_max_particpip, mcost, mtip_moneda, dificultate, participanti, mpretMin, mpretMax, mDetalii_pret, status, null, null, poza);
                     reference.push().setValue(trip);
                     redirectActivity(CreateTrip1.this, MainActivity.class);
                 }
+
+
+                DatabaseReference referenceUsers = FirebaseDatabase.getInstance().getReference("Utilizatori");
+                Query query_uid = referenceUsers.orderByChild("UID").equalTo(UID_organiztor);
+                query_uid.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot child : dataSnapshot.getChildren()) {
+                            User user = child.getValue(User.class);
+                            String key = child.getKey();
+                            FirebaseDatabase.getInstance().getReference("Utilizatori").child(key).child("nr_excursii_organizate").setValue(user.nr_excursii_organizate+1);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                    }
+                });
             }
         });
 

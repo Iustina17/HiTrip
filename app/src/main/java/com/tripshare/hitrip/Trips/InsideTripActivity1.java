@@ -437,6 +437,23 @@ public class InsideTripActivity1 extends AppCompatActivity {
                         public void onCancelled(@NonNull DatabaseError databaseError) {
                         }
                     });
+                DatabaseReference referenceUsers = FirebaseDatabase.getInstance().getReference("Utilizatori");
+
+                Query query_uid = referenceUsers.orderByChild("UID").equalTo(uid_posibil_participant);
+                query_uid.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot child : dataSnapshot.getChildren()) {
+                            User user = child.getValue(User.class);
+                            String key = child.getKey();
+                            FirebaseDatabase.getInstance().getReference("Utilizatori").child(key).child("nr_excursii_participare").setValue(user.nr_excursii_participare+1);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                    }
+                });
 
                 }
   //          }

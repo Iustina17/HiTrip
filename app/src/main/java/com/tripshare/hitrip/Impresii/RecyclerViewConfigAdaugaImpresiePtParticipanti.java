@@ -85,10 +85,9 @@ class RecyclerViewConfigAdaugaImpresiePtParticipanti {
                                         Calendar.getInstance().getTime().toString(), ratingBar.getRating(), trip.poza, editText.getText().toString());
                                 referenceUsers.child(key).child("impresie_participare_user").push().setValue(impresie);
 
-                                referenceUsers.child(key).child("nr_impresii_organizator").setValue(participant.nr_impresii_organizator+1);
-                                Float rating_actualizat = ((participant.rating_organizator * participant.nr_impresii_organizator) +  ratingBar.getRating() )/(participant.nr_impresii_organizator + 1);
-                                referenceUsers.child(key).child("rating_organizator").setValue(rating_actualizat);
 
+                                referenceUsers.child(key).child("nr_impresii_participant").setValue(participant.nr_impresii_participant+1);
+                                referenceUsers.child(key).child("rating_participant").setValue(((participant.rating_participant * participant.nr_impresii_participant) +  ratingBar.getRating() )/(participant.nr_impresii_participant + 1));
 
                                 DatabaseReference referenceTrip = FirebaseDatabase.getInstance().getReference().child("Calatorii");
 
@@ -121,6 +120,7 @@ class RecyclerViewConfigAdaugaImpresiePtParticipanti {
                                                                             hashMapFeedbacks.put(feedback.uid_participant, feedback2);
                                                                             for (Map.Entry<String, Feedback> entry_push : hashMapFeedbacks.entrySet()) {
                                                                                 referenceTrip.child(key).child("impresii_date_de_organizator").push().setValue(entry_push.getValue());
+
                                                                             }
                                                                         }
                                                                     }

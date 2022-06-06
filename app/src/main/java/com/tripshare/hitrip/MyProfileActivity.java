@@ -3,6 +3,7 @@ package com.tripshare.hitrip;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -59,8 +60,11 @@ public class MyProfileActivity extends AppCompatActivity {
         nu_exista_info_verificate_my = findViewById(R.id.nu_exista_info_verificate_my);
         vezi_impresii_organizator_buton = findViewById(R.id.vezi_impresii_organizator_buton);
         vezi_impresii_participant_buton = findViewById(R.id.vezi_impresii_participant_buton);
+        ratingOrganizatorBar = findViewById(R.id.ratingOrganizatorBar);
+        ratingParticipantBar = findViewById(R.id.ratingParticipantBar);
 
         referenceUsers.addValueEventListener(new ValueEventListener() {
+            @SuppressLint({"DefaultLocale", "SetTextI18n"})
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot keyNode : snapshot.getChildren()) {
@@ -75,12 +79,14 @@ public class MyProfileActivity extends AppCompatActivity {
                         varsta_my.setText(user.varsta.toString());
                         nr_exc_organiz_my.setText(user.nr_exc_organiz.toString());
                         nr_exc_perticip_my.setText(user.nr_exc_partic.toString());
-                        nr_pers_rating_organiz_my.setText(user.rating_organizator.toString());
-                        nr_pers_rating_particip_my.setText(user.rating_participant.toString());
+                        nr_pers_rating_organiz_my.setText(String.format("%.2f", user.rating_organizator));
+                        nr_pers_rating_particip_my.setText(String.format("%.2f", user.rating_participant));
                         descriere_my.setText(user.descriere);
                         preferinte_my.setText(user.preferinte);
                         locuri_vizitate_my.setText(user.locuri_vizitate);
                         limbi_vorbite_my.setText(user.limbi_vorbite);
+                        ratingOrganizatorBar.setRating(user.rating_organizator);
+                        ratingParticipantBar.setRating(user.rating_participant);
 //                        nr_tel_verificat_my.setText(user.nume);
 //                        nu_exista_info_verificate_my.setText(user.nume);
 
