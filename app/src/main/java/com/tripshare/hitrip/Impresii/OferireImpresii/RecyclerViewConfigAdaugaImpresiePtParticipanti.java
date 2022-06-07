@@ -2,6 +2,7 @@ package com.tripshare.hitrip.Impresii.OferireImpresii;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,6 +25,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.tripshare.hitrip.Impresii.Feedback;
 import com.tripshare.hitrip.Impresii.Impresie;
+import com.tripshare.hitrip.MyTrips.MyTripsActivity;
 import com.tripshare.hitrip.R;
 import com.tripshare.hitrip.Trips.Trip;
 import com.tripshare.hitrip.ProfileRelated.User;
@@ -32,7 +35,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-class RecyclerViewConfigAdaugaImpresiePtParticipanti {
+class RecyclerViewConfigAdaugaImpresiePtParticipanti extends AppCompatActivity {
     private Context mContext;
     private FeedbackAdaptor adaptorFeedback;
     private Trip trip;
@@ -81,15 +84,14 @@ class RecyclerViewConfigAdaugaImpresiePtParticipanti {
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             for (DataSnapshot child : dataSnapshot.getChildren()) {
                                 User participant = child.getValue(User.class);
-
                                 String key = child.getKey();
+
                                 Impresie impresie = new Impresie(trip.nume, trip.prenume, trip.UID_organiztor, trip.titlu_excursie,
                                         Calendar.getInstance().getTime().toString(), ratingBar.getRating(), trip.poza, editText.getText().toString());
                                 referenceUsers.child(key).child("impresie_participare_user").push().setValue(impresie);
 
-
-                                referenceUsers.child(key).child("nr_impresii_participant").setValue(participant.nr_impresii_participant+1);
-                                referenceUsers.child(key).child("rating_participant").setValue(((participant.rating_participant * participant.nr_impresii_participant) +  ratingBar.getRating() )/(participant.nr_impresii_participant + 1));
+                                referenceUsers.child(key).child("nr_impresii_participant").setValue(participant.nr_impresii_participant + 1);
+                                referenceUsers.child(key).child("rating_participant").setValue(((participant.rating_participant * participant.nr_impresii_participant) + ratingBar.getRating()) / (participant.nr_impresii_participant + 1));
 
                                 DatabaseReference referenceTrip = FirebaseDatabase.getInstance().getReference().child("Calatorii");
 
@@ -109,21 +111,31 @@ class RecyclerViewConfigAdaugaImpresiePtParticipanti {
                                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                                                         for (DataSnapshot child : dataSnapshot.getChildren()) {
                                                             Trip trip = child.getValue(Trip.class);
-                                                            referenceTrip.child(key).child("impresii_date_de_organizator").removeValue();
                                                             HashMap<String, Feedback> hashMapFeedbacks;
                                                             if (trip.impresii_date_de_organizator != null) {
                                                                 hashMapFeedbacks = trip.impresii_date_de_organizator;
+                                                                //referenceTrip.child(key).child("impresii_date_de_organizator").removeValue();
                                                                 if (hashMapFeedbacks != null)
                                                                     for (Map.Entry<String, Feedback> entry : hashMapFeedbacks.entrySet()) {
                                                                         Feedback feedback1 = entry.getValue();
+                                                                        String keyFeedback = entry.getKey();
                                                                         if (feedback1.uid_participant.equals(feedback.uid_participant)) {
+                                                                            referenceTrip.child(key).child("impresii_date_de_organizator").child(keyFeedback).removeValue();
                                                                             hashMapFeedbacks.entrySet().remove(entry);
                                                                             Feedback feedback2 = new Feedback(feedback.uid_participant, "da", feedback.nume, feedback.prenume, feedback.poza);
-                                                                            hashMapFeedbacks.put(feedback.uid_participant, feedback2);
-                                                                            for (Map.Entry<String, Feedback> entry_push : hashMapFeedbacks.entrySet()) {
-                                                                                referenceTrip.child(key).child("impresii_date_de_organizator").push().setValue(entry_push.getValue());
+                                                                            referenceTrip.child(key).child("impresii_date_de_organizator").child(keyFeedback).push().setValue(feedback2);
 
-                                                                            }
+                                                                            hashMapFeedbacks.put(feedback.uid_participant, feedback2);
+//                                                                            for (Map.Entry<String, Feedback> entry_push : hashMapFeedbacks.entrySet()) {
+//                                                                                referenceTrip.child(key).child("impresii_date_de_organizator").push().setValue(entry_push.getValue());
+////                                                                                try {
+////                                                                                    wait(500);
+////                                                                                } catch (InterruptedException e) {
+////                                                                                    e.printStackTrace();
+////                                                                                }
+//                                                                                finish();
+//
+//                                                                            }
                                                                         }
                                                                     }
 
@@ -144,8 +156,10 @@ class RecyclerViewConfigAdaugaImpresiePtParticipanti {
                                     public void onCancelled(@NonNull DatabaseError databaseError) {
                                     }
                                 });
+
                             }
                         }
+
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -153,6 +167,7 @@ class RecyclerViewConfigAdaugaImpresiePtParticipanti {
                     });
                 }
             });
+
         }
     }
 

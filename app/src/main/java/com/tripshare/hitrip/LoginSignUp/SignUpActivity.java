@@ -165,7 +165,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                             UID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-                            User utilizator = new User(UID, email, lastName, firstName, age, "",0.0f, 0.0f, 0,0,0,0, spinner_sex_login,date, nationalitate_login,0,0,"","","","", null, null,0,0);
+                            User utilizator = new User(UID, email, "",lastName, firstName, age, "",0.0f, 0.0f,0,0, spinner_sex_login,date, nationalitate_login,0,0,"","","","", null, null,0,0);
                             reference.push().setValue(utilizator);
                             Toast.makeText(SignUpActivity.this,"Utilizator creat",Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getApplicationContext(), MainActivity.class));

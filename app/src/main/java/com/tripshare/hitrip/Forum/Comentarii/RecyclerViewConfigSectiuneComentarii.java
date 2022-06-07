@@ -132,12 +132,8 @@ class RecyclerViewConfigSectiuneComentarii {
                                                         && sectiuneForum.data_inceput.equals(data_start)
                                                         && sectiuneForum.denumire_sectiune.equals(denumire_sectiune)) {
                                                     String keySectiune = keyNode.getKey();
-                                                    Log.d("Sectiune gasita", "onDataChange: "+sectiuneForum.denumire_sectiune);
                                                     for (Map.Entry<String, Comentariu> entry : sectiuneForum.comentarii.entrySet()) {
                                                         Comentariu comentariu1 = entry.getValue();
-                                                        Log.d("Comentariu gasit", "onDataChange: "+comentariu1.numeAutor+" "+comentariu1.continut);
-                                                        Log.d("Comentariu gasit - data", "onDataChange: "+comentariu1.dataComentariu);
-                                                        Log.d("Comentariu refer - data", "onDataChange: "+comentariu.dataComentariu);
                                                         if(comentariu1.dataComentariu.equals(comentariu.dataComentariu)){
                                                             String keyComentariu = entry.getKey();
                                                             referenceSectiuni.child(keySectiune).child("comentarii").child(keyComentariu).removeValue();

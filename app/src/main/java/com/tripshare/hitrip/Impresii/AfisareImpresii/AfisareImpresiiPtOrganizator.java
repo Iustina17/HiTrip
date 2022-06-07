@@ -18,10 +18,11 @@ public class AfisareImpresiiPtOrganizator extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pag_impresii);
 
+        String uid = getIntent().getStringExtra("uid");
         recyclerView_impresii = findViewById(R.id.recyclerview_pag_impresii);
 
 
-        new FirebaseDatabaseHelperAfisareImpresii("organizator").showImpresii(new FirebaseDatabaseHelperAfisareImpresii.DataStatus() {
+        new FirebaseDatabaseHelperAfisareImpresii("organizator", uid).showImpresii(new FirebaseDatabaseHelperAfisareImpresii.DataStatus() {
             @Override
             public void DataIsLoaded(List<Impresie> impresiiList, List<String> keys) {
                 new RecyclerViewConfigAfisareImpresii().setconfig(recyclerView_impresii, AfisareImpresiiPtOrganizator.this, impresiiList, keys);

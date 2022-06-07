@@ -4,10 +4,10 @@
     android:id="@+id/card_view_trip"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="24dp"
-    android:layout_marginBottom="5dp"
     android:layout_marginLeft="32dp"
+    android:layout_marginTop="24dp"
     android:layout_marginRight="32dp"
+    android:layout_marginBottom="5dp"
     android:background="@drawable/profile_layout_context_corners"
     android:elevation="5dp"
     app:cardCornerRadius="8dp"
@@ -25,49 +25,78 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:id="@+id/trip_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"></ImageView>
+                <LinearLayout
+                    android:id="@+id/trip_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <ImageButton
-                    android:id="@+id/imageButton_sterge_trip"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignEnd="@+id/trip_layout"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginRight="16dp"
-                    android:background="@drawable/button_black_corners"
-                    android:visibility="gone"
-                    app:srcCompat="@drawable/ic_baseline_delete_24" />
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"></ImageView>
 
-            </LinearLayout>
+                    <ImageButton
+                        android:id="@+id/imageButton_anulare_trip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignEnd="@+id/trip_layout"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginRight="16dp"
+                        android:background="@drawable/button_black_corners"
+                        android:visibility="gone"
+                        app:srcCompat="@drawable/ic_anulare" />
 
-            <LinearLayout
-                android:id="@+id/finalizeaza_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                </LinearLayout>
 
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"></ImageView>
+                <LinearLayout
+                    android:id="@+id/anulare_trip_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <ImageButton
-                    android:id="@+id/imageButton_finalizeaza_trip"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignEnd="@+id/trip_layout"
-                    android:layout_marginTop="56dp"
-                    android:layout_marginRight="16dp"
-                    android:background="@drawable/button_black_corners"
-                    android:visibility="gone"
-                    app:srcCompat="@drawable/ic_end_trip" />
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"></ImageView>
 
+                    <ImageButton
+                        android:id="@+id/imageButton_stergere_trip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignEnd="@+id/trip_layout"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginRight="16dp"
+                        android:background="@drawable/button_black_corners"
+                        android:visibility="gone"
+                        app:srcCompat="@drawable/ic_baseline_delete_24" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/finalizeaza_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"></ImageView>
+
+                    <ImageButton
+                        android:id="@+id/imageButton_finalizare_trip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignEnd="@+id/trip_layout"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginRight="16dp"
+                        android:background="@drawable/button_black_corners"
+                        android:visibility="gone"
+                        app:srcCompat="@drawable/ic_end_trip" />
+
+                </LinearLayout>
             </LinearLayout>
 
             <ImageView
@@ -345,9 +374,9 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="4dp"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="8dp"
+                    android:layout_marginRight="4dp"
                     android:src="@drawable/ic_money"></ImageView>
 
                 <TextView
@@ -399,9 +428,9 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="4dp"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="8dp"
+                    android:layout_marginRight="4dp"
                     android:src="@drawable/ic_money"></ImageView>
 
                 <TextView

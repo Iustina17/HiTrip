@@ -64,22 +64,37 @@ public class FirebaseDatabaseHelperTrips {
                     Date date_now = new Date();
 
                     User user;
-                    if (date_fin.before(date_now) && trip.status.equals("desfasurare")) {
-                        trip.status = "incheiata";
-                        if (trip.participanti != null && trip.impresii_date_de_organizator == null && trip.impresii_date_de_participanti == null) {
-                            for (Map.Entry<String, User> entry : trip.participanti.entrySet()) {
-                                referenceTripss = referenceTrips.child(keyNode.getKey());
-                                user = entry.getValue();
-                                Feedback feedback = new Feedback(user.UID, "nu", user.nume, user.prenume, user.poza_profil);
-                                referenceTripss.child("impresii_date_de_organizator").push().setValue(feedback);
-                                referenceTripss.child("impresii_date_de_participanti").push().setValue(feedback);
+                    if (!(trip.status.equals("anulata") || trip.status.equals("finalizata"))){
+                        if (date_fin.before(date_now) && trip.status.equals("desfasurare") && !trip.status.equals("anulata")) {
+                            trip.status = "incheiata";
+                            if (trip.participanti != null && trip.impresii_date_de_organizator == null && trip.impresii_date_de_participanti == null) {
+                                for (Map.Entry<String, User> entry : trip.participanti.entrySet()) {
+                                    referenceTripss = referenceTrips.child(keyNode.getKey());
+                                    user = entry.getValue();
+                                    Feedback feedback = new Feedback(user.UID, "nu", user.nume, user.prenume, user.poza_profil);
+                                    referenceTripss.child("impresii_date_de_organizator").push().setValue(feedback);
+                                    referenceTripss.child("impresii_date_de_participanti").push().setValue(feedback);
+                                }
                             }
+                        } else if ((date_incep.before(date_now) || date_incep.equals(date_now)) && (date_fin.after(date_now) || date_fin.equals(date_now)) && !trip.status.equals("anulata")) {
+                            trip.status = "desfasurare";
+                        } else if (date_incep.after(date_now) && !trip.status.equals("anulata")) {
+                            trip.status = "viitoare";
                         }
-                    } else if ((date_incep.before(date_now) || date_incep.equals(date_now)) && (date_fin.after(date_now) || date_fin.equals(date_now))) {
-                        trip.status = "desfasurare";
-                    } else if (date_incep.after(date_now)) {
-                        trip.status = "viitoare";
+                        if(trip.status.equals("anulata") && trip.participanti==null && trip.participantiAsteptare==null){
+                            referenceTrips.child(keyNode.getKey()).removeValue();
+                        }
                     }
+                    if (trip.status.equals("finalizata") && trip.participanti != null && trip.impresii_date_de_organizator == null && trip.impresii_date_de_participanti == null) {
+                        for (Map.Entry<String, User> entry : trip.participanti.entrySet()) {
+                            referenceTripss = referenceTrips.child(keyNode.getKey());
+                            user = entry.getValue();
+                            Feedback feedback = new Feedback(user.UID, "nu", user.nume, user.prenume, user.poza_profil);
+                            referenceTripss.child("impresii_date_de_organizator").push().setValue(feedback);
+                            referenceTripss.child("impresii_date_de_participanti").push().setValue(feedback);
+                        }
+                    }
+
 
                     final String statusF = trip.status;
 

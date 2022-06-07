@@ -1,5 +1,5 @@
 
-package com.tripshare.hitrip.Trips;
+package com.tripshare.hitrip.Trips.ParticipantiAsteptare;
 
 import android.os.Build;
 import android.util.Log;
@@ -13,17 +13,17 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.tripshare.hitrip.ProfileRelated.User;
+import com.tripshare.hitrip.Trips.Trip;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiConsumer;
 
-public class FirebaseDatabaseHelperParticipanti {
+public class FirebaseDatabaseHelperParticipantiAsteptare {
 
     private FirebaseDatabase database;
     private DatabaseReference referenceTrips, referenceUsers;
     private List<User> participanti = new ArrayList<>();
-    private List<Trip> trips = new ArrayList<>();
     private List<Integer> keys = new ArrayList<Integer>();
     private String uid_organizator, data_start, data_fin;
 
@@ -33,7 +33,7 @@ public class FirebaseDatabaseHelperParticipanti {
     }
 
 
-    FirebaseDatabaseHelperParticipanti() {
+    FirebaseDatabaseHelperParticipantiAsteptare() {
         this.database = FirebaseDatabase.getInstance();
         this.referenceTrips = database.getReference("Calatorii");
         // this.referenceUsers = database.getReference("Utilizatori");
@@ -53,21 +53,20 @@ public class FirebaseDatabaseHelperParticipanti {
                 participanti.clear();
                 for (DataSnapshot keyNode : dataSnapshot.getChildren()) {
                     Trip trip = keyNode.getValue(Trip.class);
-                    if (trip != null) {
-                        if (uid_organizator.equals(trip.UID_organiztor) && data_start.equals(trip.data_inceput) && data_fin.equals(trip.data_final)) {
-                            if (trip.participanti != null) {
-                                trip.participanti.forEach(new BiConsumer<String, User>() {
-                                    @Override
-                                    public void accept(String s, User user) {
-                                        participanti.add(user);
-                                    }
-                                });
-                                for (int i = 0; i < trip.participanti.size(); i++) {
-                                    keys.add(i);
+                    if (uid_organizator.equals(trip.UID_organiztor) && data_start.equals(trip.data_inceput) && data_fin.equals(trip.data_final)) {
+                        //for (int i = 0; i < trip.participanti.size();i++)
+                        if (trip.participantiAsteptare != null) {
+                            trip.participantiAsteptare.forEach(new BiConsumer<String, User>() {
+                                @Override
+                                public void accept(String s, User user) {
+                                    participanti.add(user);
                                 }
-                            } else {
-                                Log.d("participanti", "Nu exista participanti");
+                            });
+                            for (int i = 0; i<trip.participantiAsteptare.size(); i++) {
+                                keys.add(i);
                             }
+                        } else {
+                                Log.d("participanti","Nu exista participanti");
                         }
                     }
 

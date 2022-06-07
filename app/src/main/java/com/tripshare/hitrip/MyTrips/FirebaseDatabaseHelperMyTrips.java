@@ -35,7 +35,7 @@ public class FirebaseDatabaseHelperMyTrips {
         void DataIsLoaded(List<Trip> trips, List<String> keys);
     }
 
-    FirebaseDatabaseHelperMyTrips(String buton1, String buton2,    TextView text_nuExista_excursii) {
+    FirebaseDatabaseHelperMyTrips(String buton1, String buton2, TextView text_nuExista_excursii) {
         this.database = FirebaseDatabase.getInstance();
         this.referenceTrips = database.getReference("Calatorii");
         this.buton1 = buton1;
@@ -68,38 +68,39 @@ public class FirebaseDatabaseHelperMyTrips {
                         e.printStackTrace();
                     }
                     Date date_now = new Date();
-                    if (date_fin.before(date_now)) {
-                        trip.status = "incheiata";
-                    } else if ((date_incep.before(date_now) || date_incep.equals(date_now)) && (date_fin.after(date_now) || date_fin.equals(date_now))) {
-                        trip.status = "desfasurare";
-                    } else if (date_incep.after(date_now)) {
-                        trip.status = "viitoare";
-                    }
+                    if (!trip.status.equals("anulata") && !trip.status.equals("finalizata"))
+                        if (date_fin.before(date_now)) {
+                            trip.status = "incheiata";
+                        } else if ((date_incep.before(date_now) || date_incep.equals(date_now)) && (date_fin.after(date_now) || date_fin.equals(date_now))) {
+                            trip.status = "desfasurare";
+                        } else if (date_incep.after(date_now)) {
+                            trip.status = "viitoare";
+                        }
 
                     final String statusF = trip.status;
-
-
                     //if (tripuita.data_inceput.equals(data_start) && tripuita.data_final.equals(data_fin)) {
                     DatabaseReference referenceTripss = referenceTrips.child(keyNode.getKey());
                     referenceTripss.child("status").setValue(statusF);
+
                     // }
                     String uid_user = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                    String status="";
-                    if(buton2.equals("trecute"))
+                    String status = "";
+                    if ((buton2.equals("trecute") && trip.status.equals("finalizata"))) {
+                        status = "finalizata";
+                    } else if (buton2.equals("trecute"))
                         status = "incheiata";
-                    else if(buton2.equals("prezente"))
+                    else if (buton2.equals("prezente"))
                         status = "desfasurare";
-                    else if(buton2.equals("viitoare"))
+                    else if (buton2.equals("viitoare"))
                         status = "viitoare";
 
                     if (trip.status.equals(status)) {
                         if (buton1.equals("organizare") && trip.UID_organiztor.equals(uid_user)) {
                             keys.add(keyNode.getKey());
-                            if(trips!=null){
+                            if (trips != null) {
                                 text_nuExista_excursii.setVisibility(View.GONE);
                             }
                             trips.add(trip);
-
                         }
 
                         if ((buton1.equals("participare") && !trip.UID_organiztor.equals(uid_user))) {
@@ -108,7 +109,7 @@ public class FirebaseDatabaseHelperMyTrips {
                                     User user = entry.getValue();
                                     if (user.UID.equals(uid_user)) {
                                         keys.add(keyNode.getKey());
-                                        if(trips!=null){
+                                        if (trips != null) {
                                             text_nuExista_excursii.setVisibility(View.GONE);
                                         }
                                         trips.add(trip);

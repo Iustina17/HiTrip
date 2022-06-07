@@ -32,6 +32,7 @@ import com.tripshare.hitrip.Forum.Sectiuni.FormularActivity;
 import com.tripshare.hitrip.ProfileRelated.ProfileActivity;
 import com.tripshare.hitrip.R;
 import com.tripshare.hitrip.ProfileRelated.User;
+import com.tripshare.hitrip.Trips.ParticipantiAsteptare.ParticipantiAsteptareActivity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -41,7 +42,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
 
-public class InsideTripActivity1 extends AppCompatActivity {
+public class InsideTripActivity extends AppCompatActivity {
     String uid_organizator, data_start, data_fin;
     String titluHelp = null, data_inceputHelp = null, data_finalHelp = null, Uid_organizatorHelp = null;
     ImageView imagine_excursie;
@@ -61,14 +62,11 @@ public class InsideTripActivity1 extends AppCompatActivity {
     LinearLayoutManager HorizontalLayout;
     Button button_alaturare_la_excursie;
     Button button_forum_excursie;
-    ImageButton imageButton_sterge_trip1;
-    ImageButton imageButton_finalizeaza_trip1;
-
+    TextView text_dupa_cerere;
     TextView pret_min1, pret_max1, moneda_var;
     LinearLayout ll_pret_fix, ll_pret_var;
     TextView detalii_pret1;
 
-    String uid_user_curent;
     BottomNavigationView inscriere_excursie_layout;
 
     Integer loc_ramase = 0;
@@ -80,12 +78,17 @@ public class InsideTripActivity1 extends AppCompatActivity {
     LinearLayout inside_layout_list;
     TextView inside_descriere_transport, inside_locatie_item, inside_descriere_item;
 
+    Button button_lista_asteptare;
+
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
 
     private DatabaseReference referenceTrips = database.getReference("Calatorii");
     DatabaseReference referenceTrip = FirebaseDatabase.getInstance().getReference().child("Calatorii");
     DatabaseReference referenceUsers = database.getReference("Utilizatori");
     DatabaseReference referenceTripss = database.getReference("Calatorii");
+    ImageButton imageButton_stergere_trip, imageButton_anulare_trip, imageButton_finalizare_trip;
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,13 +134,15 @@ public class InsideTripActivity1 extends AppCompatActivity {
         inside_trip_profil_recycler = findViewById(R.id.inside_trip_profil_recycler);
         RecyclerViewLayoutManager = new LinearLayoutManager(getApplicationContext());
         inside_trip_profil_recycler.setLayoutManager(RecyclerViewLayoutManager);
-
+        text_dupa_cerere = findViewById(R.id.text_dupa_cerere);
         profil_organizator_layout = findViewById(R.id.profil_organizator_layout);
         button_alaturare_la_excursie = findViewById(R.id.button_alaturare_la_excursie);
         button_forum_excursie = findViewById(R.id.button_forum_excursie);
 
-        imageButton_sterge_trip1 = findViewById(R.id.imageButton_sterge_trip1);
-        imageButton_finalizeaza_trip1 = findViewById(R.id.imageButton_finalizeaza_trip1);
+        imageButton_stergere_trip = findViewById(R.id.imageButton_stergere_trip1);
+        imageButton_anulare_trip = findViewById(R.id.imageButton_anulare_trip1);
+        imageButton_finalizare_trip = findViewById(R.id.imageButton_finalizeaza_trip1);
+
 
         pret_min1 = findViewById(R.id.pret_min1);
         pret_max1 = findViewById(R.id.pret_max1);
@@ -150,6 +155,7 @@ public class InsideTripActivity1 extends AppCompatActivity {
 
         inside_layout_list = findViewById(R.id.inside_layout_list);
 
+        button_lista_asteptare = findViewById(R.id.button_lista_asteptare);
 
         referenceTrips.addValueEventListener(new ValueEventListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -160,38 +166,37 @@ public class InsideTripActivity1 extends AppCompatActivity {
 
                     if (trip.UID_organiztor.equals(uid_organizator) && trip.data_inceput.equals(data_start) && trip.data_final.equals(data_fin)) {
 
-                        List<String> uids = new ArrayList<>();
+                        List<String> uidsParticipanti = new ArrayList<>();
                         if (trip.participanti != null) {
                             trip.participanti.forEach(new BiConsumer<String, User>() {
                                 @Override
                                 public void accept(String s, User user) {
-                                    uids.add(user.UID);
+                                    uidsParticipanti.add(user.UID);
                                 }
                             });
                         }
+
+                        List<String> uidsAsteptare = new ArrayList<>();
+                        if (trip.participantiAsteptare != null) {
+                            trip.participantiAsteptare.forEach(new BiConsumer<String, User>() {
+                                @Override
+                                public void accept(String s, User user) {
+                                    uidsAsteptare.add(user.UID);
+                                }
+                            });
+
+
+                        } else {
+                            button_lista_asteptare.setVisibility(View.GONE);
+
+                        }
+
 
                         titluHelp = trip.titlu_excursie;
                         data_inceputHelp = trip.data_inceput;
                         data_finalHelp = trip.data_final;
                         Uid_organizatorHelp = trip.UID_organiztor;
-//                        if (trip.status.equals("incheiata")) {
-//                            uid_posibil_participant = FirebaseAuth.getInstance().getCurrentUser().getUid();
 //
-//                            if (trip.UID_organiztor.equals(uid_posibil_participant)) {
-//                                Intent intent = new Intent(InsideTripActivity1.this, AdaugaImpresiePtParticipantiActivity.class);
-//                                intent.putExtra("titlu", trip.titlu_excursie);
-//                                intent.putExtra("data_inceput", trip.data_inceput);
-//                                intent.putExtra("data_final", trip.data_final);
-//                                startActivity((intent));
-//                            } else if (uids.contains(uid_posibil_participant)) {
-//                                Intent intent = new Intent(InsideTripActivity1.this, AdaugaImpresiePtOrganizatorActivity.class);
-//                                intent.putExtra("titlu", trip.titlu_excursie);
-//                                intent.putExtra("data_inceput", trip.data_inceput);
-//                                intent.putExtra("data_final", trip.data_final);
-//                                startActivity((intent));
-//                            }
-//                        }
-
                         //imagine_excursie.setAdjustViewBounds(trip.imagine_excursie);
                         nume.setText(trip.nume);
                         prenume.setText(trip.prenume);
@@ -224,6 +229,27 @@ public class InsideTripActivity1 extends AppCompatActivity {
                         pret_max1.setText(trip.pret_max);
                         detalii_pret1.setText(trip.detalii_pret);
 
+                        imageButton_stergere_trip.setVisibility(View.GONE);
+                        imageButton_anulare_trip.setVisibility(View.GONE);
+                        imageButton_finalizare_trip.setVisibility(View.GONE);
+
+                        if (user.getUid().equals(trip.UID_organiztor) && trip.participanti == null && !trip.status.equals("incheiata")) {
+                            imageButton_stergere_trip.setVisibility(View.VISIBLE);
+                            imageButton_anulare_trip.setVisibility(View.GONE);
+                            imageButton_finalizare_trip.setVisibility(View.GONE);
+                        } else if (user.getUid().equals(trip.UID_organiztor) && trip.participanti != null && trip.status.equals("viitoare")) {
+                            imageButton_stergere_trip.setVisibility(View.GONE);
+                            imageButton_anulare_trip.setVisibility(View.VISIBLE);
+                            imageButton_finalizare_trip.setVisibility(View.GONE);
+                        } else if (user.getUid().equals(trip.UID_organiztor) && trip.participanti != null && trip.status.equals("desfasurare")) {
+                            imageButton_stergere_trip.setVisibility(View.GONE);
+                            imageButton_anulare_trip.setVisibility(View.GONE);
+                            imageButton_finalizare_trip.setVisibility(View.VISIBLE);
+                        }
+
+                        functionareButoane(trip, imageButton_stergere_trip, imageButton_anulare_trip, imageButton_finalizare_trip);
+
+
                         if (trip.vect_opriri != null) {
                             for (Map.Entry<String, Oprire> entry : trip.vect_opriri.entrySet()) {
                                 View stopView = getLayoutInflater().inflate(R.layout.inside_trip_row_add_stop, null, false);
@@ -255,16 +281,21 @@ public class InsideTripActivity1 extends AppCompatActivity {
                         }
 
 
-                        HorizontalLayout = new LinearLayoutManager(InsideTripActivity1.this, LinearLayoutManager.HORIZONTAL, false);
+                        HorizontalLayout = new LinearLayoutManager(InsideTripActivity.this, LinearLayoutManager.HORIZONTAL, false);
                         inside_trip_profil_recycler.setLayoutManager(HorizontalLayout);
 
-                        uid_user_curent = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                        if (trip.UID_organiztor.equals(uid_user_curent) || uids.contains(uid_user_curent)) {
+                        if (trip.UID_organiztor.equals(user.getUid()) || uidsParticipanti.contains(user.getUid())) {
                             button_alaturare_la_excursie.setVisibility(View.GONE);
                             button_forum_excursie.setVisibility(View.VISIBLE);
+                            text_dupa_cerere.setVisibility(View.GONE);
+                        } else if (uidsAsteptare.contains(user.getUid())) {
+                            button_alaturare_la_excursie.setVisibility(View.GONE);
+                            button_forum_excursie.setVisibility(View.GONE);
+                            text_dupa_cerere.setVisibility(View.VISIBLE);
                         } else {
                             button_alaturare_la_excursie.setVisibility(View.VISIBLE);
                             button_forum_excursie.setVisibility(View.GONE);
+                            text_dupa_cerere.setVisibility(View.GONE);
                         }
 
 
@@ -315,14 +346,14 @@ public class InsideTripActivity1 extends AppCompatActivity {
 
                         Date date_now = new Date();
 
-
-                        if (date_fin.before(date_now)) {
-                            trip.status = "incheiata";
-                        } else if ((date_incep.before(date_now) || date_incep.equals(date_now)) && (date_fin.after(date_now) || date_fin.equals(date_now))) {
-                            trip.status = "desfasurare";
-                        } else if (date_incep.after(date_now)) {
-                            trip.status = "viitoare";
-                        }
+                        if (!(trip.status.equals("anulata") || trip.status.equals("finalizata")))
+                            if (date_fin.before(date_now)) {
+                                trip.status = "incheiata";
+                            } else if ((date_incep.before(date_now) || date_incep.equals(date_now)) && (date_fin.after(date_now) || date_fin.equals(date_now))) {
+                                trip.status = "desfasurare";
+                            } else if (date_incep.after(date_now)) {
+                                trip.status = "viitoare";
+                            }
 
                         final String statusF = trip.status;
                         Query query = referenceTripss.orderByChild("UID_organiztor").equalTo(trip.UID_organiztor);
@@ -344,9 +375,7 @@ public class InsideTripActivity1 extends AppCompatActivity {
                             }
                         });
 
-                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                         if (user.getUid().equals(uid_organizator)) {
-                            imageButton_sterge_trip1.setVisibility(View.VISIBLE);
 
                             String sDate4 = trip.data_final;
                             Date date_fin2 = null;
@@ -366,16 +395,16 @@ public class InsideTripActivity1 extends AppCompatActivity {
 
                             Date date_now2 = new Date();
 
-                            if (date_fin2.before(date_now2)) {
-                                //trip.status = "incheiata";
-                                imageButton_finalizeaza_trip1.setVisibility(View.GONE);
-                            } else if ((date_incep2.before(date_now2) || date_incep2.equals(date_now2)) && (date_fin2.after(date_now2) || date_fin2.equals(date_now2))) {
-                                //trip.status = "desfasurare";
-                                imageButton_finalizeaza_trip1.setVisibility(View.VISIBLE);
-                            } else if (date_incep2.after(date_now2)) {
-                                //trip.status = "viitoare";
-                                imageButton_finalizeaza_trip1.setVisibility(View.GONE);
-                            }
+//                            if (date_fin2.before(date_now2)) {
+//                                //trip.status = "incheiata";
+//                                imageButton_finalizare_trip.setVisibility(View.GONE);
+//                            } else if ((date_incep2.before(date_now2) || date_incep2.equals(date_now2)) && (date_fin2.after(date_now2) || date_fin2.equals(date_now2))) {
+//                                //trip.status = "desfasurare";
+//                                imageButton_finalizare_trip.setVisibility(View.VISIBLE);
+//                            } else if (date_incep2.after(date_now2)) {
+//                                //trip.status = "viitoare";
+//                                imageButton_finalizare_trip.setVisibility(View.GONE);
+//                            }
                         }
                     }
 
@@ -391,20 +420,30 @@ public class InsideTripActivity1 extends AppCompatActivity {
         new FirebaseDatabaseHelperParticipanti().showParticipanti(new FirebaseDatabaseHelperParticipanti.DataStatus() {
             @Override
             public void DataIsLoaded(List<User> participanti, List<Integer> keys) {
-                new RecyclerViewConfigParticipant().setconfig(inside_trip_profil_recycler, InsideTripActivity1.this, participanti, keys);
+                new RecyclerViewConfigParticipant().setconfig(inside_trip_profil_recycler, InsideTripActivity.this, participanti, keys);
             }
         }, uid_organizator, data_start, data_fin);
 
         profil_organizator_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(InsideTripActivity1.this, ProfileActivity.class);
+                Intent intent = new Intent(InsideTripActivity.this, ProfileActivity.class);
                 intent.putExtra("uid", uid_organizator);
                 //Start activity
                 startActivity(intent);
             }
         });
 
+        button_lista_asteptare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(InsideTripActivity.this, ParticipantiAsteptareActivity.class);
+                intent.putExtra("uid_organizator", uid_organizator);
+                intent.putExtra("data_start", data_start);
+                intent.putExtra("data_final", data_fin);
+                startActivity(intent);
+            }
+        });
 
         button_alaturare_la_excursie.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -413,15 +452,13 @@ public class InsideTripActivity1 extends AppCompatActivity {
 //                    Toast.makeText(getApplicationContext(), "This is a message displayed in a Toast", Toast.LENGTH_LONG).show();
 //                } else {
                 referenceTrips.child("participanti");
-                uid_user_curent = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                Query query = referenceUsers.orderByChild("UID").equalTo(uid_user_curent);
+                Query query = referenceUsers.orderByChild("UID").equalTo(user.getUid());
                 //Log.d("uid_organiztaor",uid_organizator);
                 query.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         for (DataSnapshot child : dataSnapshot.getChildren()) {
                             User user = child.getValue(User.class);
-                            User participant = new User(user.UID, user.prenume, user.poza_profil);
                             Query query = referenceTrips.orderByChild("UID_organiztor").equalTo(uid_organizator);
                             query.addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
@@ -431,7 +468,7 @@ public class InsideTripActivity1 extends AppCompatActivity {
                                         Trip trip = child.getValue(Trip.class);
                                         if (trip.data_final.equals(data_fin) && trip.data_inceput.equals(data_start)) {
                                             DatabaseReference referenceTripParticipanti = referenceTrips.child(key);
-                                            referenceTripParticipanti.child("participanti").push().setValue(participant);
+                                            referenceTripParticipanti.child("participantiAsteptare").push().setValue(new User(user.UID, user.prenume, user.nume, user.poza_profil));
                                         }
                                     }
                                 }
@@ -449,7 +486,7 @@ public class InsideTripActivity1 extends AppCompatActivity {
                 });
                 DatabaseReference referenceUsers = FirebaseDatabase.getInstance().getReference("Utilizatori");
 
-                Query query_uid = referenceUsers.orderByChild("UID").equalTo(uid_user_curent);
+                Query query_uid = referenceUsers.orderByChild("UID").equalTo(user.getUid());
                 query_uid.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -472,7 +509,7 @@ public class InsideTripActivity1 extends AppCompatActivity {
         button_forum_excursie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(InsideTripActivity1.this, FormularActivity.class);
+                Intent intent = new Intent(InsideTripActivity.this, FormularActivity.class);
                 intent.putExtra("titlu", titluHelp);
                 intent.putExtra("data_inceput", data_inceputHelp);
                 intent.putExtra("data_final", data_finalHelp);
@@ -481,13 +518,10 @@ public class InsideTripActivity1 extends AppCompatActivity {
             }
         });
 
-        //this.key = key;
-        functionareButoane(imageButton_sterge_trip1);
-
     }
 
-
-    private void functionareButoane(ImageButton msterge) {
+    private void functionareButoane(Trip trip, ImageButton msterge, ImageButton manuleaza, ImageButton mfinalizeaza) {
+        final Trip tripFinal = trip;
 
         msterge.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -496,19 +530,43 @@ public class InsideTripActivity1 extends AppCompatActivity {
                         .setPositiveButton("Da", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                Query query = referenceTrip.orderByChild("UID_organiztor").equalTo(uid_organizator);
-                                //Log.d("uid_organiztaor",uid_organizator);
+                                referenceTrip = FirebaseDatabase.getInstance().getReference().child("Calatorii");
+                                Query query = referenceTrip.orderByChild("UID_organiztor").equalTo(tripFinal.UID_organiztor);
                                 query.addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                         for (DataSnapshot child : dataSnapshot.getChildren()) {
                                             String key = child.getKey();
-
-                                            if (data_inceput.getText().equals(child.child("data_inceput").getValue())
-                                                    && data_final.getText().equals(child.child("data_final").getValue())) {
+                                            if (tripFinal.data_inceput.equals(child.child("data_inceput").getValue())
+                                                    && tripFinal.data_final.equals(child.child("data_final").getValue())) {
                                                 referenceTrip = referenceTrip.child(key);
-                                                Log.d("uid_reference", referenceTrip.child(key).toString());
-                                                referenceTrip.removeValue();
+                                                if (tripFinal.participanti == null) {
+                                                    referenceTrip.removeValue();
+                                                    DatabaseReference referenceUtilizatori = FirebaseDatabase.getInstance().getReference().child("Utilizatori");
+                                                    Query gqery1 = referenceUtilizatori.orderByChild("UID").equalTo(tripFinal.UID_organiztor);
+
+                                                    gqery1.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                        @Override
+                                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                            Log.d("Inainte", "");
+
+                                                            for (DataSnapshot child_user : snapshot.getChildren()) {
+
+                                                                String keyUser = child_user.getKey();
+                                                                User user = child_user.getValue(User.class);
+
+                                                                Log.d("Inainte", "" + user.nr_excursii_organizate + " " + keyUser);
+                                                                FirebaseDatabase.getInstance().getReference("Utilizatori").child(keyUser).child("nr_excursii_organizate").setValue(user.nr_excursii_organizate - 1);
+                                                                Log.d("Dupa", "" + user.nr_excursii_organizate);
+                                                            }
+                                                        }
+
+                                                        @Override
+                                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                                        }
+                                                    });
+                                                }
                                             }
                                         }
                                     }
@@ -517,15 +575,84 @@ public class InsideTripActivity1 extends AppCompatActivity {
                                     public void onCancelled(@NonNull DatabaseError databaseError) {
                                     }
                                 });
-                                Intent intToHome = new Intent(InsideTripActivity1.this, MainActivity.class);
-                                startActivity(intToHome);
-                                finish();
                             }
                         })
                         .setNegativeButton("Nu", null)
                         .setTitle("Sunteţi sigur că doriţi să stergeţi excursia?")
                         .create();
                 alertStergere.show();
+            }
+        });
+
+        manuleaza.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final AlertDialog alertAnulare = new AlertDialog.Builder(view.getContext())
+                        .setPositiveButton("Da", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                referenceTrip = FirebaseDatabase.getInstance().getReference().child("Calatorii");
+                                Query query = referenceTrip.orderByChild("UID_organiztor").equalTo(tripFinal.UID_organiztor);
+                                query.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        for (DataSnapshot child : dataSnapshot.getChildren()) {
+                                            String key = child.getKey();
+                                            if (tripFinal.data_inceput.equals(child.child("data_inceput").getValue())
+                                                    && tripFinal.data_final.equals(child.child("data_final").getValue())) {
+                                                if (tripFinal.participanti != null) {
+                                                    referenceTrip.child(key).child("status").setValue("anulata");
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                                    }
+                                });
+                            }
+                        })
+                        .setNegativeButton("Nu", null)
+                        .setTitle("Sunteţi sigur că doriţi să anulaţi excursia?")
+                        .create();
+                alertAnulare.show();
+            }
+        });
+
+        mfinalizeaza.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final AlertDialog alertAnulare = new AlertDialog.Builder(view.getContext())
+                        .setPositiveButton("Da", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                referenceTrip = FirebaseDatabase.getInstance().getReference().child("Calatorii");
+                                Query query = referenceTrip.orderByChild("UID_organiztor").equalTo(tripFinal.UID_organiztor);
+                                query.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        for (DataSnapshot child : dataSnapshot.getChildren()) {
+                                            String key = child.getKey();
+                                            if (tripFinal.data_inceput.equals(child.child("data_inceput").getValue())
+                                                    && tripFinal.data_final.equals(child.child("data_final").getValue())) {
+                                                if (tripFinal.participanti != null) {
+                                                    referenceTrip.child(key).child("status").setValue("finalizata");
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                                    }
+                                });
+                            }
+                        })
+                        .setNegativeButton("Nu", null)
+                        .setTitle("Sunteţi sigur că doriţi să anulaţi excursia?")
+                        .create();
+                alertAnulare.show();
             }
         });
 

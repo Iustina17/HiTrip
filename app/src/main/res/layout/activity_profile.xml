@@ -138,6 +138,7 @@
                                 android:orientation="horizontal">
 
                                 <RatingBar
+                                    android:id="@+id/ratingOrganizatorBar1"
                                     style="@style/Widget.AppCompat.RatingBar.Small"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -195,6 +196,7 @@
                             </LinearLayout>
 
                             <Button
+                                android:id="@+id/vezi_impresii_organizator_buton1"
                                 android:layout_width="100dp"
                                 android:layout_height="30dp"
                                 android:layout_gravity="center"
@@ -238,6 +240,7 @@
                                 android:orientation="horizontal">
 
                                 <RatingBar
+                                    android:id="@+id/ratingParticipantBar1"
                                     style="@style/Widget.AppCompat.RatingBar.Small"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -295,6 +298,7 @@
                             </LinearLayout>
 
                             <Button
+                                android:id="@+id/vezi_impresii_participant_buton1"
                                 android:layout_width="100dp"
                                 android:layout_height="30dp"
                                 android:layout_gravity="center"

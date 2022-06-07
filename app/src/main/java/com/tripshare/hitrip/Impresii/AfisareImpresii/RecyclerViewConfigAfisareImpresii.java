@@ -28,7 +28,7 @@ class RecyclerViewConfigAfisareImpresii {
         adaptorImpresie = new ImpresieAdaptor(impresiiList, keys);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(adaptorImpresie);
-        Log.d("Impresie in ", "setconfig: " + impresiiList.get(0).prenume + " " + impresiiList.get(0).titlu_excursie);
+//        Log.d("Impresie in ", "setconfig: " + impresiiList.get(0).prenume + " " + impresiiList.get(0).titlu_excursie);
 
     }
 

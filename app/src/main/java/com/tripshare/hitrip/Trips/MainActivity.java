@@ -204,7 +204,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void ClickCreateTrip(View view) {
-        redirectActivity(this, CreateTrip1.class);
+        redirectActivity(this, CreateTrip.class);
     }
 
     public void ClickMyTrips(View view) {

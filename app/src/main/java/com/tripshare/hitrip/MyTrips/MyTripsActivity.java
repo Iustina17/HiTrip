@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
@@ -17,6 +18,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,6 +27,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.tripshare.hitrip.Forum.Comentarii.Comentariu;
 import com.tripshare.hitrip.Impresii.OferireImpresii.AdaugaImpresiePtOrganizatorActivity;
 import com.tripshare.hitrip.Impresii.OferireImpresii.AdaugaImpresiePtParticipantiActivity;
 import com.tripshare.hitrip.HelpActivity;
@@ -33,7 +36,7 @@ import com.tripshare.hitrip.LoginSignUp.LoginActivity;
 import com.tripshare.hitrip.ProfileRelated.MyProfileActivity;
 import com.tripshare.hitrip.R;
 import com.tripshare.hitrip.Sugestii.SugestiiActivity;
-import com.tripshare.hitrip.Trips.CreateTrip1;
+import com.tripshare.hitrip.Trips.CreateTrip;
 import com.tripshare.hitrip.Trips.MainActivity;
 import com.tripshare.hitrip.Trips.Trip;
 import com.tripshare.hitrip.ProfileRelated.User;
@@ -89,7 +92,7 @@ public class MyTripsActivity extends AppCompatActivity {
                     uid_user_nav = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
                     if (user.UID.equals(uid_user_nav)) {
-                        //imagine_excursie.setAdjustViewBounds(trip.imagine_excursie);
+                        //imagine_excursie.setAdjustViewBounds(trip.imagine_excursie); todo
                         nume.setText(user.nume);
                         prenume.setText(user.prenume);
                     }
@@ -195,7 +198,7 @@ public class MyTripsActivity extends AppCompatActivity {
                     for (DataSnapshot keyNode : dataSnapshot.getChildren()) {
                         Trip trip = keyNode.getValue(Trip.class);
                         if (trip.UID_organiztor.equals(uid_utilizator_curent)) {
-                            if (trip.status.equals("incheiata") && trip.impresii_date_de_organizator != null) {
+                            if ((trip.status.equals("incheiata") || (trip.status.equals("finalizata")) && trip.impresii_date_de_organizator != null)) {
                                 for (Map.Entry<String, Feedback> entry : trip.impresii_date_de_organizator.entrySet()) {
                                     Feedback feedback = entry.getValue();
                                     if (feedback.stare_feedback.equals("nu")) {
@@ -220,18 +223,13 @@ public class MyTripsActivity extends AppCompatActivity {
             });
         }
         if (buton1.equals("participare")) {
-            Log.d("Feedback", "verificare_feedback:am ajuns aici");
             referenceTrip.addValueEventListener(new ValueEventListener() {
                 @RequiresApi(api = Build.VERSION_CODES.N)
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    Log.d("Feedback", "verificare_feedback:am ajuns aici - 2");
-
                     for (DataSnapshot keyNode : dataSnapshot.getChildren()) {
                         Trip trip = keyNode.getValue(Trip.class);
-                        if (trip.status.equals("incheiata")) {
-                            Log.d("Feedback", "verificare_feedback:am ajuns aici - 3");
-
+                        if ((trip.status.equals("incheiata") || (trip.status.equals("finalizata")))) {
                             List<String> uids = new ArrayList<>();
                             if (trip.participanti != null) {
                                 trip.participanti.forEach(new BiConsumer<String, User>() {
@@ -241,18 +239,12 @@ public class MyTripsActivity extends AppCompatActivity {
                                     }
                                 });
                             }
-                            Log.d("Feedback", "verificare_feedback:am ajuns aici - 4");
 
                             String uid_utilizator_curent = FirebaseAuth.getInstance().getCurrentUser().getUid();
                             if (uids.contains(uid_utilizator_curent)) {
-                                Log.d("Feedback", "verificare_feedback:am ajuns aici - 5");
-
-
                                 for (Map.Entry<String, Feedback> entry : trip.impresii_date_de_participanti.entrySet()) {
                                     Feedback feedback = entry.getValue();
                                     if (feedback.uid_participant.equals(uid_utilizator_curent) && feedback.stare_feedback.equals("nu")) {
-                                        Log.d("Feedback", "verificare_feedback:am ajuns aici - 6");
-
                                         Intent intent = new Intent(MyTripsActivity.this, AdaugaImpresiePtOrganizatorActivity.class);
                                         intent.putExtra("titlu", trip.titlu_excursie);
                                         intent.putExtra("data_inceput", trip.data_inceput);
@@ -260,6 +252,123 @@ public class MyTripsActivity extends AppCompatActivity {
                                         startActivity((intent));
                                     }
                                 }
+                            }
+                        }
+                        else if (trip.status.equals("anulata")) {
+                            List<String> uids_participanti = new ArrayList<>();
+                            if (trip.participanti != null) {
+                                trip.participanti.forEach(new BiConsumer<String, User>() {
+                                    @Override
+                                    public void accept(String s, User user) {
+                                        uids_participanti.add(user.UID);
+                                    }
+                                });
+                            }
+
+                            String uid_utilizator_curent = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                            if (uids_participanti.contains(uid_utilizator_curent)) {
+                                final AlertDialog alertAcreditare = new AlertDialog.Builder(MyTripsActivity.this)
+                                        .setPositiveButton("", null)
+                                        .setNegativeButton("ok", null)
+                                        .setTitle("Excursie anulată")
+                                        .create();
+
+                                //liniar layout pentru AlertDialog
+                                LinearLayout layout = new LinearLayout(MyTripsActivity.this);
+                                layout.setOrientation(LinearLayout.VERTICAL);
+                                layout.setPadding(40, 20, 40, 10);
+
+                                //edit text parola verificare
+                                final TextView excursie_anulata = new TextView(MyTripsActivity.this);
+                                excursie_anulata.setText("Excursia " + trip.titlu_excursie + " din perioada "+trip.data_inceput+
+                                        " - "+trip.data_final+" a fost anulată. Pentru mai multe detalii contactaţi organizatorul "  +
+                                        trip.prenume+" "+trip.nume + " la numărul de telefon " + trip.telefon_organizator);
+                                layout.addView(excursie_anulata);
+
+                                alertAcreditare.setView(layout);
+                                alertAcreditare.setOnShowListener(new DialogInterface.OnShowListener() {
+                                    @Override
+                                    public void onShow(DialogInterface dialog) {
+                                        Button butonAnulare = alertAcreditare.getButton(Dialog.BUTTON_NEGATIVE);
+                                        butonAnulare.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                String key_trip = keyNode.getKey();
+                                                for (Map.Entry<String, User> entry : trip.participanti.entrySet()) {
+                                                    User user1 = entry.getValue();
+                                                    String uidCurent = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                                    if(user1.UID.equals(uidCurent)){
+                                                        String keyUser = entry.getKey();
+                                                        referenceTrip.child(key_trip).child("participanti").child(keyUser).removeValue();
+                                                        alertAcreditare.dismiss();
+                                                    }
+                                                }
+
+
+
+                                            }
+                                        });
+                                    }
+                                });
+
+                                alertAcreditare.show();
+                            }
+
+                            List<String> uids_participantiAsteptare = new ArrayList<>();
+                            if (trip.participantiAsteptare != null) {
+                                trip.participantiAsteptare.forEach(new BiConsumer<String, User>() {
+                                    @Override
+                                    public void accept(String s, User user) {
+                                        uids_participantiAsteptare.add(user.UID);
+                                    }
+                                });
+                            }
+
+                            if (uids_participantiAsteptare.contains(uid_utilizator_curent)) {
+                                final AlertDialog alertAcreditare = new AlertDialog.Builder(MyTripsActivity.this)
+                                        .setPositiveButton("", null)
+                                        .setNegativeButton("ok", null)
+                                        .setTitle("Excursie anulată")
+                                        .create();
+
+                                //liniar layout pentru AlertDialog
+                                LinearLayout layout = new LinearLayout(MyTripsActivity.this);
+                                layout.setOrientation(LinearLayout.VERTICAL);
+                                layout.setPadding(40, 20, 40, 10);
+
+                                //edit text parola verificare
+                                final TextView excursie_anulata = new TextView(MyTripsActivity.this);
+                                excursie_anulata.setText("Excursia " + trip.titlu_excursie + " din perioada "+trip.data_inceput+
+                                        " - "+trip.data_final+" a fost anulată iar dumneavoastră vă aflaţi în lista de aşteptare.");
+                                layout.addView(excursie_anulata);
+
+                                alertAcreditare.setView(layout);
+                                alertAcreditare.setOnShowListener(new DialogInterface.OnShowListener() {
+                                    @Override
+                                    public void onShow(DialogInterface dialog) {
+                                        Button butonAnulare = alertAcreditare.getButton(Dialog.BUTTON_NEGATIVE);
+                                        butonAnulare.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                String key_trip = keyNode.getKey();
+                                                for (Map.Entry<String, User> entry : trip.participantiAsteptare.entrySet()) {
+                                                    User user1 = entry.getValue();
+                                                    String uidCurent = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                                    if(user1.UID.equals(uidCurent)){
+                                                        String keyUser = entry.getKey();
+                                                        referenceTrip.child(key_trip).child("participantiAsteptare").child(keyUser).removeValue();
+                                                        alertAcreditare.dismiss();
+                                                    }
+                                                }
+
+
+
+                                            }
+                                        });
+                                    }
+                                });
+
+                                alertAcreditare.show();
                             }
                         }
                     }
@@ -271,8 +380,6 @@ public class MyTripsActivity extends AppCompatActivity {
                 }
             });
         }
-
-
     }
 
     public void apasare_butoane(String buton1, String buton2) {
@@ -340,16 +447,13 @@ public class MyTripsActivity extends AppCompatActivity {
     }
 
     public void ClickLogo(View view) {
-        //Close drawer
         redirectActivity(this, MainActivity.class);
     }
 
     private static void closeDrawer(DrawerLayout drawerLayout) {
-        //Close drawer layout
-        //Check condition
+
         if (drawerLayout.isDrawerOpen((GravityCompat.START))) {
-            //When drawer is open
-            //Close drawer
+
             drawerLayout.closeDrawer(GravityCompat.START);
         }
     }
@@ -364,7 +468,7 @@ public class MyTripsActivity extends AppCompatActivity {
     }
 
     public void ClickCreateTrip(View view) {
-        redirectActivity(this, CreateTrip1.class);
+        redirectActivity(this, CreateTrip.class);
     }
 
     public void ClickMyTrips(View view) {

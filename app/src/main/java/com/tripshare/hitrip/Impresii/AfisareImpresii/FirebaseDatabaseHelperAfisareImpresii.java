@@ -25,7 +25,7 @@ public class FirebaseDatabaseHelperAfisareImpresii {
     private DatabaseReference referenceUsers;
     private List<Impresie> impresii = new ArrayList<>();
     private List<String> keys = new ArrayList<String>();
-    private String stare;
+    private String stare, uid_user;
 
 
     public interface DataStatus {
@@ -33,10 +33,11 @@ public class FirebaseDatabaseHelperAfisareImpresii {
     }
 
 
-    FirebaseDatabaseHelperAfisareImpresii(String stare) {
+    FirebaseDatabaseHelperAfisareImpresii(String stare, String uid_user) {
         this.stare = stare;
         this.database = FirebaseDatabase.getInstance();
         this.referenceUsers = database.getReference("Utilizatori");
+        this.uid_user = uid_user;
     }
 
 
@@ -51,9 +52,9 @@ public class FirebaseDatabaseHelperAfisareImpresii {
                 int i = 0;
                 for (DataSnapshot keyNode : dataSnapshot.getChildren()) {
                     User user = keyNode.getValue(User.class);
-                    String uid_user = FirebaseAuth.getInstance().getCurrentUser().getUid();
                     if (user.UID.equals(uid_user)) {
                         if (stare.equals("organizator")) {
+                            if (user.impresie_organizare_user != null)
                             for (Map.Entry<String, Impresie> entry : user.impresie_organizare_user.entrySet()) {
                                 Impresie impresie = entry.getValue();
                                 impresii.add(impresie);
@@ -62,12 +63,13 @@ public class FirebaseDatabaseHelperAfisareImpresii {
                                 i++;
                             }
                         } else if (stare.equals("participare")) {
-                            for (Map.Entry<String, Impresie> entry : user.impresie_participare_user.entrySet()) {
-                                Impresie impresie = entry.getValue();
-                                impresii.add(impresie);
-                                keys.add(String.valueOf(i) + "_key");
-                                i++;
-                            }
+                            if (user.impresie_participare_user != null)
+                                for (Map.Entry<String, Impresie> entry : user.impresie_participare_user.entrySet()) {
+                                    Impresie impresie = entry.getValue();
+                                    impresii.add(impresie);
+                                    keys.add(String.valueOf(i) + "_key");
+                                    i++;
+                                }
                         }
 
 

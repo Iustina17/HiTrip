@@ -44,7 +44,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
-public class CreateTrip1 extends AppCompatActivity {
+public class CreateTrip extends AppCompatActivity {
 
     FirebaseDatabase database;
     DatabaseReference reference_utilizatori;
@@ -81,6 +81,8 @@ public class CreateTrip1 extends AppCompatActivity {
     String tematica;
     HashMap<String, Oprire> vect_opriri;
     HashMap<String, User> participanti;
+    HashMap<String, User> participantiAsteptare;
+
 
     String natura1 = "", sport1 = "", relaxare1 = "", divertisment1 = "", gastronomie1 = "", muzica1 = "", arhitectura1 = "", industrie1 = "", istorie1 = "", etnografie1 = "", arta1 = "", literatura1 = "", altele1 = "";
 
@@ -398,13 +400,13 @@ public class CreateTrip1 extends AppCompatActivity {
                     pret_max.requestFocus();
                 } else {
                     DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Calatorii");
-                    Trip trip = new Trip(mUID_organiztor, mimagine_excursie, mprenume, mnume, mtitlu, mtematica,
+                    Trip trip = new Trip(mUID_organiztor, "",mimagine_excursie, mprenume, mnume, mtitlu, mtematica,
                             mtip, mdata_inceput, mdata_final, mnr_zile, mtara,
                             moras, mdescriere_plecare, layoutList.getChildCount(), vect_opriri,
                             mdescriere_excursie, mregulament, mechipament_necesar,
-                            mdocumente_necesare, mnr_min_particpip, mnr_max_particpip, mcost, mtip_moneda, dificultate, participanti, mpretMin, mpretMax, mDetalii_pret, status, null, null, poza);
+                            mdocumente_necesare, mnr_min_particpip, mnr_max_particpip, mcost, mtip_moneda, dificultate, participanti,participantiAsteptare, mpretMin, mpretMax, mDetalii_pret, status, null, null, poza);
                     reference.push().setValue(trip);
-                    redirectActivity(CreateTrip1.this, MainActivity.class);
+                    redirectActivity(CreateTrip.this, MainActivity.class);
                 }
 
 
@@ -450,7 +452,7 @@ public class CreateTrip1 extends AppCompatActivity {
                 String input = data_inceput.getText().toString();
                 if (input.equals("")) {
                     data_inceput.setError("Introduceţi data de început");
-                    Toast.makeText(CreateTrip1.this, "Introduceţi data de început", Toast.LENGTH_LONG).show();
+                    Toast.makeText(CreateTrip.this, "Introduceţi data de început", Toast.LENGTH_LONG).show();
                     data_inceput.requestFocus();
                     return;
                 } else {

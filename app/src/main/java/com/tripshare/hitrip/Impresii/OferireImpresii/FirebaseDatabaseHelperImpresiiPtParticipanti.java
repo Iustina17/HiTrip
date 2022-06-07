@@ -46,15 +46,17 @@ public class FirebaseDatabaseHelperImpresiiPtParticipanti {
                 for (DataSnapshot keyNode : dataSnapshot.getChildren()) {
                     trip = keyNode.getValue(Trip.class);
                     String uid_user = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                    if(trip.titlu_excursie.equals(titlu) && trip.data_inceput.equals(data_start) && trip.data_final.equals(data_fin)&& trip.UID_organiztor.equals(uid_user)){
-                        for (Map.Entry<String, Feedback> entry : trip.impresii_date_de_organizator.entrySet()) {
-                            Feedback feedback = entry.getValue();
-                            if(feedback.stare_feedback.equals("nu")) {
-                                feedbackList.add(feedback);
-                                keys.add(feedback.uid_participant);
+                        if (trip.titlu_excursie.equals(titlu) && trip.data_inceput.equals(data_start) && trip.data_final.equals(data_fin) && trip.UID_organiztor.equals(uid_user)) {
+                            if (trip.impresii_date_de_organizator != null)
+                                for (Map.Entry<String, Feedback> entry : trip.impresii_date_de_organizator.entrySet()) {
+                                Feedback feedback = entry.getValue();
+                                if (feedback.stare_feedback.equals("nu")) {
+                                    feedbackList.add(feedback);
+                                    keys.add(feedback.uid_participant);
+                                }
                             }
+                            break;
                         }
-                    }
 
                 }
                 dataStatus.DataIsLoaded(feedbackList, keys, trip);

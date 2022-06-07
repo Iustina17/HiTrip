@@ -78,8 +78,8 @@ public class MyProfileActivity extends AppCompatActivity {
                         nume_my.setText(user.nume);
                         prenume_my.setText(user.prenume);
                         varsta_my.setText(user.varsta.toString());
-                        nr_exc_organiz_my.setText(user.nr_exc_organiz.toString());
-                        nr_exc_perticip_my.setText(user.nr_exc_partic.toString());
+                        nr_exc_organiz_my.setText(user.nr_excursii_organizate.toString());
+                        nr_exc_perticip_my.setText(user.nr_excursii_participare.toString());
                         nr_pers_rating_organiz_my.setText(String.format("%.2f", user.rating_organizator));
                         nr_pers_rating_particip_my.setText(String.format("%.2f", user.rating_participant));
                         descriere_my.setText(user.descriere);
@@ -106,8 +106,8 @@ public class MyProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MyProfileActivity.this, AfisareImpresiiPtOrganizator.class);
+                intent.putExtra("uid",uid_organizator_my);
                 startActivity(intent);
-
             }
         });
 
@@ -115,6 +115,7 @@ public class MyProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MyProfileActivity.this, AfisareImpresiiPtParticipare.class);
+                intent.putExtra("uid",uid_organizator_my);
                 startActivity(intent);
             }
         });

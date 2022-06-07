@@ -3,7 +3,9 @@ package com.tripshare.hitrip.Trips;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,6 +15,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.tripshare.hitrip.ProfileRelated.ProfileActivity;
 import com.tripshare.hitrip.R;
 import com.tripshare.hitrip.ProfileRelated.User;
 
@@ -24,6 +27,7 @@ class RecyclerViewConfigParticipant {
 
     RecyclerView.LayoutManager RecyclerViewLayoutManager;
     LinearLayoutManager HorizontalLayout;
+
 
     void setconfig(RecyclerView recyclerView, Context context, List<User> participantList, List<Integer> keys) {
         mContext = context;
@@ -44,9 +48,7 @@ class RecyclerViewConfigParticipant {
         ImageView poza;
         String poza_string;
         CardView card_view_participant;
-//        private TextView mtitlu, mdata, mautor, madresare, mcontinut;
-//        private ImageButton mediteaza, msterge;
-//        String key;
+
 
         ParticipantItemView(@NonNull final ViewGroup parent) {
             super(LayoutInflater.from(mContext).
@@ -54,12 +56,21 @@ class RecyclerViewConfigParticipant {
 
             prenume_particip = itemView.findViewById(R.id.prenume_particip);
             poza = itemView.findViewById(R.id.poza_profil_item);
+            card_view_participant = itemView.findViewById(R.id.card_view_participant);
         }
 
         @SuppressLint("SetTextI18n")
         void bind(User user, Integer key) {
             prenume_particip.setText(user.prenume);
             // poza.setText(user.poza_profil); TODO
+            card_view_participant.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(mContext, ProfileActivity.class);
+                    intent.putExtra("uid", user.UID);
+                    mContext.startActivity(intent);
+                }
+            });
         }
     }
 

@@ -31,12 +31,15 @@ public class AfisareImpresiiPtParticipare extends AppCompatActivity {
 
         recyclerView_impresii = findViewById(R.id.recyclerview_pag_impresii);
 
+        String uid = getIntent().getStringExtra("uid");
+
+
 //        String data_start, data_fin, titlu;
 //        titlu = getIntent().getStringExtra("titlu");
 //        data_start = getIntent().getStringExtra("data_inceput");
 //        data_fin = getIntent().getStringExtra("data_final");
 
-        new FirebaseDatabaseHelperAfisareImpresii("participare").showImpresii(new FirebaseDatabaseHelperAfisareImpresii.DataStatus() {
+        new FirebaseDatabaseHelperAfisareImpresii("participare", uid).showImpresii(new FirebaseDatabaseHelperAfisareImpresii.DataStatus() {
             @Override
             public void DataIsLoaded(List<Impresie> impresiiList, List<String> keys) {
                 new RecyclerViewConfigAfisareImpresii().setconfig(recyclerView_impresii, AfisareImpresiiPtParticipare.this , impresiiList, keys);
