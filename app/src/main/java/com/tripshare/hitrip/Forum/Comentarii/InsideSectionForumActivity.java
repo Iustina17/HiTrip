@@ -127,18 +127,14 @@ public class InsideSectionForumActivity extends AppCompatActivity {
         });
 
 
-        recycler_sectiuni_forum =
+        recycler_sectiuni_forum = findViewById(R.id.recyclerview_comentarii);
 
-                findViewById(R.id.recyclerview_comentarii);
-
-        new
-
-                FirebaseDatabaseHelperSectiuneComentarii(uid_organizator, data_start, data_fin, titlu, denumire_sectiune).
+        new FirebaseDatabaseHelperSectiuneComentarii(uid_organizator, data_start, data_fin, titlu, denumire_sectiune).
 
                 showSectiuni(new FirebaseDatabaseHelperSectiuneComentarii.DataStatus() {
                     @Override
                     public void DataIsLoaded(List<Comentariu> comentarii, List<String> keys) {
-                        new RecyclerViewConfigSectiuneComentarii().setconfig(recycler_sectiuni_forum, InsideSectionForumActivity.this, comentarii, keys);
+                        new RecyclerViewConfigSectiuneComentarii().setconfig(recycler_sectiuni_forum, InsideSectionForumActivity.this, comentarii, keys, uid_organizator, data_start, data_fin, titlu, denumire_sectiune);
                     }
                 });
 

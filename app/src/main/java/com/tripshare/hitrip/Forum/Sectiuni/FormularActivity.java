@@ -26,7 +26,7 @@ import java.util.List;
 public class FormularActivity extends AppCompatActivity {
 
     RecyclerView recycler_sectiuni_forum;
-    String uid_organizator,data_start,data_fin, titlu;
+    String uid_organizator, data_start, data_fin, titlu;
     FloatingActionButton buton_adauga_sectiune;
 
     @Override
@@ -42,17 +42,17 @@ public class FormularActivity extends AppCompatActivity {
         recycler_sectiuni_forum = findViewById(R.id.Recycler_sectiuni_forum);
         buton_adauga_sectiune = findViewById(R.id.buton_adauga_sectiune);
 
-        new FirebaseDatabaseHelperForumSectiuni(uid_organizator,data_start,data_fin,titlu).showSectiuni(new FirebaseDatabaseHelperForumSectiuni.DataStatus() {
+        new FirebaseDatabaseHelperForumSectiuni(uid_organizator, data_start, data_fin, titlu).showSectiuni(new FirebaseDatabaseHelperForumSectiuni.DataStatus() {
             @Override
             public void DataIsLoaded(List<SectiuneForum> sectiuniList, List<String> keys) {
-                new RecyclerViewConfigForumSectiuni().setconfig(recycler_sectiuni_forum, FormularActivity.this , sectiuniList, keys);
+                new RecyclerViewConfigForumSectiuni().setconfig(recycler_sectiuni_forum, FormularActivity.this, sectiuniList, keys);
             }
         });
 
         String uid_user = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        Log.d("UID_user", ""+uid_user);
-        Log.d("UID_organizator", ""+uid_organizator);
-        if(!uid_user.equals(uid_organizator)){
+        Log.d("UID_user", "" + uid_user);
+        Log.d("UID_organizator", "" + uid_organizator);
+        if (!uid_user.equals(uid_organizator)) {
             buton_adauga_sectiune.setVisibility(View.GONE);
         }
 
@@ -92,7 +92,10 @@ public class FormularActivity extends AppCompatActivity {
                             @Override
                             public void onClick(View v) {
                                 String sectiuneS = denumire_sectiune_add.getText().toString().trim();
-                                addSectiune(sectiuneS, denumire_sectiune_add, alertSectiuneAdd);
+                                DatabaseReference referenceSectiuni = FirebaseDatabase.getInstance().getReference("Sectiuni");
+                                SectiuneForum sectiuneForumAdd = new SectiuneForum(uid_organizator, titlu, data_start, data_fin, sectiuneS, null);
+                                referenceSectiuni.push().setValue(sectiuneForumAdd);
+                                alertSectiuneAdd.dismiss();
                             }
                         });
                     }
@@ -104,9 +107,4 @@ public class FormularActivity extends AppCompatActivity {
 
     }
 
-    void addSectiune(String sectiuneS, EditText denumire_sectiune_add, AlertDialog alertSectiuneAdd){
-        DatabaseReference referenceSectiuni = FirebaseDatabase.getInstance().getReference("Sectiuni");
-        SectiuneForum sectiuneForumAdd = new SectiuneForum(uid_organizator, titlu, data_start, data_fin, sectiuneS, null);
-        referenceSectiuni.push().setValue(sectiuneForumAdd);
-    }
 }

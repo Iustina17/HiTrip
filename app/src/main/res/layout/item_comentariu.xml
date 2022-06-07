@@ -26,14 +26,15 @@
 
                 <ImageView
                     android:id="@+id/poza_pers_comentariu"
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
                     android:src="@drawable/ic_account"></ImageView>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -46,7 +47,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
                             android:text="Prenume"
-                            android:textSize="20sp" />
+                            android:textSize="18sp"
+                            android:textColor="@color/black"/>
 
                         <TextView
                             android:id="@+id/nume_pers_comenatriu"
@@ -54,7 +56,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
                             android:text="Nume"
-                            android:textSize="20sp" />
+                            android:textSize="18sp"
+                            android:textColor="@color/black"/>
 
                     </LinearLayout>
 
@@ -64,10 +67,29 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8dp"
                         android:text="Continut comentariu"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:textColor="@color/black"/>
 
                 </LinearLayout>
             </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_sterge_comm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/imageButton_sterge_comentariu"
+                android:layout_width="40dp"
+                android:layout_margin="4dp"
+                android:layout_height="30dp"
+                android:background="@color/white"
+                android:src="@drawable/ic_baseline_delete_24"
+                android:visibility="visible"
+                android:layout_gravity="end"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

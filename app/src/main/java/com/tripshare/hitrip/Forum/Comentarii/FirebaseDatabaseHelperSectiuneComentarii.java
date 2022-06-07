@@ -28,7 +28,7 @@ public class FirebaseDatabaseHelperSectiuneComentarii {
     public String uid_organizator, data_start, data_fin, titlu, denumire;
 
 
-    public interface DataStatus {
+    public interface DataStatus  {
         void DataIsLoaded(List<Comentariu> comentarii, List<String> keys);
     }
 
