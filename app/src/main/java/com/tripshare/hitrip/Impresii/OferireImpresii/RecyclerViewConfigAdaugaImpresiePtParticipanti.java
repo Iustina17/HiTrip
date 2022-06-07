@@ -3,6 +3,7 @@ package com.tripshare.hitrip.Impresii.OferireImpresii;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -115,29 +116,28 @@ class RecyclerViewConfigAdaugaImpresiePtParticipanti extends AppCompatActivity {
                                                             if (trip.impresii_date_de_organizator != null) {
                                                                 hashMapFeedbacks = trip.impresii_date_de_organizator;
                                                                 //referenceTrip.child(key).child("impresii_date_de_organizator").removeValue();
-                                                                if (hashMapFeedbacks != null)
+                                                                if (hashMapFeedbacks != null) {
                                                                     for (Map.Entry<String, Feedback> entry : hashMapFeedbacks.entrySet()) {
+                                                                        if (entry == null) {
+                                                                            Intent intent = new Intent(mContext, MyTripsActivity.class);
+                                                                            startActivity(intent);
+                                                                        }
                                                                         Feedback feedback1 = entry.getValue();
                                                                         String keyFeedback = entry.getKey();
+                                                                        Log.d("ENTRYs", "nume "+ feedback1.nume+ " "+ keyFeedback);
                                                                         if (feedback1.uid_participant.equals(feedback.uid_participant)) {
                                                                             referenceTrip.child(key).child("impresii_date_de_organizator").child(keyFeedback).removeValue();
-                                                                            hashMapFeedbacks.entrySet().remove(entry);
+                                                                            // hashMapFeedbacks.entrySet().remove(entry);
                                                                             Feedback feedback2 = new Feedback(feedback.uid_participant, "da", feedback.nume, feedback.prenume, feedback.poza);
-                                                                            referenceTrip.child(key).child("impresii_date_de_organizator").child(keyFeedback).push().setValue(feedback2);
+                                                                            referenceTrip.child(key).child("impresii_date_de_organizator").push().setValue(feedback2);
 
-                                                                            hashMapFeedbacks.put(feedback.uid_participant, feedback2);
-//                                                                            for (Map.Entry<String, Feedback> entry_push : hashMapFeedbacks.entrySet()) {
-//                                                                                referenceTrip.child(key).child("impresii_date_de_organizator").push().setValue(entry_push.getValue());
-////                                                                                try {
-////                                                                                    wait(500);
-////                                                                                } catch (InterruptedException e) {
-////                                                                                    e.printStackTrace();
-////                                                                                }
-//                                                                                finish();
-//
-//                                                                            }
                                                                         }
                                                                     }
+                                                                } else {
+                                                                    Intent intent = new Intent(mContext, MyTripsActivity.class);
+                                                                    startActivity(intent);
+                                                                }
+
 
                                                             }
                                                         }
@@ -148,6 +148,7 @@ class RecyclerViewConfigAdaugaImpresiePtParticipanti extends AppCompatActivity {
 
                                                     }
                                                 });
+
                                             }
                                         }
                                     }
@@ -165,6 +166,7 @@ class RecyclerViewConfigAdaugaImpresiePtParticipanti extends AppCompatActivity {
                         public void onCancelled(@NonNull DatabaseError databaseError) {
                         }
                     });
+
                 }
             });
 
